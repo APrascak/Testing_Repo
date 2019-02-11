@@ -25,7 +25,7 @@
                 <th>Building Name</th>
                 <th></th>
               </tr>
-              <tr ng-repeat="listing in listings | filter: query track by listing._id" ng-click="showDetails($index)">
+              <tr ng-repeat="listing in listings | filter: query track by listing._id" ng-click="showDetails(listings.indexOf(listing))">
                 <td>{{listing.code}}</td>
                 <td>{{listing.name}}</td>
                 <td ng-click="deleteListing(listing._id)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
