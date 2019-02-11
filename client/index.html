@@ -5,10 +5,13 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="directoryApp">
-    <div class="container">
-      <div class="row">
-        <h1>UF Directory App</h1>
+<div class="row logo">
+      <div class="container">
+        <img class="logo" src="http://www.ufl.edu/media/templates/uf2015/img/logo-uf.svg" alt="UF Logo">
+          <h1>Directory App</h1>
       </div>
+    </div>
+	  <div class="container main">
       <div class="row" ng-controller="ListingsController">
         <div class="col-md-6">
           <div class="input-group" id="searchBar">
@@ -22,28 +25,30 @@
                 <th>Building Name</th>
                 <th></th>
               </tr>
-              <tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+              <tr ng-repeat="listing in listings | filter: query track by listing._id" ng-click="showDetails($index)">
                 <td>{{listing.code}}</td>
                 <td>{{listing.name}}</td>
                 <td ng-click="deleteListing(listing._id)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
               </tr>
             </table>
           </div>
-          <form novalidate class="simple-form">
+        </div>
+        <div class="col-md-6">
+          <div class="details">
+            <h2>Name: {{detailedInfo.name}}</h2>
+			<div class="info-dets">
+            <p>Address: {{detailedInfo.address}}</p>
+            <p>Building Code: {{detailedInfo.code}}</p>
+			</div>
+          </div>
+		  
+		  <form novalidate class="simple-form">
             <h2>Add New Listing</h2>
             Code: <input type="text" ng-model="newListing.code" /><br />
             Name: <input type="text" ng-model="newListing.name" /><br />
             Address: <input type="text" ng-model="newListing.address" /><br />
             <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
           </form>
-        </div>
-        <div class="col-md-6">
-          <div class="jumbotron">
-            <h2>Detailed Information</h2>
-            <h4>{{detailedInfo.name}}</h4>
-            <p>Address: {{detailedInfo.address}}</p>
-            <p>Building Code: {{detailedInfo.code}}</p>
-          </div>
         </div>
       </div>
     </div>

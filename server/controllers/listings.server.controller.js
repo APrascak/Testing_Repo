@@ -38,25 +38,40 @@ exports.read = function(req, res) {
 
 /* Update a listing */
 exports.update = function(req, res) {
-  var listing = req.listing;
-
+  var listing = req.body;
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
+  var id = req.params.listingId;
+	Listing.findOneAndUpdate({_id : id}, {$set:{code: listing.code, name: listing.name, latitude: listing.latitude, 
+	longitude: listing.longitude, address: listing.address}}, {new: true}, function(err,updated){
+		if (err)
+			res.status(400).send(err);
+	   res.json(updated);
+	});
 };
 
 /* Delete a listing */
 exports.delete = function(req, res) {
-  var listing = req.listing;
-
+  var id = req.params.listingId;
   /** TODO **/
   /* Remove the article */
+   Listing.deleteOne({_id: id}, function(err,listing){
+	   if (err)
+			res.status(400).send(err);
+	   res.json(listing);
+   });
 };
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
   /** TODO **/
   /* Your code here */
+   Listing.find({}, function(err,listing){
+    if (err) throw err;
+    res.json(listing);
+   }).sort( { code: 1 } );
+
 };
 
 /* 
