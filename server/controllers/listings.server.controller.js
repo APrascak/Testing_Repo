@@ -17,17 +17,24 @@ exports.create = function(req, res) {
 
   /* Instantiate a Listing */
   var listing = new Listing(req.body);
-
-
+  const crypto = require('crypto');
+  const buf = crypto.randomBytes(16);
+  //console.log(`${buf.length} bytes of random data: ${buf.toString('hex')}`);
+  const key = crypto.pbkdf2Sync(listing.password, `${buf.toString('hex')}`, 100000, 64, 'sha512');
+  //console.log(key.toString('hex'));
+  
+	listing.password = key.toString('hex');
+	listing.salt = `${buf.toString('hex')}`;
+	console.log(listing.password);
   /* Then save the listing */
-  listing.save(function(err) {
+  /*listing.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     } else {
       res.json(listing);
     }
-  });
+  });*/
 };
 
 /* Show the current listing */

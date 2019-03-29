@@ -31,6 +31,9 @@ module.exports.init = function() {
   /**TODO 
   Go to homepage for all routes not specified */ 
 	app.all('/*', function(req, res){
+		 if(req.path === '/testHash'){
+			 res.redirect('testHash.html')
+		 }
 		res.redirect('index.html');
 	});
 
