@@ -226,14 +226,20 @@ iframe {
 /*Spans for left side*/
 .mission-header{
   text-decoration: underline;
-  font-family: Gill Sans, sans-serif;
+  font-family: Arial, Arial;
   text-align:center;
   font-size:24px;
+
 }
 .mission-statement{
-  font-family: Gill Sans, sans-serif;
-  text-align:center;
+  font-family: Arial, Arial;
+
   font-size:16px;
+
+
+
+
+
 }
 
 /*==================================================================
@@ -251,8 +257,8 @@ iframe {
 }
 
 .login100-form-title {
-  font-family: Poppins-Regular;
-  font-size: 20px;
+  font-family: Arial;
+  font-size: 30px;
   color: #555555;
   line-height: 1.2;
   text-transform: uppercase;
@@ -267,16 +273,22 @@ iframe {
   color: white;
   font-size: 30px;
   text-align: center;
+  line-height: 20pt;
   width: 50%;
   background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url('mentorship.jpg') no-repeat center center;
   background-size: cover;
+  padding-left: 20px;
+  padding-right: 20px;
 }
+
+
 
 /*------------------------------------------------------------------
 [ Input ]*/
 
 .wrap-input100 {
   width: 100%;
+  height: 40px;
   position: relative;
   border: 1px solid #e6e6e6;
 }
@@ -292,18 +304,17 @@ iframe {
 
 
 .input100 {
-  display: block;
   width: 100%;
   background: transparent;
-  font-family: Poppins-Regular;
-  font-size: 18px;
+  font-family: Arial;
+  font-size: 40px;
   color: #666666;
-  line-height: 1.2;
-  padding: 0 25px;
+  line-height: 1;
+
 }
 
 input.input100 {
-  height: 55px;
+  height: 40px;
 }
 
 /*---------------------------------------------*/
@@ -377,8 +388,8 @@ input.input100 {
 
   background: blue;
 
-  font-family: Montserrat-Bold;
-  font-size: 12px;
+  font-family: Arial;
+  font-size: 20px;
   color: #fff;
   line-height: 1.2;
   text-transform: uppercase;
@@ -388,6 +399,44 @@ input.input100 {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+}
+
+.google-button{
+  height: 40px;
+  border-width: 10px;
+  border-color: black;
+  background: white;
+  color: #737373;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 1px 2px 0px 1px rgba(0,0,0,0.05);
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding-left: 4px;
+  padding-right: 4px;
+
+  &:focus,
+  &:hover {
+    box-shadow: 1px 4px 5px 1px rgba(0,0,0,0.1);
+  }
+
+  &:active {
+    background-color: #e5e5e5;
+    box-shadow: none;
+    transition-duration: 10ms;
+  }
+
+}
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+
 }
 
 .login100-form-btn:hover {
