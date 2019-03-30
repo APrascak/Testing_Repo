@@ -2,6 +2,8 @@
 <html>
 <head>
 
+<link rel="stylesheet" type="text/css" href="style2.css">
+
 <style>
 img {
   width: 100px;
@@ -9,21 +11,25 @@ img {
 </style>
 
 </head>
-<body>
+<body class = sizelimit>
   <div id = "wrapper"></div>
-<img src = "roan wolf original.jpg" alt="HTML5 Icon" width = "128" height = "128">
-<a>
-  <button> change profile picture </button>
-</a>
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button style = "background: blue; color: white; Height: 50px; Width: 100px;"> change profile picture </button>
+</div>
+
+<div style = "margin-right: 100px">
+
+</div>
 
 <div>
- <p style="padding-right: 10px;">I am a </p>
+  <p style="position: relative; right: -5px; font-weight: bold;">I am a </p>
  <input type="checkbox" name="mentor" value="Mentor">Mentor
  <input type="checkbox" name="mentee" value="Mentee">Mentee
 </div>
 
 <div>
-  <p> What area do you want to be mentored in? </p>
+  <p class = bold> What area do you want to be mentored in? </p>
   <select>
   <option value="Null"> </option>
   <option value="Biology">Biology</option>
@@ -37,7 +43,7 @@ img {
 </div>
 
 <div>
-  <p> What area do you want to mentor in? </p>
+  <p class = bold> What area do you want to mentor in? </p>
   <select>
   <option value="Null"> </option>
   <option value="Biology">Biology</option>
@@ -51,7 +57,7 @@ img {
 </div>
 
 <div>
-  <p> What year are you? </p>
+  <p class = bold> What year are you? </p>
   <select>
     <option value="Null"> </option>
     <option value="Freshman">Freshman</option>
@@ -64,7 +70,7 @@ img {
 </div>
 
 <div>
-  <p> What is the level of experience in the subject you are mentoring in? </p>
+  <p class = bold> What is the level of experience in the subject you are mentoring in? </p>
   <select>
     <option value="Null"> </option>
     <option value="Low">Low</option>
@@ -75,24 +81,19 @@ img {
 </div>
 
 <div>
-  <p> What is the minimal level of experience you want your mentor to have? </p>
-  <select>
-    <option value="Null"> </option>
-    <option value="Low">Low</option>
-    <option value="Moderate">Moderate</option>
-    <option value="High">High</option>
-  </select>
+  <p class = bold> What city do you live in? </p>
+  <textarea name="city" rows="1" cols="30"></textarea>
 
 </div>
 
 <div>
- <p style="padding-right: 10px;">I like to meet </p>
+ <p style="padding-right: 10px; font-weight: bold;">I like to meet </p>
  <input type="checkbox" name="online" value="Online">Online
  <input type="checkbox" name="inperson" value="InPerson">In Person
 </div>
 
 <div>
- <p style="padding-right: 10px;">I am normally available during </p>
+ <p style="padding-right: 10px; font-weight: bold;">I am normally available during </p>
  <input type="checkbox" name="earlymorning" value="EarlyMorning">Early Morning
  <input type="checkbox" name="latemorning" value="LateMorning">Late Morning
  <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon">Early Afternoon
@@ -102,9 +103,9 @@ img {
  <input type="checkbox" name="lateevening" value="LateEvening">Late Evening
 </div>
 
-<button style = "position: absolute; Right: 100px; Width: 100px; Height: 50px;"> Submit </button>
-<form action="/action_page.php" style = "position: fixed; Top: 40px; Right: 10px">
-  Details you want others to know: <div> </div> <textarea name="about" rows="15" cols="80"></textarea>
+<button style = " position: relative; Right: -950px; Top: -150px; Width: 200px; Height: 50px; background: blue; color: white;"> Submit </button>
+<form style = " position: relative; Top: -800px; Right: -750px; font-weight: bold;">
+  Details you want others to know: <div> </div> <textarea name="about" rows="20" cols="80"></textarea>
 
 </form>
 
