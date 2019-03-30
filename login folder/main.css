@@ -167,7 +167,7 @@ iframe {
 .limiter {
   width: 100%;
   margin: 0 auto;
-  
+
 }
 
 .container-login100 {
@@ -223,7 +223,18 @@ iframe {
   background: rgba(0,0,0,0.3);
 }
 
-
+/*Spans for left side*/
+.mission-header{
+  text-decoration: underline;
+  font-family: Gill Sans, sans-serif;
+  text-align:center;
+  font-size:24px;
+}
+.mission-statement{
+  font-family: Gill Sans, sans-serif;
+  text-align:center;
+  font-size:16px;
+}
 
 /*==================================================================
 [ Form ]*/
@@ -252,7 +263,14 @@ iframe {
   display: block;
 }
 
-
+.leftside{
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  width: 50%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url('mentorship.jpg') no-repeat center center;
+  background-size: cover;
+}
 
 /*------------------------------------------------------------------
 [ Input ]*/
