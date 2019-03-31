@@ -3,18 +3,14 @@ var listings = require('../controllers/listings.server.controller.js'),
     express = require('express'), 
     router = express.Router();
 	
-var profile = require('../controllers/profile.server.controller.js'), 
-    express = require('express'), 
-    profRouter = express.Router();
 
 /* 
   These method calls are responsible for routing requests to the correct request handler.
   Take note that it is possible for different controller functions to handle requests to the same route.
  */
-profRouter.route('/')
+router.route('/')
   .get(listings.list)
-  .post(profile.create);
-
+  .post(listings.signup);
 
 /*
   The ':' specifies a URL parameter. 

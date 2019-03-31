@@ -8,7 +8,52 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     });
 
     $scope.detailedInfo = undefined;
+	
+	$scope.errors = [];
 
+	$scope.signUp = function() {
+	  /**TODO 
+	  *Save the article using the Listings factory. If the object is successfully 
+	  saved redirect back to the list page. Otherwise, display the error
+	 */
+	
+    Listings.signUp($scope.newListing).then(function(response) {
+	  //$window.location.href = '/index.html';
+	  console.log(response);
+    }, function(error) {
+      console.log('Unable to update listings:', error);
+    });
+
+    };
+	
+	$scope.login = function() {
+		$scope.errors = [];
+		
+		if(!$scope.newListing){
+			$scope.errors.push("Please enter an email and password");
+		}else{
+			if(!$scope.newListing.email)
+				$scope.errors.push("Please enter an email.");
+			
+			if(!$scope.newListing.password)
+				$scope.errors.push("Please enter a password.");
+		}
+			
+		if($scope.errors.length > 0){
+			return;
+		}
+	
+    Listings.login($scope.newListing).then(function(response) {
+	  //$window.location.href = '/index.html';
+	  console.log('WORKING',response);
+    }, function(error) {
+		$scope.errors.push("Username or password is wrong.");
+      //console.log('Unable to update listings:', error);
+	  
+    });
+
+    };
+	
     $scope.addListing = function() {
 	  /**TODO 
 	  *Save the article using the Listings factory. If the object is successfully 
@@ -18,7 +63,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     Listings.create($scope.newListing).then(function(response) {
 	  $window.location.href = '/index.html';
     }, function(error) {
-      console.log('Unable to update listings:', error);
+		//change this so that it shows error message
+      console.log('Password or email is incorrect', error);
     });
 
     };

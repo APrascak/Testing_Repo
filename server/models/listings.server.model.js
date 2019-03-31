@@ -1,6 +1,7 @@
 /* Import mongoose and define any variables needed to create the schema */
 var mongoose = require('mongoose'), 
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+	bcrypt = require('bcrypt-nodejs');
 
 /* Create your schema */
 var listingSchema = new Schema({
@@ -23,18 +24,16 @@ var listingSchema = new Schema({
 });
 
 var userSchema = new Schema({
-    email:{
-		type: String,
-		required: true
+    /*local: {
+		email: String,
+		password: String
 	},
-    username: {
-		type: String,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	}/*,
+	gmail: {
+		id: String
+	},*/
+	email: String,
+	password: String,
+	username: String,
 	usertype: {
         mentee: Boolean,
         mentor: Boolean
@@ -43,7 +42,7 @@ var userSchema = new Schema({
     topics: [String],
     city: String,
     hours: [String],
-    communication: [String]*/ 
+    communication: [String]
 });
 
 
@@ -57,6 +56,16 @@ userSchema.pre('save', function(next) {
   }
   next();
 });
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 
 /* Use your schema to instantiate a Mongoose model */
 var User = mongoose.model('User', userSchema);

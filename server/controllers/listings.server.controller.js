@@ -1,7 +1,8 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'), 
-    Listing = require('../models/listings.server.model.js');
+    Listing = require('../models/listings.server.model.js'),
+	bcrypt = require('bcrypt-nodejs');
 
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
@@ -13,28 +14,25 @@ var mongoose = require('mongoose'),
  */
 
 /* Create a listing */
-exports.create = function(req, res) {
+exports.signup = function(req, res) {
+	
+	console.log("GOT TO WRONG FUNCTION");
 
   /* Instantiate a Listing */
-  var listing = new Listing(req.body);
-  const crypto = require('crypto');
-  const buf = crypto.randomBytes(16);
-  //console.log(`${buf.length} bytes of random data: ${buf.toString('hex')}`);
-  const key = crypto.pbkdf2Sync(listing.password, `${buf.toString('hex')}`, 100000, 64, 'sha512');
-  //console.log(key.toString('hex'));
-  
-	listing.password = key.toString('hex');
-	listing.salt = `${buf.toString('hex')}`;
-	console.log(listing.password);
+	var listing = new Listing(req.body);
+	listing.password = bcrypt.hashSync(listing.password);
+	
+
+	//bcrypt.compareSync("my password", hash)); // true
   /* Then save the listing */
-  /*listing.save(function(err) {
+  Listing.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     } else {
       res.json(listing);
     }
-  });*/
+  });
 };
 
 /* Show the current listing */

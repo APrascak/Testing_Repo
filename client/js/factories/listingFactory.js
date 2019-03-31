@@ -7,6 +7,14 @@ angular.module('listings', []).factory('Listings', function($http) {
 	create: function(listing) {
 	  return $http.post('http://localhost:8080/api/listings', listing);
     }, 
+	
+	signUp: function(listing) {
+	  return $http.post('http://localhost:8080/signup', listing);
+    }, 
+
+	login: function(listing) {
+	  return $http.post('http://localhost:8080/login', listing);
+    }, 	
 
     delete: function(id) {
 	   /**TODO
