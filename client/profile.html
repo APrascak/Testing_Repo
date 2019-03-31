@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body style = "margin-left: 250px">
+  <div class="row ">
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button> Change Profile Picture </button>
+</div>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   I am a
+ </label>
+   </p>
+ <input type="checkbox" name="mentor" value="Mentor">Mentor
+ <input type="checkbox" name="mentee" value="Mentee">Mentee
+</div>
+<br>
+<div>
+  <p>
+    <label class="bold">
+    What area do you want to be mentored in?
+  </label>
+ </p>
+  <select>
+  <option value="" selected disabled></option>
+  <option value="Biology">Biology</option>
+  <option value="Physics">Physics</option>
+  <option value="Computer Science">Computer Science</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Business">Business</option>
+  <option value="ProfessionalWriting">Professional Writing</option>
+  <option value="Psychology">Psychology</option>
+</select>
+</div>
+
+<br>
+<div>
+  <p>
+    <label class="bold">
+      What area do you want to mentor in?
+    </label>
+   </p>
+  <select>
+  <option value="Null"> </option>
+  <option value="Biology">Biology</option>
+  <option value="Physics">Physics</option>
+  <option value="Computer Science">Computer Science</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Business">Business</option>
+  <option value="ProfessionalWriting">Professional Writing</option>
+  <option value="Psychology">Psychology</option>
+</select>
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      What year are you?
+    </label>
+  </p>
+  <select>
+    <option value="Null"> </option>
+    <option value="Freshman">Freshman</option>
+    <option value="Sophmore">Sophmore</option>
+    <option value="Junior">Junior</option>
+    <option value="Senior">Senior</option>
+    <option value="Graduate">Graduate +</option>
+  </select>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      What is the level of experience in the subject you are mentoring in?
+    </label>
+   </p>
+  <select>
+    <option value="Null"> </option>
+    <option value="Low">Low</option>
+    <option value="Moderate">Moderate</option>
+    <option value="High">High</option>
+  </select>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      Which city are you in?
+    </label>
+  </p>
+  <textarea name="location" rows="1" cols="20"></textarea>
+
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     I like to meet
+   </label>
+  </p>
+ <label><input type="checkbox" name="online" value="Online">Online</label>
+ <label><input type="checkbox" name="inperson" value="InPerson">In Person</label>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     I am normally available during
+   </label>
+ </p>
+ <label><input type="checkbox" name="earlymorning" value="EarlyMorning">Early Morning</label>
+<label> <input type="checkbox" name="latemorning" value="LateMorning">Late Morning</label>
+<label> <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon">Early Afternoon</label>
+<label> <input type="checkbox" name="lateafternoon" value="LateAfternoon">Late Afternoon</label>
+<label> <input type="checkbox" name="earlyevening" value="EarlyEvening">Early Evening</label>
+<label> <input type="checkbox" name="lateevening" value="LateEvening">Late Evening</label>
+</div>
+<br>
+  <label class="bold">
+  Details you want others to know:
+</label>
+<div>
+ <textarea name="about" rows="10" cols="80"></textarea>
+</div>
+ <div>
+ <button> Submit </button>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Name Goes Here</p>
+            <img src ="mentorship.jpg">
+
+            <br>
+            <br>
+            <br>
+
+            <li class="active" >
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Profile</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li class = centervertical>
+                <a class = whitetext href="#">Matches</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Find Mentors</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li>
+                <a class = whitetext href="#">Mentee Requests</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#">Notification</a>
+            </li>
+        </ul>
+
+    </nav>
+    <!-- Page Content -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+</div>
+</div>
+
+</body>
+</html>
