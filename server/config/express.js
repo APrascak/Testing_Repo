@@ -54,7 +54,7 @@ require('./passport')(passport);
         failureFlash : false // allow flash messages
     }));
 	
-	  app.use('/api/listings/', listingsRouter); 
+	  app.use('/api/user/', listingsRouter); 
 
 	app.get('/login', function(req, res){
 		res.redirect('login.html');
@@ -64,7 +64,7 @@ require('./passport')(passport);
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
 	//If it doesn't the listingController will display error
-    res.redirect('/profile');
+    res.send();
   });
 	
 	 // =====================================

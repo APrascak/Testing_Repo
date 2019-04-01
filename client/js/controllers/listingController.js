@@ -44,8 +44,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		}
 	
     Listings.login($scope.newListing).then(function(response) {
-	  //$window.location.href = '/index.html';
-	  console.log('WORKING',response);
+	  $window.location.href = '/profile.html';
     }, function(error) {
 		$scope.errors.push("Username or password is wrong.");
       //console.log('Unable to update listings:', error);
@@ -53,6 +52,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     });
 
     };
+	
+	$scope.profile
 	
     $scope.addListing = function() {
 	  /**TODO 
