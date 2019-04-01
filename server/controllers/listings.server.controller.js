@@ -12,7 +12,30 @@ var mongoose = require('mongoose'),
   HINT: if you are struggling with implementing these functions, refer back to this tutorial 
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
+/*==================ALGORITHM================
+exports.algorithm = function(req,res){
 
+get mentee with -> req.session.passport.user
+findOne to get mentee (see profile fucntion)
+
+//find to get all mentees
+
+loop through mentors check where usertype.mentor = true
+
+comapre it if match
+
+MatchSchema{
+	mentee_id = req.session.passport.user
+	mentor = get from query
+	status = pending
+}
+
+var match = new Match();
+match (set values)
+match.save
+};
+
+===============================================*/
 /* Create a listing */
 exports.create = function(req, res) {
 	
