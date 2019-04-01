@@ -14,25 +14,29 @@ var mongoose = require('mongoose'),
  */
 
 /* Create a listing */
-exports.signup = function(req, res) {
+exports.create = function(req, res) {
 	
-	console.log("GOT TO WRONG FUNCTION");
-
   /* Instantiate a Listing */
 	var listing = new Listing(req.body);
-	listing.password = bcrypt.hashSync(listing.password);
-	
+	console.log(req.body);
+	//add user name check
+	Listing.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: listing.username, availaeble: true, mentor_topic: listing.mentor_topic, 
+	mentee_topic: listing.mentee_topic, topic_level: listing.topic_level, hours: listing.hours, city: listing.city, communication: listing.communication, 
+	add_info: listing.add_info}}, {new: true}, function(err,updated){
+		if (err)
+			res.status(400).send(err);
+	   res.send();
+	});
+};
 
-	//bcrypt.compareSync("my password", hash)); // true
-  /* Then save the listing */
-  Listing.save(function(err) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.json(listing);
-    }
-  });
+exports.profile = function(req,res){
+	Listing.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,updated){
+		if (err)
+		res.status(400).send(err);
+		console.log(updated);
+	   res.json(updated);
+	});
+	
 };
 
 /* Show the current listing */

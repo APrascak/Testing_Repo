@@ -35,29 +35,28 @@ require('./passport')(passport);
 	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
-  
-	//require('../routes/listings.server.routes')(app, passport);
+
   /**TODO
   Serve static files */
+	
+	app.use('/api/listings/', listingsRouter); 
+	
 	app.use('/', express.static('client'));
-  /**TODO 
-  Use the listings router for requests to the api */
-  app.use('/api/listings/', listingsRouter); 
+	
+	app.get('/create', function(req, res){
+		res.redirect('index.html');
+	});
 
 	app.get('/signup', function(req, res){
 		res.redirect('signup.html');
 	});
 	
-	app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/index.html', // redirect to the secure profile section
-        failureRedirect : '/fail.html', // redirect back to the signup page if there is an error
-        failureFlash : false // allow flash messages
-    }));
-	
-	  app.use('/api/user/', listingsRouter); 
+	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
+		res.send();
+	});
 
 	app.get('/login', function(req, res){
-		res.redirect('login.html');
+		res.redirect('create.html');
 	});
 	
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
@@ -81,11 +80,9 @@ require('./passport')(passport);
 	
   /**TODO 
   Go to homepage for all routes not specified */ 
-	app.all('/*', function(req, res){
-
-		res.redirect('index.html');
+  	app.all('/*', function(req, res){
+		res.redirect('/index.html');
 	});
-
   return app;
 };  
 

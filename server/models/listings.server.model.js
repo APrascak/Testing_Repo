@@ -24,25 +24,27 @@ var listingSchema = new Schema({
 });
 
 var userSchema = new Schema({
-    /*local: {
+    local: {
 		email: String,
 		password: String
 	},
 	gmail: {
 		id: String
-	},*/
-	email: String,
-	password: String,
+	},
 	username: String,
 	usertype: {
         mentee: Boolean,
         mentor: Boolean
     },
     available: Boolean,
-    topics: [String],
+    mentor_topic: String,
+	mentee_topic: String,
+	topic_level: String,
+	year: String,
     city: String,
     hours: [String],
-    communication: [String]
+    communication: [String],
+	add_info: String
 });
 
 
@@ -63,7 +65,7 @@ userSchema.methods.generateHash = function(password) {
 
 // checking if password is valid
 userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
+    return bcrypt.compareSync(password, this.local.password);
 };
 
 
