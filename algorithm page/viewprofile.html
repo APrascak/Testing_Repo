@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style2.css">
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body style = "margin-left: 250px">
+  <div class="row ">
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button> View Profile Picture </button>
+</div>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   Your Roles
+ </label>
+   </p>
+ <p id = "mentormenteevar"> Mentor and/or Mentee </p>
+</div>
+<br>
+<div>
+  <p>
+    <label class="bold">
+    Area you're being mentored in
+  </label>
+ </p>
+  <p id = "menteesubjectvar"> Subject Here </p>
+</div>
+
+<br>
+<div>
+  <p>
+    <label class="bold">
+      Area you're mentoring in
+    </label>
+   </p>
+  <p id = "mentorsubjectvar"> Subject Here </p>
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      Year of school
+    </label>
+  </p>
+  <p id = "yearvar"> Year Here </p>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      Level of experience as mentor
+    </label>
+   </p>
+  <p id = "experiencevar"> Level Here </p>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      City/location
+    </label>
+  </p>
+  <p id = "location var"> Locatin Here </p>
+
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Meeting Preferance
+   </label>
+  </p>
+ <p id = "meetupvar"> Online and/or In Person </p>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Available times
+   </label>
+ </p>
+ <p id = "meetuptimesvar"> Times Here </p>
+</div>
+<br>
+  <label class="bold">
+  Other info
+</label>
+<div>
+ <textarea readonly name="about" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<div>
+  <label class="bold">
+    Your Rating
+  </label>
+  <br>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
+
+ <div>
+ <button> Edit Profile </button>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Name Goes Here</p>
+            <img src ="mentorship.jpg">
+
+            <br>
+            <br>
+            <br>
+
+            <li class="active" >
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Profile</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li class = centervertical>
+                <a class = whitetext href="#">Matches</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Find Mentors</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li>
+                <a class = whitetext href="#">Mentee Requests</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#">Notification</a>
+            </li>
+        </ul>
+
+    </nav>
+    <!-- Page Content -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+</div>
+</div>
+
+</body>
+</html>
