@@ -31,26 +31,26 @@
 angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
-      return $http.get('http://apple-shortcake-58416.herokuapp.com/api/listings');
+      return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
     },
 	
 	create: function(listing) {
-	  return $http.post('http://apple-shortcake-58416.herokuapp.com/api/listings', listing);
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings', listing);
     }, 
 	
 	signUp: function(listing) {
-	  return $http.post('http://apple-shortcake-58416.herokuapp.com/signup', listing);
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/signup', listing);
     }, 
 
 	login: function(listing) {
-	  return $http.post('http://apple-shortcake-58416.herokuapp.com//login', listing);
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com//login', listing);
     },
 	profile: function(){
-		return $http.get('http://apple-shortcake-58416.herokuapp.com/api/listings');
+		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
 	},
 
     delete: function(id) {
-	   return $http.delete('http://apple-shortcake-58416.herokuapp.com/api/listings/'+id);
+	   return $http.delete('https://apple-shortcake-58416.herokuapp.com/api/listings/'+id);
 
     }
   };
