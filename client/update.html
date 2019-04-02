@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Scrumble - Create</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
@@ -25,7 +24,7 @@ Select Option (Drop down)
 </form>
 -->
  <body ng-app="directoryApp">
-	<div ng-controller="ListingsController">
+	<div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
         <div class="container main-page" >
   <form style = "margin-top: 10px; margin-left: 20px;">
@@ -135,7 +134,7 @@ Select Option (Drop down)
       Which city are you in?
     </label>
   </p>
-  <input type="text" name="location" ng-model="newProfile.city">
+  <input type="text" name="location" ng-model="newProfile.city" ng-value"newProfile.city">
 
 </div>
 

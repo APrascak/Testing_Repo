@@ -20,10 +20,7 @@
 	},
 
     delete: function(id) {
-	   /**TODO
-        return result of HTTP delete method
-       */
-	   /*return $http.delete('http://localhost:8080/api/listings/'+id);
+	   return $http.delete('http://localhost:8080/api/listings/'+id);
 
     }
   };
@@ -53,9 +50,6 @@ angular.module('listings', []).factory('Listings', function($http) {
 	},
 
     delete: function(id) {
-	   /**TODO
-        return result of HTTP delete method
-       */
 	   return $http.delete('https://apple-shortcake-58416.herokuapp.com/api/listings/'+id);
 
     }
