@@ -33,7 +33,6 @@ img {
   width: 1000px;
 }
 </style>
-
 </head>
 <body>
 
@@ -76,6 +75,30 @@ img {
   </span>
   <span class="google-button__text">Sign in with Google</span>
 </button>
+							<button class="login100-form-btn">
+								<div class="g-signin2" data-onsuccess="onSignIn"></div>
+								<div id="my-signin2"></div>
+								  <script>
+								    function onSuccess(googleUser) {
+								      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+								    }
+								    function onFailure(error) {
+								      console.log(error);
+								    }
+								    function renderButton() {
+								      gapi.signin2.render('my-signin2', {
+								        'scope': 'profile email',
+								        'width': 240,
+								        'height': 50,
+								        'longtitle': true,
+								        'theme': 'dark',
+								        'onsuccess': onSuccess,
+								        'onfailure': onFailure
+								      });
+								    }
+								  </script>
+								Google login
+							</button>
 						</a>
 
 				</form>
@@ -84,6 +107,7 @@ img {
 				<p class = leftside>
 
 
+				<p style="color: black; font-size: 30px; text-align: center; width: 50%; background-color:grey">
 					<br>
 					<br>
 					<br>
@@ -91,6 +115,9 @@ img {
 					<span style = "font-family: Arial"> Create a New Bubble <br> <br> When You're Using Scrumble!</span>
 					<br>
 					<br>
+					<br>
+					<br>
+					Create a New Bubble <br> When You're Using Scrumble!
 					<br>
 					<br>
 					<span class="mission-header">
