@@ -1,4 +1,4 @@
-/*angular.module('listings', []).factory('Listings', function($http) {
+angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
       return $http.get('http://localhost:8080/api/listings');
@@ -20,6 +20,7 @@
 	},
 
     delete: function(id) {
+<<<<<<< HEAD
 	   return $http.delete('http://localhost:8080/api/listings/'+id);
 
     }
@@ -51,6 +52,12 @@ angular.module('listings', []).factory('Listings', function($http) {
 
     delete: function(id) {
 	   return $http.delete('https://apple-shortcake-58416.herokuapp.com/api/listings/'+id);
+=======
+	   /**TODO
+        return result of HTTP delete method
+       */
+	   return $http.delete('http://localhost:8080/api/listings/'+id);
+>>>>>>> parent of c143608... Update for server
 
     }
   };
