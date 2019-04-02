@@ -14,9 +14,10 @@ angular.module('listings', []).factory('Listings', function($http) {
 
 	login: function(listing) {
 	  return $http.post('http://localhost:8080/login', listing);
-    },profile: function(){
+    },
+	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
-	} 	
+	},
 
     delete: function(id) {
 	   /**TODO

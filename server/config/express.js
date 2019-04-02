@@ -48,7 +48,7 @@ require('./passport')(passport);
 	});
 
 	app.get('/signup', function(req, res){
-		res.redirect('signup.html');
+		res.redirect('index.html');
 	});
 	
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
@@ -56,7 +56,7 @@ require('./passport')(passport);
 	});
 
 	app.get('/login', function(req, res){
-		res.redirect('create.html');
+		res.redirect('index.html');
 	});
 	
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
@@ -75,7 +75,7 @@ require('./passport')(passport);
         /*res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
         });*/
-		res.redirect('profile.html');
+		res.redirect('/profile.html');
     });
 	
   /**TODO 

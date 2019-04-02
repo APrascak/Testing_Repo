@@ -20,7 +20,7 @@ exports.create = function(req, res) {
 	var listing = new Listing(req.body);
 	console.log(req.body);
 	//add user name check
-	Listing.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: listing.username, availaeble: true, mentor_topic: listing.mentor_topic, 
+	Listing.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: listing.username, usertype: listing.usertype,availaeble: true, mentor_topic: listing.mentor_topic, 
 	mentee_topic: listing.mentee_topic, topic_level: listing.topic_level, hours: listing.hours, city: listing.city, communication: listing.communication, 
 	add_info: listing.add_info}}, {new: true}, function(err,updated){
 		if (err)
@@ -30,9 +30,11 @@ exports.create = function(req, res) {
 };
 
 exports.profile = function(req,res){
+	console.log("got to profile.");
 	Listing.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,updated){
 		if (err)
 		res.status(400).send(err);
+		updated._id = null;
 		console.log(updated);
 	   res.json(updated);
 	});
@@ -54,6 +56,7 @@ exports.update = function(req, res) {
   var id = req.params.listingId;
 	Listing.findOneAndUpdate({_id : id}, {$set:{code: listing.code, name: listing.name, latitude: listing.latitude, 
 	longitude: listing.longitude, address: listing.address}}, {new: true}, function(err,updated){
+		updated._id = null;
 		if (err)
 			res.status(400).send(err);
 	   res.json(updated);
