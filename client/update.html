@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+ <body ng-app="directoryApp">
+	<div ng-controller="ListingsController" data-ng-init="profileLoad()">
+  <div class="row ">
+        <div class="container main-page" >
+  <form style = "margin-top: 10px; margin-left: 20px;">
+<!--<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button> Change Profile Picture </button>
+</div>
+-->
+<div>
+  <p>
+    <label class="bold">
+      Username
+    </label>
+  </p>
+  <input type=text" name="username" ng-model="newProfile.username">
+
+</div>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   I am a
+ </label>
+   </p>
+ <input type="checkbox" name="mentor" value="true" ng-model="newProfile.usertype.mentor" >Mentor
+ <input type="checkbox" name="mentee" value="true" ng-model="newProfile.usertype.mentee">Mentee
+</div>
+<br>
+<div>
+  <p>
+    <label class="bold">
+    What area do you want to be mentored in?
+  </label>
+ </p>
+  <select ng-model="newProfile.mentor_topic">
+  <option value="Null" selected disabled></option>
+  <option value="Biology">Biology</option>
+  <option value="Physics">Physics</option>
+  <option value="Computer Science">Computer Science</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Business">Business</option>
+  <option value="ProfessionalWriting">Professional Writing</option>
+  <option value="Psychology">Psychology</option>
+</select>
+</div>
+
+<br>
+<div>
+  <p>
+    <label class="bold">
+      What area do you want to mentor in?
+    </label>
+   </p>
+  <select ng-model="newProfile.mentee_topic">
+  <option value="Null"> </option>
+  <option value="Biology">Biology</option>
+  <option value="Physics">Physics</option>
+  <option value="Computer Science">Computer Science</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Business">Business</option>
+  <option value="ProfessionalWriting">Professional Writing</option>
+  <option value="Psychology">Psychology</option>
+</select>
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      What year are you?
+    </label>
+  </p>
+  <select ng-model="newProfile.year">
+    <option value="Null"> </option>
+    <option value="Freshman">Freshman</option>
+    <option value="Sophmore">Sophmore</option>
+    <option value="Junior">Junior</option>
+    <option value="Senior">Senior</option>
+    <option value="Graduate">Graduate +</option>
+  </select>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      What is the level of experience in the subject you are mentoring in?
+    </label>
+   </p>
+  <select ng-model="newProfile.topic_level">
+    <option value="Null"> </option>
+    <option value="Low">Low</option>
+    <option value="Moderate">Moderate</option>
+    <option value="High">High</option>
+  </select>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      Which city are you in?
+    </label>
+  </p>
+  <input type="text" name="location" ng-model="newProfile.city" ng-value"newProfile.city">
+
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     I like to meet
+   </label>
+  </p>
+ <label><input type="checkbox" name="communication[]" value="Online" ng-model="Online" ng-click="addComm('Online')">Online</label>
+ <label><input type="checkbox" name="communication[]"value="In Person" ng-click="addComm('In Person')">In Person</label>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     I am normally available during
+   </label>
+ </p>
+ <label><input type="checkbox" name="earlymorning" value="EarlyMorning" ng-click="addTime('Early Morning')">Early Morning</label>
+<label> <input type="checkbox" name="latemorning" value="LateMorning" ng-click="addTime('Late Morning')">Late Morning</label>
+<label> <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon" ng-click="addTime('Early Afternoon')">Early Afternoon</label>
+<label> <input type="checkbox" name="lateafternoon" value="LateAfternoon" ng-click="addTime('Late Afternoon')">Late Afternoon</label>
+<label> <input type="checkbox" name="earlyevening" value="EarlyEvening" ng-click="addTime('Early Evening')">Early Evening</label>
+<label> <input type="checkbox" name="lateevening" value="LateEvening" ng-click="addTime('Late Evening')">Late Evening</label>
+</div>
+<br>
+  <label class="bold">
+  Details you want others to know:
+</label>
+<div>
+ <textarea name="about" rows="10" cols="80" ng-model="newProfile.add_info"></textarea>
+</div>
+ <div>
+ <button ng-click="profileAdd()"> Submit </button>
+</div>
+
+
+</form>
+</div>
+</div>
+</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+	
+</body>
+</html>
