@@ -36,6 +36,147 @@ match.save
 };
 
 ===============================================*/
+
+//do i need to implement a callback?? maybe 
+
+/* Matching Algorithm */
+exports.algorithm = function(req, res){
+
+  //variables
+  var mentee;
+  var users = [];
+  var mentor;
+  //var matchingMentorid;
+
+  var isMatch = true;
+
+
+  //get mentee
+  Listing.findOne({_id : req.session.passport.user }, function(err, listings) {
+    if (err){
+      res.status(400).send(err);
+    };
+    mentee = listings;
+
+  });
+
+  //get ALL users
+  Listing.find({_id : req.session.passport.user }, function(err, listings) {
+    if (err){
+      res.status(400).send(err);
+    };
+    users = listings;
+
+  });
+  
+  //loop through users and find where usertype.mentor = true
+  //also check to make sure it isn't our current mentee
+  for(var userCount = 0; userCount < users.length; userCount++){
+    var user = users[userCount];
+    //check if user is mentor
+    if(user.usertype.mentor == true){
+      mentor = users[userCount];
+      //check and see if mentor is available && not the mentee
+      if(mentor.available == true && user._id != mentee._id){
+          
+        /* Begin Matching! */
+        //check if mentee and mentor topics match
+        if(mentee.mentee_topic != mentor.mentor_topic){
+          isMatch = false;
+        } else{
+          isMatch = true;
+          //put mentee hours in my variable so i can check its length
+          var menteeHours = [];
+          menteeHours = mentee.hours;
+  
+          var mentorHours = [];
+          mentorHours = mentor.hours;
+  
+          var matchingHours = [];
+          var falseCount = 0;
+  
+          //check for matching hours
+          for(var i = 0; i < mentorHours.length; i++){
+            for(var j = 0; i < menteeHours.length; j++){
+              if(mentorHours[i] == menteeHours[j]){
+                matchingHours[i] = true;
+              } else{
+                matchingHours[i] = false;
+              }
+            }
+          }
+  
+          //count number of false in matchingHours
+          for(var i = 0; i < matchingHours.length; i++){
+            if(matchingHours[i] != true){
+              falseCount++;
+            }
+          }
+  
+          //if all the matchingHours is false, then none of the times matched
+          if(falseCount == matchingHours.length){
+            isMatch = false;
+          } else{
+            isMatch = true;
+          }
+        }
+  
+        //check if match is still true then check for communication
+        if(isMatch != false){
+          
+          var matchingComm = 0;;
+          var falseComm = 0;
+
+          //check matching communication
+          for (var i = 0; i < menteeComm.length; i++) {
+            for (var j = 0; j < mentorComm.length; j++) {
+              if (menteeComm[j] != mentorComm[i]) {
+                //update what communications match with mentor and mentee
+                //matchingComm[commCount] = true;
+                matchingComm++;
+                falseComm++;
+              } else{
+                matchingComm++;
+              }
+            }
+          }
+
+          //check if false exists in matchingComm
+          if(falseComm == matchingComm){
+            isMatch = false;
+          } else{
+            isMatch = true;
+          }
+        }
+      }
+    }
+
+    //
+
+    //thi what match schema looks like
+    /* MatchSchema({
+      mentee_id = req.session.passport.user;
+      //mentor = get from query
+      status = pending
+    }); */
+    
+    //if mentor and mentee matches, update matchSchema
+    if(match == true){
+      var match = new Match();
+      match.mentor_id = mentor._id;
+      match.status = "pending"
+      match.save;
+    }
+    
+    
+  }
+
+  
+
+
+
+};
+
 /* Create a listing */
 exports.create = function(req, res) {
 	
