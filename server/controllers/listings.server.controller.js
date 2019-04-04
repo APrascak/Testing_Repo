@@ -2,7 +2,9 @@
 /* Dependencies */
 var mongoose = require('mongoose'), 
     Listing = require('../models/listings.server.model.js'),
-	bcrypt = require('bcrypt-nodejs');
+	bcrypt = require('bcrypt-nodejs'),
+	Match = require('../models/matching.server.model.js');
+	
 
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
