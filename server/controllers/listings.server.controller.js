@@ -43,7 +43,7 @@ match.save
 
 /* Matching Algorithm */
 exports.algorithm = function(req, res){
-
+	console.log("got here");
   //variables
   var mentee;
   var users = [];

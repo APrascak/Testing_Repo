@@ -17,6 +17,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
 	$scope.time = [];
 	
+	$scope.userProfile= undefined;
+	
 	
 	$scope.signUp = function() {
 		$scope.errors = [];
@@ -65,7 +67,9 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		}
 	
     Listings.login($scope.newListing).then(function(response) {
-	  $window.location.href = '/create.html';
+	  $window.location.href = '/profile.html';
+	  console.log(response);
+	  return response;
     }, function(error) {
 		$scope.errors.push("Email or password is wrong.");
       //console.log('Unable to update listings:', error);
@@ -120,7 +124,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			
 		Listings.create($scope.newProfile).then(function(response) {
 			console.log(response);
-	  //$window.location.href = '/profile.html';
+		$window.location.href = '/profile.html';
     }, function(error) {
 		$scope.errors.push("There was an error.");
       //console.log('Unable to update listings:', error);
@@ -128,6 +132,29 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     });
 
     };
+	
+	$scope.profileLoad = function() {
+		console.log("called");
+		Listings.profile().then(function(response) {
+			$scope.userProfile = response.data;
+		}, function(error) {
+		$scope.errors.push("There was an error loading your profile.");
+      //console.log('Unable to update listings:', error);
+	  
+		});
+
+    };
+	
+	
+	$scope.checkMatches = function(e) {
+		Listings.algorithm().then(function(response) {
+			console.log(response);
+		}, function(error) {
+      //console.log('Unable to update listings:', error);
+	  
+    });
+    };
+	
 	
   }
 ]);

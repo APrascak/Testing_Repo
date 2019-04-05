@@ -14,16 +14,14 @@ angular.module('listings', []).factory('Listings', function($http) {
 
 	login: function(listing) {
 	  return $http.post('http://localhost:8080/login', listing);
-    },profile: function(){
+    },
+	
+	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
-	} 	
-
-    delete: function(id) {
-	   /**TODO
-        return result of HTTP delete method
-       */
-	   return $http.delete('http://localhost:8080/api/listings/'+id);
-
+	},
+	
+	algorithm: function() {
+      return $http.get('http://localhost:8080/api/listings/algorithm');
     }
   };
 

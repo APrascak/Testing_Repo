@@ -11,7 +11,9 @@ var listings = require('../controllers/listings.server.controller.js'),
 router.route('/')
   .get(listings.profile)
   .post(listings.create);
-
+  
+  router.route('/algorithm')
+  .get(listings.algorithm);
 /*
   The ':' specifies a URL parameter. 
  */

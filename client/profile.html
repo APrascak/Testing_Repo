@@ -2,10 +2,15 @@
 <html>
 <head>
   <!-- Latest compiled and minified CSS -->
+  <title>Scrumble - Profile</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/style2.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
 <style>
 img {
   width: 100px;
@@ -25,14 +30,15 @@ Select Option (Drop down)
 </select>
 </form>
 -->
-<body style = "margin-left: 250px">
+<body style = "margin-left: 250px" ng-app="directoryApp">
+	<div ng-controller="ListingsController"  data-ng-init="profileLoad()">
   <div class="row ">
         <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
-<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+  <form  style = "margin-top: 10px; margin-left: 20px;">
+<!--<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <div>
   <button> View Profile Picture </button>
-</div>
+</div>-->
 
 <div>
  <p style="padding-right: 10px;">
@@ -40,7 +46,7 @@ Select Option (Drop down)
    Your Roles
  </label>
    </p>
- <p id = "mentormenteevar"> Mentor and/or Mentee </p>
+ <p id = "mentormenteevar" ng-repeat="(index,type) in userProfile.usertype" style="text-transform:capitalize;"> {{index}} : {{type}} </p>
 </div>
 <br>
 <div>
@@ -49,7 +55,7 @@ Select Option (Drop down)
     Area you're being mentored in
   </label>
  </p>
-  <p id = "menteesubjectvar"> Subject Here </p>
+  <p id = "menteesubjectvar"> {{userProfile.mentee_topic}}</p>
 </div>
 
 <br>
@@ -59,7 +65,7 @@ Select Option (Drop down)
       Area you're mentoring in
     </label>
    </p>
-  <p id = "mentorsubjectvar"> Subject Here </p>
+  <p id = "mentorsubjectvar"> {{userProfile.mentor_topic}}</p>
 </div>
 
 <br>
@@ -70,7 +76,7 @@ Select Option (Drop down)
       Year of school
     </label>
   </p>
-  <p id = "yearvar"> Year Here </p>
+  <p id = "yearvar"> {{userProfile.year}} </p>
 
 </div>
 
@@ -82,7 +88,7 @@ Select Option (Drop down)
       Level of experience as mentor
     </label>
    </p>
-  <p id = "experiencevar"> Level Here </p>
+  <p id = "experiencevar"> {{userProfile.topic_level}} </p>
 
 </div>
 
@@ -94,7 +100,7 @@ Select Option (Drop down)
       City/location
     </label>
   </p>
-  <p id = "location var"> Locatin Here </p>
+  <p id = "location var">{{userProfile.city}}</p>
 
 </div>
 
@@ -117,14 +123,14 @@ Select Option (Drop down)
      Available times
    </label>
  </p>
- <p id = "meetuptimesvar"> Times Here </p>
+ <p id = "meetuptimesvar" ng-repeat="times in userProfile.hours" > {{times}} </p>
 </div>
 <br>
   <label class="bold">
   Other info
 </label>
 <div>
- <textarea readonly name="about" rows="10" cols="80"></textarea>
+ <textarea readonly name="about" rows="10" cols="80">{{userProfile.add_info}}</textarea>
 </div>
 
 <br>
@@ -142,7 +148,8 @@ Select Option (Drop down)
 </div>
 
  <div>
- <button> Edit Profile </button>
+ <!--<button> Edit Profile </button>-->
+ <button ng-click="checkMatches($event)">Test Algoritm</button>
 </div>
 
 
@@ -161,8 +168,8 @@ Select Option (Drop down)
         </div>
 
         <ul class="list-unstyled components">
-            <p>Name Goes Here</p>
-            <img src ="mentorship.jpg">
+            <p style="text-transform:capitalize;">{{userProfile.username}}</p>
+            <!--<img src ="mentorship.jpg">-->
 
             <br>
             <br>
@@ -245,6 +252,8 @@ Select Option (Drop down)
 </form>
 </div>
 </div>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	
 </body>
 </html>
