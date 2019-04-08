@@ -4,7 +4,7 @@ body{
 
 body .main-page{
 		background-color: #fff;
-		
+
 }
 
 .row{
@@ -153,8 +153,17 @@ form .row{
 
 .whitetext{
 	color: #fff;
-
+	position:relative;
+	width: 250px;
+	padding-left: 28%;
+	padding-right: 28%;
+	padding-top: 8%;
+	padding-bottom: 8%;
+	text-align: center;
+	box-sizing: border-box;
 }
+
+
 
 /*
 a, a:hover, a:focus {
@@ -182,6 +191,7 @@ li:hover{
 }
 
 a:hover{
-	color: red;
+	color: darkblue;
 	decoration: none;
+
 }
