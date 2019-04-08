@@ -4,6 +4,8 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style2.css">
 <style>
 img {
   width: 100px;
@@ -27,57 +29,42 @@ Select Option (Drop down)
   <div class="row ">
         <div class="container main-page">
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
-<h1> Edit Profile </h1>
+<h1> Potential Match </h1>
+<p id = "match name"> Name Here </p>
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <div>
-  <button> Change Profile Picture </button>
+
 </div>
+
+<br>
+<br>
 
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-   I am a
+   User Roles
  </label>
    </p>
- <input type="checkbox" name="mentor" value="Mentor">Mentor
- <input type="checkbox" name="mentee" value="Mentee">Mentee
+ <p id = "mentormenteevar"> Mentor and/or Mentee </p>
 </div>
 <br>
 <div>
   <p>
     <label class="bold">
-    What area do you want to be mentored in?
+    Area user is being mentored in
   </label>
  </p>
-  <select>
-  <option value="" selected disabled></option>
-  <option value="Biology">Biology</option>
-  <option value="Physics">Physics</option>
-  <option value="Computer Science">Computer Science</option>
-  <option value="Chemistry">Chemistry</option>
-  <option value="Business">Business</option>
-  <option value="ProfessionalWriting">Professional Writing</option>
-  <option value="Psychology">Psychology</option>
-</select>
+  <p id = "menteesubjectvar"> Subject Here </p>
 </div>
 
 <br>
 <div>
   <p>
     <label class="bold">
-      What area do you want to mentor in?
+      Area user is mentoring in
     </label>
    </p>
-  <select>
-  <option value="Null"> </option>
-  <option value="Biology">Biology</option>
-  <option value="Physics">Physics</option>
-  <option value="Computer Science">Computer Science</option>
-  <option value="Chemistry">Chemistry</option>
-  <option value="Business">Business</option>
-  <option value="ProfessionalWriting">Professional Writing</option>
-  <option value="Psychology">Psychology</option>
-</select>
+  <p id = "mentorsubjectvar"> Subject Here </p>
 </div>
 
 <br>
@@ -85,17 +72,10 @@ Select Option (Drop down)
 <div>
   <p>
     <label class="bold">
-      What year are you?
+      Year of school
     </label>
   </p>
-  <select>
-    <option value="Null"> </option>
-    <option value="Freshman">Freshman</option>
-    <option value="Sophmore">Sophmore</option>
-    <option value="Junior">Junior</option>
-    <option value="Senior">Senior</option>
-    <option value="Graduate">Graduate +</option>
-  </select>
+  <p id = "yearvar"> Year Here </p>
 
 </div>
 
@@ -104,15 +84,10 @@ Select Option (Drop down)
 <div>
   <p>
     <label class="bold">
-      What is the level of experience in the subject you are mentoring in?
+      Level of experience as mentor
     </label>
    </p>
-  <select>
-    <option value="Null"> </option>
-    <option value="Low">Low</option>
-    <option value="Moderate">Moderate</option>
-    <option value="High">High</option>
-  </select>
+  <p id = "experiencevar"> Level Here </p>
 
 </div>
 
@@ -121,10 +96,10 @@ Select Option (Drop down)
 <div>
   <p>
     <label class="bold">
-      Which city are you in?
+      City/location
     </label>
   </p>
-  <textarea name="location" rows="1" cols="20"></textarea>
+  <p id = "location var"> Location Here </p>
 
 </div>
 
@@ -133,11 +108,10 @@ Select Option (Drop down)
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-     I like to meet
+     Meeting Preferance
    </label>
   </p>
- <label><input type="checkbox" name="online" value="Online">Online</label>
- <label><input type="checkbox" name="inperson" value="InPerson">In Person</label>
+ <p id = "meetupvar"> Online and/or In Person </p>
 </div>
 
 <br>
@@ -145,25 +119,35 @@ Select Option (Drop down)
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-     I am normally available during
+     Available times
    </label>
  </p>
- <label><input type="checkbox" name="earlymorning" value="EarlyMorning">Early Morning</label>
-<label> <input type="checkbox" name="latemorning" value="LateMorning">Late Morning</label>
-<label> <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon">Early Afternoon</label>
-<label> <input type="checkbox" name="lateafternoon" value="LateAfternoon">Late Afternoon</label>
-<label> <input type="checkbox" name="earlyevening" value="EarlyEvening">Early Evening</label>
-<label> <input type="checkbox" name="lateevening" value="LateEvening">Late Evening</label>
+ <p id = "meetuptimesvar"> Times Here </p>
 </div>
 <br>
   <label class="bold">
-  Details you want others to know:
+  Other info
 </label>
 <div>
- <textarea name="about" rows="10" cols="80"></textarea>
+ <textarea readonly name="about" rows="10" cols="80"></textarea>
 </div>
+
+<br>
+
+<div>
+  <label class="bold">
+    User Rating
+  </label>
+  <br>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
+
  <div>
- <button> Submit </button>
+ <button> Back To Results </button>
 </div>
 
 

@@ -4,8 +4,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="resulttable.css">
 <style>
 img {
   width: 100px;
@@ -29,128 +28,62 @@ Select Option (Drop down)
   <div class="row ">
         <div class="container main-page">
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
-<h1> Your Profile </h1>
-<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
-<div>
-  <button> View Profile Picture </button>
-</div>
 
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-   Your Roles
- </label>
-   </p>
- <p id = "mentormenteevar"> Mentor and/or Mentee </p>
-</div>
-<br>
-<div>
-  <p>
-    <label class="bold">
-    Area you're being mentored in
-  </label>
- </p>
-  <p id = "menteesubjectvar"> Subject Here </p>
-</div>
+<h1 style= "padding-left: 40%"> Matches </h1>
 
-<br>
-<div>
-  <p>
-    <label class="bold">
-      Area you're mentoring in
-    </label>
-   </p>
-  <p id = "mentorsubjectvar"> Subject Here </p>
-</div>
 
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Year of school
-    </label>
-  </p>
-  <p id = "yearvar"> Year Here </p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Level of experience as mentor
-    </label>
-   </p>
-  <p id = "experiencevar"> Level Here </p>
-
-</div>
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Major</th>
+    <th>Year</th>
+    <th>View Profile </th>
+    <th>Quick Request </th>
+  </tr>
+  <tr>
+    <td>Generic Name</td>
+    <td>Generic Subject</td>
+    <td>Year Here</td>
+    <td> <button> View Profile </button> </td>
+    <td> <button> Request Match </button> </td>
+  </tr>
+  <tr>
+    <td>Generic Name 2</td>
+    <td>Generic Subject 2</td>
+    <td>Year Here</td>
+    <td> <button> View Profile </button> </td>
+    <td> <button> Request Match </button> </td>
+  </tr>
+  <tr>
+    <td>Generic Name 3</td>
+    <td>Generic Subject 3</td>
+    <td>Year Here</td>
+    <td> <button> View Profile </button> </td>
+    <td> <button> Request Match </button> </td>
+  </tr>
+  <tr>
+    <td>Generic Name 4</td>
+    <td>Generic Subject 4</td>
+    <td>Year Here</td>
+    <td> <button> View Profile </button> </td>
+    <td> <button> Request Match </button> </td>
+  </tr>
+  <tr>
+    <td>Generic Name 5</td>
+    <td>Generic Subject 5</td>
+    <td>Year Here</td>
+    <td> <button> View Profile </button> </td>
+    <td> <button> Request Match </button> </td>
+  </tr>
+</table>
 
 <br>
-
-<div>
-  <p>
-    <label class="bold">
-      City/location
-    </label>
-  </p>
-  <p id = "location var"> Location Here </p>
-
-</div>
-
 <br>
 
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Meeting Preferance
-   </label>
-  </p>
- <p id = "meetupvar"> Online and/or In Person </p>
+<div style= "margin-left: 40%">
+<a href="#" class="previous">&laquo; Previous</a>
+<a href="#" class="next">Next &raquo;</a>
 </div>
-
-<br>
-
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Available times
-   </label>
- </p>
- <p id = "meetuptimesvar"> Times Here </p>
-</div>
-<br>
-  <label class="bold">
-  Other info
-</label>
-<div>
- <textarea readonly name="about" rows="10" cols="80"></textarea>
-</div>
-
-<br>
-
-<div>
-  <label class="bold">
-    Your Rating
-  </label>
-  <br>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star"></span>
-  <span class="fa fa-star"></span>
-</div>
-
- <div>
- <button> Edit Profile </button>
-</div>
-
-
-
-
-
-
 
 
 
@@ -178,7 +111,7 @@ Select Option (Drop down)
             <br>
             <br>
 
-            <li class = centervertical>
+            <li class = "centervertical">
                 <a class = whitetext href="#">Matches</a>
             </li>
 
