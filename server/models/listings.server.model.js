@@ -1,22 +1,22 @@
 /* Import mongoose and define any variables needed to create the schema */
-var mongoose = require('mongoose'), 
+var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 	bcrypt = require('bcrypt-nodejs');
 
 /* Create your schema */
 var listingSchema = new Schema({
   name: {
-    type: String, 
+    type: String,
     required: true
-  }, 
+  },
   code: {
-    type: String, 
-    required: true, 
+    type: String,
+    required: true,
     unique: true
-  }, 
-  address: String, 
+  },
+  address: String,
   coordinates: {
-    latitude: Number, 
+    latitude: Number,
     longitude: Number
   },
   created_at: Date,
@@ -24,13 +24,11 @@ var listingSchema = new Schema({
 });
 
 var userSchema = new Schema({
-    local: {
+  local: {
 		email: String,
 		password: String
 	},
-	gmail: {
-		id: String
-	},
+	googleID: String,
 	username: String,
 	usertype: {
         mentee: Boolean,

@@ -1,5 +1,5 @@
-var path = require('path'),  
-    express = require('express'), 
+var path = require('path'),
+    express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
@@ -17,7 +17,7 @@ var path = require('path'),
 module.exports.init = function() {
   //connect to database
   mongoose.connect(config.db.uri);
-  
+
 
   //initialize app
   var app = express();
@@ -25,10 +25,10 @@ module.exports.init = function() {
 require('./passport')(passport);
   //enable request logging for development debugging
   app.use(morgan('dev'));
-  
+
   app.use(cookieParser()); // read cookies (needed for auth)
 
-  //body parsing middleware 
+  //body parsing middleware
   app.use(bodyParser.json());
 
 	// required for passport
@@ -38,11 +38,11 @@ require('./passport')(passport);
 
   /**TODO
   Serve static files */
-	
-	app.use('/api/listings/', listingsRouter); 
-	
+
+	app.use('/api/listings/', listingsRouter);
+
 	app.use('/', express.static('client'));
-	
+
 	app.get('/create', function(req, res){
 		res.redirect('index.html');
 	});
@@ -50,7 +50,7 @@ require('./passport')(passport);
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
 		res.send();
 	});
@@ -58,14 +58,21 @@ require('./passport')(passport);
 	app.get('/login', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
 	//If it doesn't the listingController will display error
     res.send();
   });
-	
+
+  // Implementation for Google OAuth
+  app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+
+  app.post('/auth/google/redirect', passport.authenticate('google'), function(req,res){
+    res.redirect('/profile.html');
+  });
+
 	 // =====================================
     // PROFILE SECTION =====================
     // =====================================
@@ -77,18 +84,18 @@ require('./passport')(passport);
         });*/
 		res.redirect('/profile.html');
     });
-	
-  /**TODO 
-  Go to homepage for all routes not specified */ 
+
+  /**TODO
+  Go to homepage for all routes not specified */
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');
 	});
   return app;
-};  
+};
 
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 

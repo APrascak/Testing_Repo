@@ -2,6 +2,8 @@
 var passport = require('passport');
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20');
+const config = require('./config');
 
 // load up the user model
 var User = require('../models/listings.server.model.js');
@@ -75,12 +77,12 @@ module.exports = function(passport) {
                 });
             }
 
-        });    
+        });
 
         });
 
     }));
-	
+
 	// =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
@@ -122,7 +124,27 @@ module.exports = function(passport) {
 
     }));
 
-	
-	
+    // Passport Implementation for Google Login
+    passport.use(new GoogleStrategy({
+      callbackURL: '/auth/google/redirect',
+      clientID: config.google.clientID,
+      clientSecret: config.google.clientSecret
+    }, function(accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      User.findOne({googleID: profile.id}).then((currUser) => {
+        if (currUser) {
+          console.log('User Information: ' + currUser);
+          done(null, currUser);
+        } else {
+          new User({
+              gmail: {
+                id: profile.displayName
+              }
+          }).save().then(function(newUser){
+            console.log('New User has been created: ' + newUser);
+          });
+        }
+      });
+    }));
 
 };
