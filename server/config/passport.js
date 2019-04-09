@@ -125,7 +125,7 @@ module.exports = function(passport) {
     }));
 
     // Passport Implementation for Google Login
-    passport.use(new GoogleStrategy({
+    passport.use('google', new GoogleStrategy({
       callbackURL: '/auth/google/redirect',
       clientID: config.google.clientID,
       clientSecret: config.google.clientSecret

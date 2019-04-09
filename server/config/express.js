@@ -69,7 +69,7 @@ require('./passport')(passport);
   // Implementation for Google OAuth
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
-  app.post('/auth/google/redirect', passport.authenticate('google'), function(req,res){
+  app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
     res.redirect('/profile.html');
   });
 
