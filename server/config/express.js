@@ -70,8 +70,12 @@ require('./passport')(passport);
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
   app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
-    res.redirect('/profile.html');
+    res.redirect('/profile/');
   });
+  //
+  // app.post('/auth/google/redirect', function(req, res) {
+  //   res.redirect();
+  // });
 
 	 // =====================================
     // PROFILE SECTION =====================

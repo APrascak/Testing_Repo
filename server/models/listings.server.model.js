@@ -28,7 +28,9 @@ var userSchema = new Schema({
 		email: String,
 		password: String
 	},
-	googleID: String,
+	gmail: {
+		id: String
+	},
 	username: String,
 	usertype: {
         mentee: Boolean,

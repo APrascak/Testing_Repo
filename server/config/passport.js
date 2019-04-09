@@ -130,15 +130,14 @@ module.exports = function(passport) {
       clientID: config.google.clientID,
       clientSecret: config.google.clientSecret
     }, function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      User.findOne({googleID: profile.id}).then((currUser) => {
+      User.findOne({gmail: {id: profile.id}}).then((currUser) => {
         if (currUser) {
           console.log('User Information: ' + currUser);
           done(null, currUser);
         } else {
           new User({
               gmail: {
-                id: profile.displayName
+                id: profile.id
               }
           }).save().then(function(newUser){
             console.log('New User has been created: ' + newUser);
