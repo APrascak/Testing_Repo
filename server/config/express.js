@@ -43,10 +43,6 @@ require('./passport')(passport);
 
 	app.use('/', express.static('client'));
 
-	app.get('/create', function(req, res){
-		res.redirect('index.html');
-	});
-
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
@@ -70,8 +66,13 @@ require('./passport')(passport);
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
   app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
-    res.redirect('/profile/');
+    res.redirect('/create/');
   });
+
+  app.get('/create', function(req, res) {
+    res.redirect('/create.html');
+  });
+
   //
   // app.post('/auth/google/redirect', function(req, res) {
   //   res.redirect();

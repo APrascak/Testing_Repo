@@ -131,6 +131,7 @@ module.exports = function(passport) {
       clientSecret: config.google.clientSecret
     }, function(accessToken, refreshToken, profile, done) {
       User.findOne({gmail: {id: profile.id}}).then((currUser) => {
+        console.log(profile);
         if (currUser) {
           console.log('User Information: ' + currUser);
           done(null, currUser);
