@@ -226,19 +226,17 @@ iframe {
 /*Spans for left side*/
 .mission-header{
   text-decoration: underline;
-  font-family: Arial, Arial;
+  font-family: serif;
   text-align:center;
-  font-size:24px;
+  font-size:36px;
+  display:inline-block;
+  padding-bottom:30px;
 
 }
 .mission-statement{
   font-family: Arial, Arial;
-
   font-size:16px;
-
-
-
-
+  display:inline-block;
 
 }
 
@@ -246,14 +244,13 @@ iframe {
 [ Form ]*/
 
 .login100-form {
-  width: 50%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding: 303px 65px 40px 65px;
+  padding: 0px 65px 40px 65px;
 }
 
 .login100-form-title {
@@ -274,11 +271,36 @@ iframe {
   font-size: 30px;
   text-align: center;
   line-height: 20pt;
-  width: 50%;
   background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url('mentorship.jpg') no-repeat center center;
   background-size: cover;
   padding-left: 20px;
   padding-right: 20px;
+  border: 10px solid #168635;
+}
+
+#equal{
+  display:flex !important;
+  width:100%;
+}
+
+#equal .span-6{
+  flex:1 !important;
+  border: solid 5px #168635 !important;
+}
+.col{
+  flex:1;
+  padding:16px;
+}
+
+
+.motto-spacing1{
+  padding-top:40px;
+  padding-bottom:20px;
+  display:inline-block;
+}
+.motto-spacing2{
+  padding-bottom:70px;
+  display:inline-block;
 }
 
 
@@ -386,7 +408,7 @@ input.input100 {
   border-radius: 3px;
   border-width: 4px;
 
-  background: blue;
+  background: #168635;
 
   font-family: Arial;
   font-size: 20px;
