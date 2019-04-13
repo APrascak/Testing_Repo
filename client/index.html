@@ -5,17 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="styles/util.css">
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/base.css">
 <style>
 img {
   width: 1000px;
@@ -25,10 +17,35 @@ img {
 </head>
   <body ng-app="directoryApp">
 	<div ng-controller="ListingsController">
-		<div class="limiter">
-			<div class="container-login100">
-				<div class="wrap-login100">
+	<div class= "col-container" id="equal">
+		<!--Left side of the page-->
+				<div class = "span-6 leftside">
+		<span style = "font-family: Arial;">
+			<span class= motto-spacing1>
+			 Create a New Bubble
+			 <br>
+		 </span>
+		 <span class= motto-spacing2>
+			 When You're Using Scrumble!
+		 </span>
+				</span>
+		<span class="mission-header">
+			Mission Statement
+		</span>
+		<br>
+		<span class="mission-statement">
+			“With Scrumble, we aim to pair like-minded individuals looking to improve
+			their skills in an area of expertise. We provide a space to create communities
+			with people interested in similar subjects, whether experienced or inexperienced.
+			You will seamlessly be connected with either a mentor or mentee, based on your
+			preference, and feel fulfillment as you provide guidance or gain important knowledge in your field of interest.”
+		</span>
+	</div>
+
+	<div class = "span-6 omega">
+		<div class= "col">
 					<form class="login100-form validate-form">
+						<a href="https://imgbb.com/"><img src="https://i.ibb.co/ZKVGWpD/scrumblelogo-Final.png" alt="scrumblelogo-Final" style="width:400px; length:400px; padding-left:50px; padding-bottom:60px;" border="0"></a>
 						<span class="login100-form-title p-b-20" style="text-align:left; font-size: 15px">
 							Fill out the form below to sign up or login.
 						</span>
@@ -66,36 +83,10 @@ img {
 							</a>
 
 					</form>
-
-						<!--Left side of the page-->
-					<p class = leftside>
-
-
-						<br>
-						<br>
-						<br>
-						<br>
-						<span style = "font-family: Arial"> Create a New Bubble <br> <br> When You're Using Scrumble!</span>
-						<br>
-						<br>
-						<br>
-						<br>
-						<span class="mission-header">
-							Mission Statement
-						</span>
-						<br>
-						<br>
-						<span class="mission-statement">
-							“With Scrumble, we aim to pair like-minded individuals looking to improve
-							their skills in an area of expertise. We provide a space to create communities
-							with people interested in similar subjects, whether experienced or inexperienced.
-							You will seamlessly be connected with either a mentor or mentee, based on your
-							preference, and feel fulfillment as you provide guidance or gain important knowledge in your field of interest.”
-						</span>
-				</div>
+				</span>
 			</div>
-		</div>
 	</div>
+</div>
 
 	<!--<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/animsition/js/animsition.min.js"></script>
@@ -114,7 +105,7 @@ img {
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="js/main.js"></script>
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
