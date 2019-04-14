@@ -1,4 +1,4 @@
-/*angular.module('listings', []).factory('Listings', function($http) {
+angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
       return $http.get('http://localhost:8080/api/listings');
@@ -17,21 +17,13 @@
     },
 	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
-	},
-
-    delete: function(id) {
-	   /**TODO
-        return result of HTTP delete method
-       */
-	   /*return $http.delete('http://localhost:8080/api/listings/'+id);
-
-    }
+	}
   };
 
   return methods;
-});*/
+});
 
-angular.module('listings', []).factory('Listings', function($http) {
+/*angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
       return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
@@ -50,16 +42,8 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 	profile: function(){
 		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
-	},
-
-    delete: function(id) {
-	   /**TODO
-        return result of HTTP delete method
-       */
-	   return $http.delete('https://apple-shortcake-58416.herokuapp.com/api/listings/'+id);
-
-    }
+	}
   };
 
   return methods;
-});
+});*/

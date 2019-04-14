@@ -19,6 +19,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
 	$scope.userProfile= undefined;
 	
+	$scope.changedProfile = undefined;
+	
 	
 	$scope.signUp = function() {
 		$scope.errors = [];
@@ -144,6 +146,10 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 
     };
+	
+	$scope.profileUpdate = function(){
+		console.log($scope.userProfile);
+	}
 	
   }
 ]);
