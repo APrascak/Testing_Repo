@@ -62,7 +62,7 @@ exports.algorithm = function(req, res){
 	console.log("Mentee \n" + mentee);
 	
 	  //get ALL users
-	Listing.find({"usertype.mentor": true}, function(err, mentors) {
+	Listing.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
     if (err){
       res.status(400).send(err);
     };
