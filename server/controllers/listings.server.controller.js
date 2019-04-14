@@ -54,30 +54,28 @@ exports.algorithm = function(req, res){
 
 
   //get mentee
-  Listing.findOne({_id : req.session.passport.user }, function(err, listings) {
+  Listing.findOne({_id : req.session.passport.user, "usertype.mentee" : true }, function(err, mentee) {
     if (err){
       res.status(400).send(err);
     };
-    mentee = listings;
-
-  });
-
-  //get ALL users
-  Listing.find({_id : req.session.passport.user }, function(err, listings) {
+	
+	console.log("Mentee \n" + mentee);
+	
+	  //get ALL users
+	Listing.find({"usertype.mentor": true}, function(err, mentors) {
     if (err){
       res.status(400).send(err);
     };
-    users = listings;
-
-  });
-  
-  //loop through users and find where usertype.mentor = true
+    //users = listings;
+	console.log("Mentors \n" + mentors);
+	
+	  //loop through users and find where usertype.mentor = true
   //also check to make sure it isn't our current mentee
-  for(var userCount = 0; userCount < users.length; userCount++){
-    var user = users[userCount];
+  for(var userCount = 0; userCount < mentors.length; userCount++){
+    var user = mentors[userCount];
     //check if user is mentor
     if(user.usertype.mentor == true){
-      mentor = users[userCount];
+      mentor = mentors[userCount];
       //check and see if mentor is available && not the mentee
       if(mentor.available == true && user._id != mentee._id){
           
@@ -164,6 +162,7 @@ exports.algorithm = function(req, res){
     
     //if mentor and mentee matches, update matchSchema
     if(match == true){
+		console.log("Got a match");
       var match = new Match();
       match.mentor_id = mentor._id;
       match.status = "pending"
@@ -172,6 +171,21 @@ exports.algorithm = function(req, res){
     
     
   }
+
+	});
+
+  });
+
+  //get ALL users
+  /*Listing.find({_id : req.session.passport.user }, function(err, listings) {
+    if (err){
+      res.status(400).send(err);
+    };
+    users = listings;
+	
+
+
+  });*/
 
   
 
@@ -184,7 +198,7 @@ exports.create = function(req, res) {
 	
   /* Instantiate a Listing */
 	var listing = new Listing(req.body);
-	console.log(req.body);
+	//console.log(req.body);
 	//add user name check
 	Listing.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: listing.username, availaeble: true, mentor_topic: listing.mentor_topic, 
 	mentee_topic: listing.mentee_topic, topic_level: listing.topic_level, hours: listing.hours, city: listing.city, communication: listing.communication, 
@@ -199,7 +213,7 @@ exports.profile = function(req,res){
 	Listing.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,updated){
 		if (err)
 		res.status(400).send(err);
-		console.log(updated);
+		//console.log(updated);
 	   res.json(updated);
 	});
 	
