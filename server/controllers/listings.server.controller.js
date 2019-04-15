@@ -43,7 +43,7 @@ match.save
 
 /* Matching Algorithm */
 exports.algorithm = function(req, res){
-	console.log("got here");
+	console.log(">>>>>>>>>>>>got here");
   //variables
   var mentee;
   var users = [];
@@ -59,7 +59,7 @@ exports.algorithm = function(req, res){
       res.status(400).send(err);
     };
 	
-	console.log("Mentee \n" + mentee);
+  console.log("Mentee \n" + mentee);
 	
 	  //get ALL users
 	Listing.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
@@ -72,41 +72,57 @@ exports.algorithm = function(req, res){
 	  //loop through users and find where usertype.mentor = true
   //also check to make sure it isn't our current mentee
   for(var userCount = 0; userCount < mentors.length; userCount++){
+    //console.log("inside forloop");
     var user = mentors[userCount];
-    //check if user is mentor
-    if(user.usertype.mentor == true){
-      mentor = mentors[userCount];
-      //check and see if mentor is available && not the mentee
-      if(mentor.available == true && user._id != mentee._id){
+    //console.log("Mentors: \n" + user);
+    
+      //check and see if mentor is available 
+      //if(mentor.available == true){
+        //console.log("mentor is available");
           
         /* Begin Matching! */
         //check if mentee and mentor topics match
-        if(mentee.mentee_topic != mentor.mentor_topic){
+        var menteeTopic = mentee.mentee_topic;
+        var mentorTopic = user.mentor_topic;
+        if(menteeTopic.localeCompare(mentorTopic) != 0){
           isMatch = false;
         } else{
+          //console.log("mentee and mentor topics match\n");
           isMatch = true;
           //put mentee hours in my variable so i can check its length
           var menteeHours = [];
           menteeHours = mentee.hours;
   
           var mentorHours = [];
-          mentorHours = mentor.hours;
+          mentorHours = user.hours;
   
           var matchingHours = [];
           var falseCount = 0;
+          var count = 0;
   
           //check for matching hours
           for(var i = 0; i < mentorHours.length; i++){
-            for(var j = 0; i < menteeHours.length; j++){
-              if(mentorHours[i] == menteeHours[j]){
-                matchingHours[i] = true;
+            for(var j = 0; j < menteeHours.length; j++){
+              //var torHours = mentorHours[i];
+              //var teeHours = menteeHours[j];
+              //console.log("MentorHours length is: ", mentorHours.length);
+              //console.log("MenteeHours length is: ", menteeHours.length);
+              //menteeHours[j].localeCompare(mentorHours[i]) == 0
+              if((Object.is(menteeHours[j], mentorHours[i])) == true){
+                //console.log("mentee hours and mentor horus matched at this point");
+                matchingHours[count] = true;
+                //console.log("matchingHours now has ", matchingHours[count]);
+                count++;
               } else{
-                matchingHours[i] = false;
+                //console.log("no match");
+                matchingHours[count] = false;
+                count++;
               }
             }
           }
-  
+          //console.log("matchingHours: ", matchingHours);
           //count number of false in matchingHours
+          //console.log("count number of false in matchingHours");
           for(var i = 0; i < matchingHours.length; i++){
             if(matchingHours[i] != true){
               falseCount++;
@@ -126,30 +142,34 @@ exports.algorithm = function(req, res){
           
           var matchingComm = 0;;
           var falseComm = 0;
+          var menteeComm = mentee.communication;
+          var mentorComm = user.communication;
 
           //check matching communication
           for (var i = 0; i < menteeComm.length; i++) {
             for (var j = 0; j < mentorComm.length; j++) {
-              if (menteeComm[j] != mentorComm[i]) {
+              //var teeComm = menteeComm[j];
+              //var torComm = mentorComm[i];
+              //(Object.is(menteeComm[j], mentorComm[i])) == true
+              if ((Object.is(menteeComm[j], mentorComm[i])) == true) {
+                //console.log("mentor and mentee comm matched at this point");
                 //update what communications match with mentor and mentee
                 //matchingComm[commCount] = true;
                 matchingComm++;
-                falseComm++;
-              } else{
-                matchingComm++;
+                //falseComm++;
               }
             }
           }
 
           //check if false exists in matchingComm
-          if(falseComm == matchingComm){
-            isMatch = false;
-          } else{
+          if(matchingComm >= 1){
             isMatch = true;
+          } else{
+            isMatch = false;
           }
         }
-      }
-    }
+      //}
+    
 
     //
 
@@ -161,10 +181,11 @@ exports.algorithm = function(req, res){
     }); */
     
     //if mentor and mentee matches, update matchSchema
-    if(match == true){
-		console.log("Got a match");
+    if(isMatch == true){
+    console.log("Got a match!");
+    console.log("You", mentee.username, "matched with", user.username);
       var match = new Match();
-      match.mentor_id = mentor._id;
+      match.mentor_id = user._id;
       match.status = "pending"
       match.save;
     }
