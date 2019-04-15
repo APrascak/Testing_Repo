@@ -5,98 +5,83 @@ var path = require('path'),
     bodyParser = require('body-parser'),
     config = require('./config'),
     listingsRouter = require('../routes/listings.server.routes'),
-	passport = require('passport'),
-	cookieParser = require('cookie-parser'),
-	bodyParser = require('body-parser'),
-	LocalStrategy = require('passport-local').Strategy,
-	morgan = require('morgan'),
-	cookieParser = require('cookie-parser'),
-	passport = require('passport'),
-	session = require('express-session');
+  	passport = require('passport'),
+  	cookieParser = require('cookie-parser'),
+  	bodyParser = require('body-parser'),
+  	LocalStrategy = require('passport-local').Strategy,
+  	morgan = require('morgan'),
+  	cookieParser = require('cookie-parser'),
+  	passport = require('passport'),
+  	session = require('express-session');
 
-module.exports.init = function() {
-  //connect to database
-  mongoose.connect(config.db.uri);
+    module.exports.init = function() {
+    //connect to database
+    mongoose.connect(config.db.uri);
 
 
-  //initialize app
-  var app = express();
+    //initialize app
+    var app = express();
 
-require('./passport')(passport);
-  //enable request logging for development debugging
-  app.use(morgan('dev'));
+    require('./passport')(passport);
 
-  app.use(cookieParser()); // read cookies (needed for auth)
+  app.use(morgan('dev'));     // Enable request logging for development debugging
+  app.use(cookieParser());    // Need for auth, reading cookies
+  app.use(bodyParser.json()); //Body parsing middleware
 
-  //body parsing middleware
-  app.use(bodyParser.json());
-
-	// required for passport
+	// Required for Passport
 	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 
-  /**TODO
-  Serve static files */
-
 	app.use('/api/listings/', listingsRouter);
-
 	app.use('/', express.static('client'));
 
+  // GET & POST Methods for 'signup'
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
-
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
 		res.send();
 	});
 
+  // GET & POST Methods for 'signup'
 	app.get('/login', function(req, res){
 		res.redirect('index.html');
 	});
-
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-	//If it doesn't the listingController will display error
+     // If this function gets called, authentication was successful.
+     // `req.user` contains the authenticated user.
+	   //If it doesn't the listingController will display error
     res.send();
   });
 
   // Implementation for Google OAuth
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-
   app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
     res.redirect('/create/');
   });
-
   app.get('/create', function(req, res) {
     res.redirect('/create.html');
   });
 
-  //
-  // app.post('/auth/google/redirect', function(req, res) {
-  //   res.redirect();
-  // });
+  // =====================================
+  // PROFILE SECTION =====================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  app.get('/profile',isLoggedIn, function(req, res) {
+      /*res.render('profile.ejs', {
+          user : req.user // get the user out of session and pass to template
+      });*/
+  res.redirect('/profile.html');
+  });
 
-	 // =====================================
-    // PROFILE SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile',isLoggedIn, function(req, res) {
-        /*res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });*/
-		res.redirect('/profile.html');
-    });
-
-  /**TODO
-  Go to homepage for all routes not specified */
-  	app.all('/*', function(req, res){
-		res.redirect('/index.html');
+  // Go to homepage for all routes not specified
+	app.all('/*', function(req, res){
+	res.redirect('/index.html');
 	});
   return app;
-};
+  };
 
 function isLoggedIn(req, res, next) {
 
