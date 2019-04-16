@@ -187,7 +187,12 @@ exports.algorithm = function(req, res){
       var match = new Match();
       match.mentor_id = user._id;
       match.status = "pending"
-      match.save;
+      match.save(function(err){
+        if (err){
+          console.log(err);
+          throw err;
+        }
+      });
     }
     
     
