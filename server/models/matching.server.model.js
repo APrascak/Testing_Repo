@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs');
 
 var matchSchema = new Schema({
-	mentee_id: Number,
-	mentor_id: Number,
+	mentee_id: String,
+	mentor_id: String,
     status: String
 });
 
