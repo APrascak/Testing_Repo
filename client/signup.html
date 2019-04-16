@@ -30,7 +30,7 @@ Select Option (Drop down)
 
 
 
-<div style = " background-color: lightgreen; width: 400px;" class = centerhorizontal>
+<div style = " background-color: lightgrey; width: 400px;" class = centerhorizontal>
 <h1 class = centerhorizontal> Sign Up </h1>
   <div class = centerhorizontal>
     <label class = "textboxquestion"> Name: </label>
@@ -67,21 +67,38 @@ Select Option (Drop down)
   <br>
 <textarea rows = "1" id = age> </textarea>
 </div>
-
+<br>
 <div class = centerhorizontal>
   <label class = "textboxquestion"> Gender: </label>
   <br>
-<textarea rows = "1" id = gender> </textarea>
+  <select>
+  <option value="Null"> </option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Nonbinary"> Non-binary </option>
+  <option value="Nopreferance">I prefer not to answer</option>
+  </select>
 </div>
-
+<br>
 <div class = centerhorizontal>
-  <label class = "textboxquestion"> Demographics: </label>
+  <label class = "textboxquestion"> Ethnicity/Race: </label>
   <br>
-<textarea rows = "1" id = demographics> </textarea>
+  <select>
+  <option value="Null"> </option>
+  <option value="Nativeamerican">Native American</option>
+  <option value="Africanamerican">African American</option>
+  <option value="Middleeastern">Middle Eastern</option>
+  <option value="Asian">Asian</option>
+  <option value="Hispanic">Hispanic</option>
+  <option value="European">European</option>
+  <option value="White">White American</option>
+  <option value="Eurasian">Eurasian</option>
+  <option value="Nopreferance">I prefer not to answer</option>
+  </select>
 </div>
 
 <div>
-  <button class = centerhorizontal> Submit </button>
+  <button class = "centerhorizontal" style = "background-color: lightgreen;"> Submit </button>
 </div>
 
 
