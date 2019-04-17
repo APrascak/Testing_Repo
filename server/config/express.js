@@ -4,7 +4,7 @@ var path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    listingsRouter = require('../routes/listings.server.routes'),
+    usersRouter = require('../routes/users.server.routes'),
 	passport = require('passport'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
@@ -39,7 +39,7 @@ require('./passport')(passport);
   /**TODO
   Serve static files */
 	
-	app.use('/api/listings/', listingsRouter); 
+	app.use('/api/listings/', usersRouter); 
 	
 	app.use('/', express.static('client'));
 	

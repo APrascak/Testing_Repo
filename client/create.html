@@ -96,25 +96,6 @@ Select Option (Drop down)
 <div>
   <p>
     <label class="bold">
-      What year are you?
-    </label>
-  </p>
-  <select ng-model="newProfile.year">
-    <option value="Null"> </option>
-    <option value="Freshman">Freshman</option>
-    <option value="Sophmore">Sophmore</option>
-    <option value="Junior">Junior</option>
-    <option value="Senior">Senior</option>
-    <option value="Graduate">Graduate +</option>
-  </select>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
       What is the level of experience in the subject you are mentoring in?
     </label>
    </p>
@@ -147,8 +128,10 @@ Select Option (Drop down)
      I like to meet
    </label>
   </p>
- <label><input type="checkbox" name="communication[]" value="Online" ng-model="Online" ng-click="addComm('Online')">Online</label>
+ <label><input type="checkbox" name="communication[]" value="Email" ng-click="addComm('Email')">Email</label>
  <label><input type="checkbox" name="communication[]"value="In Person" ng-click="addComm('In Person')">In Person</label>
+ <label><input type="checkbox" name="communication[]"value="Text" ng-click="addComm('Text')">Text</label>
+ <label><input type="checkbox" name="communication[]"value="Video Call" ng-click="addComm('Video Call')">Video Call</label>
 </div>
 
 <br>

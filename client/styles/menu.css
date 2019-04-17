@@ -1,0 +1,81 @@
+.subnav{
+	overflow: hidden;
+	background-color: #444;
+	margin-bottom: 10px;
+	font-weight: 500;
+}
+
+.subnav.container{
+	padding: 0;
+	margin-bottom: 0;
+}
+
+.subnav a {
+  float: left;
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.subnav a:hover {
+  background-color: #F4BB33;
+  color: black;
+}
+
+.active {
+  background-color: #F4BB33;
+  color: black !important;
+}
+
+.subnav .icon {
+  display: none;
+}
+
+.preview{
+	background: #1578C1;
+}
+
+@media screen and (max-width: 768px) {
+  .subnav{
+  	background: #F4BB33;
+  }
+
+  .subnav .home{
+  	color: black !important;
+  }
+
+ .subnav a:not(:first-child) {
+  	display: none;
+  }
+
+  .subnav a.icon {
+    float: right;
+    display: block;
+    color: black;
+  }
+
+  .subnav.responsive {
+  	position: relative;
+  	background: #444 !important;
+  }
+
+  .subnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .subnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .responsive .home{
+    color: #fff !important;
+  }
+    .responsive .home:hover{
+    color: #000 !important;
+  }
+}
