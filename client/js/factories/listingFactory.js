@@ -17,7 +17,6 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
-	}
   };
 
   return methods;
@@ -42,7 +41,6 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 	profile: function(){
 		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
-	}
   };
 
   return methods;

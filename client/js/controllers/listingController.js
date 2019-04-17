@@ -70,7 +70,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
     Listings.login($scope.newListing).then(function(response) {
 	  $window.location.href = '/profile.html';
-	  console.log(respose);
+	  console.log(response);
 	  return response;
     }, function(error) {
 		$scope.errors.push("Email or password is wrong.");
