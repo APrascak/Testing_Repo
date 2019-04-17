@@ -1,28 +1,104 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
-  </head>
-  <body ng-app="directoryApp">
-   <div class="container main">
-      <div class="row" ng-controller="ListingsController">
-        <div class="col-md-12">		
-		  <form novalidate class="simple-form">
-            <h2>Sign Up</h2>
-            Email: <input type="text" ng-model="newListing.email" /><br />
-            <!--Username: <input type="text" ng-model="newListing.username" /><br />-->
-            Password: <input type="text" ng-model="newListing.password" /><br />
-            <button class="btn btn-primary" ng-click="singUp()">Sign Up</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script>
-  </body>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body >
+  <div class="row ">
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;" method = "get">
+<div style = " background-color: lightgrey; width: 400px;" class = centerhorizontal>
+<h1 class = centerhorizontal> Sign Up </h1>
+  <div class = centerhorizontal>
+    <label class = "textboxquestion"> Name: </label>
+    <br>
+  <input type="text" name="name" id="name" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Email: </label>
+  <br>
+<input type="text" name="email" id="email" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Confirm Email: </label>
+  <br>
+<input type="text" name="confirmemail" id="confirmemail" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Password: </label>
+  <br>
+<input type="text" name="password" id="password" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Confirm Password: </label>
+  <br>
+<input type="text" name="confirmpassword" id="confirmpassword" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Age: </label>
+  <br>
+<input type="text" name="age" id="age" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Gender: </label>
+  <br>
+  <select id = "gender" name = "gender" required aria-required="true">
+  <option value="Null"> </option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Nonbinary"> Non-binary </option>
+  <option value="Nopreferance">I prefer not to answer</option>
+  </select>
+</div>
+<br>
+
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Ethnicity/Race: </label>
+  <br>
+  <select id = "demographic" name = "demographic" required aria-required="true">
+  <option value="Null"> </option>
+  <option value="Nativeamerican">Native American</option>
+  <option value="Africanamerican">African American</option>
+  <option value="Middleeastern">Middle Eastern</option>
+  <option value="Asian">Asian</option>
+  <option value="Hispanic">Hispanic</option>
+  <option value="European">European</option>
+  <option value="White">White American</option>
+  <option value="Eurasian">Eurasian</option>
+  <option value="Nopreferance">I prefer not to answer</option>
+  </select>
+</div>
+
+<div>
+  <button class = "centerhorizontal" style = "background-color: lightgreen;" onclick="validate()"> Submit <script> validate(); </script></button>
+</div>
+</div>
+<script>
+function validate()
+{
+ var ddl = document.getElementById("gender");
+ var selectedValue = ddl.options[ddl.selectedIndex].value;
+
+ var ddl2 = document.getElementById("demographic");
+ var selectedValue2 = ddl2.options[ddl2.selectedIndex].value;
+      if (selectedValue2 == "Null" || selectedValue == "Null")
+     {
+      alert("Please select an option for both Gender and Race/Ethnicity");
+     }
+}
+
+</script>
+</form>
+</div>
+</div>
+</body>
 </html>
