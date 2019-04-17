@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="styles/base.css">
+  <link rel="stylesheet" href="menu.css">
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body>
+  <div class="row ">
+    <div class="subnav container" id="customNav">
+    <a href="dashboard.html" class="home active">Home Page</a>
+    <a href= "viewprofile.html"> Profile </a>
+    <a href= "matchresults.html"> Find Mentors </a>
+    <a href= "viewprofile.html"> Mentee Requests </a>
+    <a href= "viewprofile.html"> Matches </a>
+    <a href= "login.html"> Log Out </a>
+    </div>
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+
+<h1 class = centerhorizontal2> Features </h1>
+
+<div style="width: 100%; overflow: hidden; display: flex;">
+
+<div class = backgroundgreen style = "width: 25%; padding: 10px; margin-right: 10px">
+<label class = bold> Profile Editing: </label>
+<p> You can manage your profile information, change your preferences for matching, and change your status as a mentee and mentor.
+    You may also view your profile and rating. </p>
+</div>
+
+<div class = backgroundgrey style = "width: 25%; padding: 10px; margin-right: 10px">
+<label class = bold> Mentor Requests: </label>
+<p> You can look up a list of available mentors, view their profiles, and send a request to add them. </p>
+</div>
+
+<div class = backgroundblue style = "width: 25%; padding: 10px; margin-right: 10px">
+<label class = bold> Mentee Requests: </label>
+<p> You can view a list of users who want you to be their mentor, look at thier profiles, and either accept or decline their request. </p>
+</div>
+
+<div class = "backgroundred" style = "width: 25%; padding: 10px">
+<label class = bold> Match Viewing: </label>
+<p> You can look at the list of people who you are matched with, and if your relation to them is mentee, you can rate them as mentors when you view their profile </p>
+</div>
+
+</div>
+
+<br>
+
+</form>
+</div>
+</div>
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
+</body>
+</html>
