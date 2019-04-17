@@ -26,7 +26,7 @@ Select Option (Drop down)
 <body >
   <div class="row ">
         <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;" method = "get">
 
 
 
@@ -35,43 +35,44 @@ Select Option (Drop down)
   <div class = centerhorizontal>
     <label class = "textboxquestion"> Name: </label>
     <br>
-  <textarea rows = "1" id = "name"> </textarea>
-</div>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Email: </label>
-  <br>
-<textarea rows = "1" id = email> </textarea>
-</div>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Confirm Email: </label>
-  <br>
-<textarea rows = "1" id = confirmemail> </textarea>
-</div>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Password: </label>
-  <br>
-<textarea rows = "1" id = password> </textarea>
-</div>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Confirm Password: </label>
-  <br>
-<textarea rows = "1" id = confirmpassword> </textarea>
-</div>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Age: </label>
-  <br>
-<textarea rows = "1" id = age> </textarea>
+  <input type="text" name="name" id="name" required aria-required="true" class = "inputcheck">
 </div>
 <br>
 <div class = centerhorizontal>
+  <label class = "textboxquestion"> Email: </label>
+  <br>
+<input type="text" name="email" id="email" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Confirm Email: </label>
+  <br>
+<input type="text" name="confirmemail" id="confirmemail" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Password: </label>
+  <br>
+<input type="text" name="password" id="password" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Confirm Password: </label>
+  <br>
+<input type="text" name="confirmpassword" id="confirmpassword" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+<div class = centerhorizontal>
+  <label class = "textboxquestion"> Age: </label>
+  <br>
+<input type="text" name="age" id="age" required aria-required="true" class = "inputcheck">
+</div>
+<br>
+
+<div class = centerhorizontal>
   <label class = "textboxquestion"> Gender: </label>
   <br>
-  <select>
+  <select id = "gender" name = "gender" required aria-required="true">
   <option value="Null"> </option>
   <option value="Male">Male</option>
   <option value="Female">Female</option>
@@ -80,10 +81,11 @@ Select Option (Drop down)
   </select>
 </div>
 <br>
+
 <div class = centerhorizontal>
   <label class = "textboxquestion"> Ethnicity/Race: </label>
   <br>
-  <select>
+  <select id = "demographic" name = "demographic" required aria-required="true">
   <option value="Null"> </option>
   <option value="Nativeamerican">Native American</option>
   <option value="Africanamerican">African American</option>
@@ -98,7 +100,7 @@ Select Option (Drop down)
 </div>
 
 <div>
-  <button class = "centerhorizontal" style = "background-color: lightgreen;"> Submit </button>
+  <button class = "centerhorizontal" style = "background-color: lightgreen;" onclick="validate()"> Submit <script> validate(); </script></button>
 </div>
 
 
@@ -108,15 +110,32 @@ Select Option (Drop down)
 
 
 
+<!--
+
+<label for="name">Name (required): </label>
+<input type="text" name="name" id="name" required aria-required="true">
+
+
+-->
 
 
 
+<script>
 
+function validate()
+{
+ var ddl = document.getElementById("gender");
+ var selectedValue = ddl.options[ddl.selectedIndex].value;
 
+ var ddl2 = document.getElementById("demographic");
+ var selectedValue2 = ddl2.options[ddl2.selectedIndex].value;
+      if (selectedValue2 == "Null" || selectedValue == "Null")
+     {
+      alert("Please select an option for both Gender and Race/Ethnicity");
+     }
+}
 
-
-
-
+</script>
 
 
 
