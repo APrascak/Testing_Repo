@@ -1,0 +1,87 @@
+{
+  "entries": [
+    {
+      "_id": {
+        "$oid": "5c9a676bfb6fc0465d4cbb10"
+      },
+      "password": "test1",
+      "email": "test1@gmail.com",
+      "username": "Test1",
+      "type": {
+        "mentee": true,
+        "mentor": false
+      },
+      "available": true,
+      "topics": [
+        "Calculus 1",
+        "Programming 1",
+        "Profressional Writing"
+      ],
+      "city": "Gainesville",
+      "hours": [
+        "4:00 - 7:00",
+        "7:00 - 10:00",
+        "13:00 - 15:00"
+      ],
+      "communication": [
+        "email",
+        "text"
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "5c9a67edfb6fc0465d4cbb34"
+      },
+      "password": "test2",
+      "email": "test2@gmail.com",
+      "username": "Test2",
+      "type": {
+        "mentee": false,
+        "mentor": true
+      },
+      "available": true,
+      "topics": [
+        "Calculus 1",
+        "Spanish"
+      ],
+      "city": "Gainesville",
+      "hours": [
+        "5:00 - 7:00",
+        "13:00 - 15:00",
+        "18:00 - 21:00"
+      ],
+      "communication": [
+        "skype",
+        "text"
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "5c9a68a3fb6fc0465d4cbbce"
+      },
+      "password": "test2",
+      "email": "test3@gmail.com",
+      "username": "Test3",
+      "type": {
+        "mentee": true,
+        "mentor": true
+      },
+      "available": true,
+      "topics": [
+        "Calculus 1",
+        "C Programming",
+        "Trigonometry"
+      ],
+      "city": "Gainesville",
+      "hours": [
+        "5:00 - 7:00",
+        "10:00 - 13:00",
+        "13:00 - 15:00"
+      ],
+      "communication": [
+        "in-person",
+        "skype"
+      ]
+    }
+  ]
+}

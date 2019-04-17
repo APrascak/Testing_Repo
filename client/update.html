@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/style2.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body style = "margin-left: 250px" ng-app="directoryApp">
+	<div ng-controller="ListingsController"  data-ng-init="profileLoad()">
+  <div class="row ">
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+<!--<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button> View Profile Picture </button>
+</div>-->
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   Your Roles
+ </label>
+   </p>
+    <input type="checkbox" name="mentor" value="true" ng-model="userProfile.usertype.mentor" ng-checked="userProfile.usertype.mentor" >Mentor
+	<input type="checkbox" name="mentee" value="true" ng-model="userProfile.usertype.mentee" ng-checked="userProfile.usertype.mentee">Mentee
+	</p>
+</div>
+<br>
+<div>
+  <p>
+    <label class="bold">
+    Area you're being mentored in
+  </label>
+ </p>
+  
+ <select ng-model="userProfile.mentee_topic">
+  <option disabled></option>
+  <option value="Biology" ng-selected="userProfile.mentee_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentee_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentee_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentee_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentee_topic == 'Business'">Business</option>
+  <option value="ProfessionalWriting" ng-selected="userProfile.mentee_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentee_topic == 'Pyschology'">Psychology</option>
+</select>
+</div>
+
+<br>
+<div>
+  <p>
+    <label class="bold">
+      Area you're mentoring in
+    </label>
+   </p>
+  <p id = "mentorsubjectvar"> {{userProfile.mentor_topic}}</p>
+  
+   <select ng-model="userProfile.mentor_topic">
+  <option disabled></option>
+  <option value="Biology" ng-selected="userProfile.mentor_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentor_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentor_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentor_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentor_topic == 'Business'">Business</option>
+  <option value="ProfessionalWriting" ng-selected="userProfile.mentor_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentor_topic == 'Pyschology'">Psychology</option>
+</select>
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      Level of experience as mentor
+    </label>
+   </p>
+  
+    <select ng-model="userProfile.topic_level">
+    <option> </option>
+    <option value="Low" ng-selected="userProfile.topic_level == 'Low'">Low</option>
+    <option value="Moderate" ng-selected="userProfile.topic_level == 'Moderate'">Moderate</option>
+    <option value="High" ng-selected="userProfile.topic_level == 'High'">High</option>
+  </select>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      City/location
+    </label>
+  </p>
+  <input type="text" name="location" ng-init="userProfile.city" ng-model="userProfile.city">
+
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Meeting Preferance
+   </label>
+  </p>
+ <p id = "meetupvar"> Online and/or In Person </p>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Available times
+   </label>
+ </p>
+ <label><input type="checkbox" name="earlymorning" value="EarlyMorning" ng-click="addTime('Early Morning')" ng-checked="userProfile.hours.indexOf('Early Morning') > -1">Early Morning</label>
+<label> <input type="checkbox" name="latemorning" value="LateMorning" ng-click="addTime('Late Morning')" ng-checked="userProfile.hours.indexOf('Late Morning') > -1">Late Morning</label>
+<label> <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon" ng-click="addTime('Early Afternoon')" ng-checked="userProfile.hours.indexOf('Early Afternoon') > -1">Early Afternoon</label>
+<label> <input type="checkbox" name="lateafternoon" value="LateAfternoon" ng-click="addTime('Late Afternoon')" ng-checked="userProfile.hours.indexOf('Late Afternoon') > -1">Late Afternoon</label>
+<label> <input type="checkbox" name="earlyevening" value="EarlyEvening" ng-click="addTime('Early Evening')" ng-checked="userProfile.hours.indexOf('Early Evening') > -1">Early Evening</label>
+<label> <input type="checkbox" name="lateevening" value="LateEvening" ng-click="addTime('Late Evening')" ng-checked="userProfile.hours.indexOf('Late Evening') > -1">Late Evening</label>
+</div>
+<br>
+  <label class="bold">
+  Other info
+</label>
+<div>
+ <textarea name="about" rows="10" cols="80">{{userProfile.add_info}}</textarea>
+</div>
+
+<br>
+
+<div>
+  <label class="bold">
+    Your Rating
+  </label>
+  <br>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
+
+ <div>
+ <button> Edit Profile </button>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p style="text-transform:capitalize;">{{userProfile.username}}</p>
+            <!--<img src ="mentorship.jpg">-->
+
+            <br>
+            <br>
+            <br>
+
+            <li class="active" >
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Profile</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li class = centervertical>
+                <a class = whitetext href="#">Matches</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Find Mentors</a>
+
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+            <li>
+                <a class = whitetext href="#">Mentee Requests</a>
+            </li>
+
+            <br>
+            <br>
+            <br>
+
+
+            <li>
+                <a class = whitetext href="#">Notification</a>
+            </li>
+        </ul>
+
+    </nav>
+    <!-- Page Content -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+</div>
+</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	
+</body>
+</html>

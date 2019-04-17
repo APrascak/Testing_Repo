@@ -1,5 +1,5 @@
 /* Dependencies */
-var listings = require('../controllers/listings.server.controller.js'), 
+var users = require('../controllers/users.server.controller.js'), 
     express = require('express'), 
     router = express.Router();
 
@@ -8,17 +8,17 @@ var listings = require('../controllers/listings.server.controller.js'),
   Take note that it is possible for different controller functions to handle requests to the same route.
  */
 router.route('/')
-  .get(listings.list)
-  .post(listings.create);
+  .get(users.list)
+  .post(users.create);
 
 
 /*
   The ':' specifies a URL parameter. 
  */
 router.route('/:listingId')
-  .get(listings.read)
-  .put(listings.update)
-  .delete(listings.delete);
+  .get(users.read)
+  .put(users.update)
+  .delete(users.delete);
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle 
