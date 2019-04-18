@@ -23,7 +23,7 @@
       <div class="row" ng-controller="ListingsController">
 
       <!--  <div class="col-md-6"> -->
-          <h1 style="margin-left: 40%">Mentor List</h1>
+          <h1 style="margin-left: 40%">Match List</h1>
           <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control" placeholder="Search" ng-model="query">
@@ -35,14 +35,14 @@
                 <th>Field of Interest</th>
                 <th>University</th>
                 <th>View Profile</th>
-                <th>Add</th>
+                <th>Remove Match</th>
               </tr>
               <tr ng-repeat="listing in listings | filter: { code: query }" ng-click="showDetails($index)">
                 <td>Name Here</td>
                 <td>Field Here</td>
                 <td>University</td>
                 <td><button>View Profile</button></td>
-                <td><button>Add</button></td>
+                <td><button>Remove</button></td>
               </tr>
             </table>
           </div>
