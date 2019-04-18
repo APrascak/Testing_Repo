@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="menu.css">
+<style>
+img {
+  width: 100px;
+}
+</style>
+
+</head>
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body>
+  <div class="row ">
+    <div class="subnav container" id="customNav">
+    <a href="dashboard.html" class="home active">Home Page</a>
+    <a href= "viewprofile.html"> Profile </a>
+    <a href= "matchresults.html"> Find Mentors </a>
+    <a href= "viewprofile.html"> Mentee Requests </a>
+    <a href= "viewprofile.html"> Matches </a>
+    <a href= "login.html"> Log Out </a>
+  </div>
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+
+<h1> Profile </h1>
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<div>
+  <button> View Profile Picture </button>
+</div>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   Name/username:
+ </label>
+   </p>
+ <p id = "name"> name here </p>
+</div>
+<br>
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+   Roles:
+ </label>
+   </p>
+ <p id = "mentormenteevar"> Mentor and/or Mentee </p>
+</div>
+<br>
+<div>
+  <p>
+    <label class="bold">
+    Area being mentored in:
+  </label>
+ </p>
+  <p id = "menteesubjectvar"> Subject Here </p>
+</div>
+
+<br>
+<div>
+  <p>
+    <label class="bold">
+      Area mentoring in:
+    </label>
+   </p>
+  <p id = "mentorsubjectvar"> Subject Here </p>
+</div>
+
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      University Attended:
+    </label>
+   </p>
+  <p id = "universityvar"> University Here </p>
+
+</div>
+
+<br>
+
+<div>
+  <p>
+    <label class="bold">
+      City/location:
+    </label>
+  </p>
+  <p id = "location var"> Location Here </p>
+
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Meeting Preferance:
+   </label>
+  </p>
+ <p id = "meetupvar"> Online and/or In Person </p>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Available times:
+   </label>
+ </p>
+ <p id = "meetuptimesvar"> Times Here </p>
+</div>
+<br>
+
+  <label class="bold">
+  Goals For Scrumble:
+</label>
+<div>
+ <textarea readonly name="goalsscrumble" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<label class="bold">
+Career Goals:
+</label>
+<div>
+<textarea readonly name="goalscareer" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<label class="bold">
+Industry Experiences:
+</label>
+<div>
+<textarea readonly name="experiences" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<label class="bold">
+Strengths in Field of Interest:
+</label>
+<div>
+<textarea readonly name="strengths" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<label class="bold">
+Current Occupation:
+</label>
+<div>
+<textarea readonly name="occupation" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<label class="bold">
+Additional Info:
+</label>
+<div>
+<textarea readonly name="about" rows="10" cols="80"></textarea>
+</div>
+
+<br>
+
+<div>
+  <label class="bold">
+    Rating:
+  </label>
+  <br>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
+
+<br>
+
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     Email:
+   </label>
+  </p>
+ <p id = "email"> Email Here </p>
+</div>
+
+ <div>
+ <button> Edit Profile </button>
+</div>
+</form>
+</div>
+</div>
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
+</body>
+</html>
