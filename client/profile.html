@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/base.css">
   <link rel="stylesheet" href="styles/menu.css">
-    <script src="js/app.js"></script>
-    <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script>
+<style>
+img {
+  width: 100px;
+}
+</style>
+
 </head>
-<body ng-app="directoryApp">
-	<div ng-controller="ListingsController"  data-ng-init="profileLoad()">
+<!--
+Form Layout
+<form class="ifYouWant" action="pageThatHandlesForms" method="post">
+Textbox (One line text input)
+<label for="idName">Text to display</label>
+<input type="text" name="idName" value="idName">
+Select Option (Drop down)
+<select class="" name="">
+  <option value="valueToDatabase"> Text you want in drop down</option>
+</select>
+</form>
+-->
+<body>
   <div class="row ">
-   <div class="subnav container" id="customNav">
+    <div class="subnav container" id="customNav">
     <a href="dashboard.html" class="home active">Home Page</a>
     <a href= "viewprofile.html"> Profile </a>
     <a href= "matchresults.html"> Find Mentors </a>
@@ -22,126 +37,231 @@
     </div>
         <div class="container main-page">
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+
+<h1> Edit Profile </h1>
+
+<div class = "span-4" style="text-align: left !important">
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <div>
-  <button> View Profile Picture </button>
+  <button> Change Profile Picture </button>
+</div>
 </div>
 
+<div class= "span-4">
 <div>
  <p style="padding-right: 10px;">
-   <label class="bold">
-   Your Roles
+  <label class="bold">
+   I am a
  </label>
    </p>
- <p id = "mentormenteevar" ng-repeat="(index,type) in userProfile.usertype" style="text-transform:capitalize;"> {{index}} : {{type}} </p>
+   <label class="checkboxContainer">Mentor
+ <input type="checkbox" name="mentor" value="Mentor">
+ <span class="checkmark" style="left: 35px !important";></span>
+</label>
+ <label class="checkboxContainer">Mentee
+ <input type="checkbox" name="mentee" value="Mentee">
+ <span class="checkmark" style="left: 35px !important";></span>
 </div>
-<br>
+</div>
+
+<div class="span-4 omega">
+  <div>
+    <p>
+      <label class="bold">
+      What Area Would You Like to Be Mentored In?
+    </label>
+   </p>
+    <select>
+    <option value="" selected disabled></option>
+    <option value="Biology">Biology</option>
+    <option value="Physics">Physics</option>
+    <option value="Computer Science">Computer Science</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Business">Business</option>
+    <option value="ProfessionalWriting">Professional Writing</option>
+    <option value="Psychology">Psychology</option>
+  </select>
+  </div>
+  <br>
+  <div>
+    <p>
+      <label class="bold">
+        What Area Would You Like to Mentor?
+      </label>
+     </p>
+    <select>
+    <option value="Null"> </option>
+    <option value="Biology">Biology</option>
+    <option value="Physics">Physics</option>
+    <option value="Computer Science">Computer Science</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Business">Business</option>
+    <option value="ProfessionalWriting">Professional Writing</option>
+    <option value="Psychology">Psychology</option>
+  </select>
+  </div>
+</div>
+
+<div class="span-12 omega" style="text-align:left !important";>
+<div class= "span-4" style="text-align:left !important">
 <div>
   <p>
     <label class="bold">
-    Area you're being mentored in
+      Which University Have You Attended?
+    </label>
+   </p>
+  <select>
+  <option value="Null"> </option>
+  <option value="UF">University of Florida</option>
+  <option value="SF">Santa Fe</option>
+  <option value="UCF">University of Central Florida</option>
+  <option value="FSU">Florida State University</option>
+  <option value="UM">University of Miami</option>
+</select>
+</div>
+</div>
+
+<div class= "span-4" style="text-align:left !important">
+<div>
+  <p>
+    <label class="bold">
+      What City Are You In?
+    </label>
+  </p>
+  <textarea name="location" rows="1" cols="20"></textarea>
+</div>
+</div>
+
+<div class= "span-4 omega" style="text-align:left !important">
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     How Would You Like to Meet?
+   </label>
+  </p>
+  <label class="checkboxContainer" style="left: 30px !important";>
+    <input type="checkbox" name="inperson" value="InPerson">In Person
+<span class="checkmark" style="left: -30px !important";></span>
   </label>
- </p>
-  <p id = "menteesubjectvar"> {{userProfile.mentee_topic}}</p>
+  <label class="checkboxContainer" style="left: 30px !important";>Video Chat
+    <input type="checkbox" name="videochat" value="VideoChat">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Phone Call
+    <input type="checkbox" name="phonecall" value="PhoneCall">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Text
+    <input type="checkbox" name="textmsg" value="TextMsg">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Email
+    <input type="checkbox" name="email" value="Email">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+</div>
 </div>
 
-<br>
-<div>
-  <p>
-    <label class="bold">
-      Area you're mentoring in
-    </label>
-   </p>
-  <p id = "mentorsubjectvar"> {{userProfile.mentor_topic}}</p>
 </div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Year of school
-    </label>
-  </p>
-  <p id = "yearvar"> {{userProfile.year}} </p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Level of experience as mentor
-    </label>
-   </p>
-  <p id = "experiencevar">{{userProfile.topic_level}}</p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      City/location
-    </label>
-  </p>
-  <p id = "location var">{{userProfile.city}}</p>
-
-</div>
-
-<br>
-
+<div class= "span-12 omega" style="text-align:left !important";>
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-     Meeting Preferance
-   </label>
-  </p>
- <p id = "meetupvar"> Online and/or In Person </p>
-</div>
-
-<br>
-
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Available times
+     When Are You Normally Available?
    </label>
  </p>
- <p id = "meetuptimesvar" ng-repeat="times in userProfile.hours" > {{times}} </p>
+ <label class="checkboxContainer" style="left:30px !important">Early Morning
+   <input type="checkbox" name="earlymorning" value="EarlyMorning">
+<span class="checkmark" style="left: -30px !important"></span>
+ </label>
+<label class="checkboxContainer" style="left:30px !important">Late Morning
+  <input type="checkbox" name="latemorning" value="LateMorning">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Early Afternoon
+  <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Late Afternoon
+  <input type="checkbox" name="lateafternoon" value="LateAfternoon">
+  <span class="checkmark" style="left:-30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Early Evening
+  <input type="checkbox" name="earlyevening" value="EarlyEvening">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Late Evening
+  <input type="checkbox" name="lateevening" value="LateEvening">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
 </div>
 <br>
+
   <label class="bold">
-  Other info
+  Goals For Scrumble:
 </label>
 <div>
- <textarea readonly name="about" rows="10" cols="80">{{userProfile.add_info}}</textarea>
+ <textarea name="about" rows="10" cols="80"></textarea>
 </div>
-
 <br>
 
+<label class="bold">
+Career Goals:
+</label>
 <div>
-  <label class="bold">
-    Your Rating
-  </label>
-  <br>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star"></span>
-  <span class="fa fa-star"></span>
+<textarea name="careerGoals" rows="10" cols="80"></textarea>
 </div>
+<br>
 
- <div>
- <button> Edit Profile </button>
+<label class="bold">
+Industry Experiences:
+</label>
+<div>
+<textarea name="experiences" rows="10" cols="80"></textarea>
 </div>
+<br>
+
+<label class="bold">
+Strengths in Field of Interest:
+</label>
+<div>
+<textarea name="strengths" rows="10" cols="80"></textarea>
+</div>
+<br>
+
+<label class="bold">
+Current Occupation:
+</label>
+<div>
+<textarea name="currentJob" rows="10" cols="80"></textarea>
+</div>
+<br>
+
+<label class="bold">
+Anything Interesting You Would Like to Add:
+</label>
+<div>
+<textarea name="miscellaneous" rows="10" cols="80"></textarea>
+</div>
+<div>
+<button> Submit </button>
+</div>
+</div>
+<br>
+
+
 </form>
 </div>
 </div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-	
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
 </body>
 </html>
