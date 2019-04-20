@@ -1,4 +1,4 @@
-angular.module('listings', []).factory('Listings', function($http) {
+/*angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
       return $http.get('http://localhost:8080/api/listings');
@@ -20,9 +20,9 @@ angular.module('listings', []).factory('Listings', function($http) {
   };
 
   return methods;
-});
+});*/
 
-/*angular.module('listings', []).factory('Listings', function($http) {
+angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
     getAll: function() {
       return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
@@ -44,4 +44,4 @@ angular.module('listings', []).factory('Listings', function($http) {
   };
 
   return methods;
-});*/
+});
