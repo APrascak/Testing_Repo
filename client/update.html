@@ -12,7 +12,7 @@
     <script src="js/controllers/listingController.js"></script>
 </head>
  <body ng-app="directoryApp">
-	<div ng-controller="ListingsController">
+	<div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
         <div class="container main-page" >
   <form style = "margin-top: 10px; margin-left: 20px;">
@@ -27,10 +27,19 @@
       Username
     </label>
   </p>
-  <input type="text" name="username">
-
+  <input type="text" name="username" ng-model="userProfile.username" readonly>
 </div>
-
+<br>
+<div>
+  <p>
+    <label class="bold">
+      I would like to be available on this platform
+    </label>
+  </p>
+    <input type="radio" ng-model="userProfile.available" value="true" ng-value="true">Yes
+	<input type="radio" ng-model="userProfile.available" value="false" ng-value="false">No
+</div>
+<br>
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
@@ -69,10 +78,9 @@
       Area you're mentoring in
     </label>
    </p>
-  <p id = "mentorsubjectvar"> {{userProfile.mentor_topic}}</p>
-  
+
    <select ng-model="userProfile.mentor_topic">
-  <option disabled></option>
+  <option disabled selected></option>
   <option value="Biology" ng-selected="userProfile.mentor_topic == 'Biology'">Biology</option>
   <option value="Physics" ng-selected="userProfile.mentor_topic == 'Physics'">Physics</option>
   <option value="Computer Science" ng-selected="userProfile.mentor_topic == 'Computer Science'">Computer Science</option>
@@ -93,7 +101,6 @@
    </p>
   
     <select ng-model="userProfile.topic_level">
-    <option> </option>
     <option value="Low" ng-selected="userProfile.topic_level == 'Low'">Low</option>
     <option value="Moderate" ng-selected="userProfile.topic_level == 'Moderate'">Moderate</option>
     <option value="High" ng-selected="userProfile.topic_level == 'High'">High</option>
@@ -144,10 +151,10 @@
   Details you want others to know:
 </label>
 <div>
- <textarea name="about" rows="10" cols="80" ng-model="newProfile.add_info"></textarea>
+ <textarea name="about" rows="10" cols="80" ng-model="userProfile.add_info"></textarea>
 </div>
  <div>
- <button ng-click="profileAdd()"> Submit </button>
+ <button ng-click="profileUpdate()"> Submit </button>
 </div>
 
 
@@ -158,10 +165,6 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script>
 	
 </body>
 </html>

@@ -6,7 +6,7 @@ exports.update = function(req, res) {
 	
 	var existingUser = new User(req.body);
 
-	User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: existingUser.username, usertype: existingUser.usertype, available: existingUser.available, mentor_topic: existingUser.mentor_topic, 
+	User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{usertype: existingUser.usertype, available: existingUser.available, mentor_topic: existingUser.mentor_topic, 
 	mentee_topic: existingUser.mentee_topic, topic_level: existingUser.topic_level, hours: existingUser.hours, city: existingUser.city, communication: existingUser.communication, 
 	add_info: existingUser.add_info}}, {new: true}, function(err,updated){
 		if (err)

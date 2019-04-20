@@ -118,31 +118,31 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.time.splice($scope.time.indexOf(e),1);
 	};
 	
-	$scope.profileAdd = function() {
+	$scope.profileUpdate = function() {
 		//need to add validation
 		$scope.errors = [];
-		if(!$scope.newProfile){
+		if(!$scope.userProfile){
 			$scope.errors.push("Please fill out the required information.");
 		}
 		
-		if(!$scope.newProfile.usertype.mentor)
-			$scope.newProfile.usertype.mentor = false;
+		if(!$scope.userProfile.usertype.mentor)
+			$scope.userProfile.usertype.mentor = false;
 		
-		if(!$scope.newProfile.usertype.mentee)
-			$scope.newProfile.usertype.mentee = false;
+		if(!$scope.userProfile.usertype.mentee)
+			$scope.userProfile.usertype.mentee = false;
 
-		$scope.newProfile.communication = $scope.comm;
+		$scope.userProfile.communication = $scope.comm;
 		
-		$scope.newProfile.hours = $scope.time;
+		$scope.userProfile.hours = $scope.time;
 		
 		
-		console.log($scope.newProfile);
+		console.log($scope.userProfile);
 			
-		Listings.create($scope.newProfile).then(function(response) {
+		Listings.update($scope.userProfile).then(function(response) {
 			console.log(response);
 		$window.location.href = '/profile.html';
     }, function(error) {
-		$scope.errors.push("There was an error.");
+		$scope.errors.push("There was an error updating your profile.");
       //console.log('Unable to update listings:', error);
 	  
     });
@@ -160,10 +160,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 
     };
-	
-	$scope.profileUpdate = function(){
-		console.log($scope.userProfile);
-	}
 	
 	$scope.getSignUp = function(){
 		$window.location.href = '/signup.html';

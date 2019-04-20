@@ -78,7 +78,7 @@ module.exports = function(passport) {
 						newUser.local.password = newUser.generateHash(password);
 						newUser.gender = req.body.gender;
 						newUser.ethnicity = req.body.ethnicity;
-						newUser.available = true;
+						newUser.available = false;
 						newUser.username = req.body.username;
 						newUser.age = req.body.age;
 
