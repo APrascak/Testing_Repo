@@ -4,12 +4,12 @@
       return $http.get('http://localhost:8080/api/listings');
     },
 	
-	create: function(listing) {
+	update: function(listing) {
 	  return $http.post('http://localhost:8080/api/listings', listing);
     }, 
 	
-	signUp: function(listing) {
-	  return $http.post('http://localhost:8080/signup', listing);
+	signUp: function(user) {
+	  return $http.post('http://localhost:8080/signup', user);
     }, 
 
 	login: function(listing) {
@@ -17,8 +17,9 @@
     },
 	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
-  };
+	}
 
+  };
   return methods;
 });*/
 
@@ -28,12 +29,12 @@ angular.module('listings', []).factory('Listings', function($http) {
       return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
     },
 	
-	create: function(listing) {
-	  return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings', listing);
+	update: function(listing) {
+	  return $http.post('http://localhost:8080/api/listings', listing);
     }, 
 	
-	signUp: function(listing) {
-	  return $http.post('https://apple-shortcake-58416.herokuapp.com/signup', listing);
+	signUp: function(user) {
+	  return $http.post('http://localhost:8080/signup', user);
     }, 
 
 	login: function(listing) {
@@ -41,6 +42,7 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 	profile: function(){
 		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
+	}
   };
 
   return methods;
