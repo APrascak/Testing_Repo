@@ -63,6 +63,41 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     });
 
     };
+
+	$scope.googleRegister = function() {
+		$scope.errors = [];
+		
+		if(!$scope.newProfile){
+			$scope.errors.push("Please fill out the form below.");
+		}else{
+			if(!$scope.newProfile.username)
+				$scope.errors.push("Please enter a username.");
+			
+			if(!$scope.newProfile.age)
+				$scope.errors.push("Please enter your age.");
+			
+			if(!$scope.newProfile.gender)
+				$scope.errors.push("Please enter your gender.");
+			
+			if(!$scope.newProfile.ethnicity)
+				$scope.errors.push("Please enter your Ethinicty/Race.");
+				
+		}
+			
+		if($scope.errors.length > 0){
+			console.log();
+			return;
+		}
+    Listings.google($scope.newProfile).then(function(response) {
+	  $window.location.href = '/profile.html';
+    }, function(error) {
+      
+	  $scope.errors.push("Email or username is already in use.");
+	  
+	  //console.log('Unable to update listings:', error);
+    });
+
+    };
 	
 	
 	$scope.login = function() {

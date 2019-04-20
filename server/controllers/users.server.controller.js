@@ -15,6 +15,33 @@ exports.update = function(req, res) {
 	});
 };
 
+exports.google = function(req, res) {
+	
+	
+	User.findOne({username : req.body.username, },function(err,user){
+		if (err){
+			console.log("Error " + err);
+			res.status(400).send(err);
+		}
+		
+		if(user){
+			console.log("Username already exists");
+			res.status(400).send();
+		} else{
+
+			User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: req.body.username, age: req.body.age, 
+			gender: req.body.gender, ethnicity: req.body.ethnicity}}, {new: true}, function(err,updated){
+				if (err){
+					console.log("Error " + err);
+					res.status(400).send(err);
+				}
+			   res.send();
+			});
+		}
+	
+	});
+};
+
 exports.profile = function(req,res){
 	User.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,info){
 		if (err)

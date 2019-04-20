@@ -6,6 +6,9 @@ var users = require('../controllers/users.server.controller.js'),
 router.route('/')
   .get(users.profile)
   .post(users.update);
+  
+router.route('/google')
+  .post(users.google);
 
 /*
   The ':' specifies a URL parameter. 

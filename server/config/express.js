@@ -15,34 +15,24 @@ var path = require('path'),
 	session = require('express-session');
 
 module.exports.init = function() {
-  //connect to database
-  mongoose.connect(config.db.uri);
+	//connect to database	
+	mongoose.connect(config.db.uri);
   
+	//initialize app
+	var app = express();
 
-  //initialize app
-  var app = express();
+	require('./passport')(passport);
 
-require('./passport')(passport);
-  //enable request logging for development debugging
-  app.use(morgan('dev'));
-  
-  app.use(cookieParser()); // read cookies (needed for auth)
-  
-	  app.use(bodyParser.urlencoded({
-		extended: true
-	}));
-
-
-  //body parsing middleware 
-  app.use(bodyParser.json());
+	app.use(morgan('dev'));     // Enable request logging for development debugging
+	app.use(cookieParser());    // Need for auth, reading cookies
+	app.use(bodyParser.json()); //Body parsing middleware
 
 	// required for passport
 	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 
-  /**TODO
-  Serve static files */
+
 	
 	app.use('/api/listings/', usersRouter); 
 	
@@ -52,6 +42,7 @@ require('./passport')(passport);
 		res.redirect('index.html');
 	});
 
+	// GET & POST Methods for 'signup'
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
@@ -60,6 +51,7 @@ require('./passport')(passport);
 		res.send();
 	});
 
+	// GET & POST Methods for 'signup'
 	app.get('/login', function(req, res){
 		res.redirect('index.html');
 	});
@@ -68,20 +60,22 @@ require('./passport')(passport);
 		res.send();
 	});
 	
-	 // =====================================
-    // PROFILE SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+	// Implementation for Google OAuth
+	app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+	app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
+		res.redirect('/profile/');
+	});
+	
+	//Profile Check
+    /*app.get('/google',isLoggedIn, function(req, res) {
+		res.redirect('/google.html');
+    });*/
+	
+	//Profile Check
     app.get('/profile',isLoggedIn, function(req, res) {
-        /*res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });*/
 		res.redirect('/profile.html');
     });
 	
-  /**TODO 
-  Go to homepage for all routes not specified */ 
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');
 	});
