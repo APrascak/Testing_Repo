@@ -38,7 +38,7 @@ angular.module('listings', []).factory('Listings', function($http) {
     }, 
 
 	login: function(listing) {
-	  return $http.post('https://apple-shortcake-58416.herokuapp.com//login', listing);
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/login', listing);
     },
 	profile: function(){
 		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
