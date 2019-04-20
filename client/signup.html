@@ -4,51 +4,53 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/base.css">
 </head>
 <body >
   <div class="row ">
         <div class="container main-page">
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;" method = "get">
-<div style = " background-color: lightgrey; width: 400px;" class = centerhorizontal>
-<h1 class = centerhorizontal> Sign Up </h1>
-  <div class = centerhorizontal>
+    <div class= "span-12 omega">
+<div>
+<h1> Sign Up </h1>
+  <div>
     <label class = "textboxquestion"> Name: </label>
     <br>
   <input type="text" name="name" id="name" required aria-required="true" class = "inputcheck">
 </div>
 <br>
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Email: </label>
   <br>
 <input type="text" name="email" id="email" required aria-required="true" class = "inputcheck">
 </div>
 <br>
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Confirm Email: </label>
   <br>
 <input type="text" name="confirmemail" id="confirmemail" required aria-required="true" class = "inputcheck">
 </div>
 <br>
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Password: </label>
   <br>
 <input type="text" name="password" id="password" required aria-required="true" class = "inputcheck">
 </div>
 <br>
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Confirm Password: </label>
   <br>
 <input type="text" name="confirmpassword" id="confirmpassword" required aria-required="true" class = "inputcheck">
 </div>
 <br>
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Age: </label>
   <br>
 <input type="text" name="age" id="age" required aria-required="true" class = "inputcheck">
 </div>
 <br>
 
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Gender: </label>
   <br>
   <select id = "gender" name = "gender" required aria-required="true">
@@ -61,7 +63,7 @@
 </div>
 <br>
 
-<div class = centerhorizontal>
+<div>
   <label class = "textboxquestion"> Ethnicity/Race: </label>
   <br>
   <select id = "demographic" name = "demographic" required aria-required="true">
@@ -79,7 +81,8 @@
 </div>
 
 <div>
-  <button class = "centerhorizontal" style = "background-color: lightgreen;" onclick="validate()"> Submit <script> validate(); </script></button>
+  <button style = "background-color: green;" onclick="validate()"> Submit <script> validate(); </script></button>
+</div>
 </div>
 </div>
 <script>
