@@ -27,6 +27,11 @@ require('./passport')(passport);
   app.use(morgan('dev'));
   
   app.use(cookieParser()); // read cookies (needed for auth)
+  
+	  app.use(bodyParser.urlencoded({
+		extended: true
+	}));
+
 
   //body parsing middleware 
   app.use(bodyParser.json());
@@ -60,11 +65,8 @@ require('./passport')(passport);
 	});
 	
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-	//If it doesn't the listingController will display error
-    res.send();
-  });
+		res.send();
+	});
 	
 	 // =====================================
     // PROFILE SECTION =====================

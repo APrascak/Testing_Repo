@@ -47,6 +47,9 @@ var userSchema = new Schema({
 	topic_level: String,
 	year: String,
     city: String,
+	age: String,
+	gender: String,
+	ethnicity: String,
     hours: [String],
     communication: [String],
 	add_info: String

@@ -1,15 +1,10 @@
 angular.module('listings').controller('ListingsController', ['$scope', '$window','Listings', 
   function($scope, $window, Listings) {
-    /* Get all the listings, then bind it to the scope */
-    Listings.getAll().then(function(response) {
-      $scope.listings = response.data;
-    }, function(error) {
-      console.log('Unable to retrieve listings:', error);
-    });
-	
     $scope.detailedInfo = undefined;
 	
 	$scope.errors = [];
+	
+	$scope.existingProfile = undefined;
 	
 	$scope.newProfile = undefined;
 	
@@ -25,25 +20,44 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	$scope.signUp = function() {
 		$scope.errors = [];
 		
-		if(!$scope.newListing){
-			$scope.errors.push("Please enter an email and password");
+		if(!$scope.newProfile){
+			$scope.errors.push("Please fill out the form below.");
 		}else{
-			if(!$scope.newListing.email)
+			if(!$scope.newProfile.username)
+				$scope.errors.push("Please enter a username.");
+			
+			if(!$scope.newProfile.email)
 				$scope.errors.push("Please enter an email.");
 			
-			if(!$scope.newListing.password)
+			if(!angular.equals($scope.newProfile.email,$scope.newProfile.emailCheck))
+				$scope.errors.push("The emails you entered are different.");
+			
+			if(!$scope.newProfile.password)
 				$scope.errors.push("Please enter a password.");
+			
+			if(!angular.equals($scope.newProfile.password,$scope.newProfile.passwordCheck))
+				$scope.errors.push("The passwords you entered are different.");
+			
+			if(!$scope.newProfile.age)
+				$scope.errors.push("Please enter your age.");
+			
+			if(!$scope.newProfile.gender)
+				$scope.errors.push("Please enter your gender.");
+			
+			if(!$scope.newProfile.ethnicity)
+				$scope.errors.push("Please enter your Ethinicty/Race.");
+				
 		}
 			
 		if($scope.errors.length > 0){
+			console.log();
 			return;
 		}
-    Listings.signUp($scope.newListing).then(function(response) {
-	  $window.location.href = '/create.html';
-	  //console.log(response);
+    Listings.signUp($scope.newProfile).then(function(response) {
+	  $window.location.href = '/profile.html';
     }, function(error) {
       
-	  $scope.errors.push("Email is already in use.");
+	  $scope.errors.push("Email or username is already in use.");
 	  
 	  //console.log('Unable to update listings:', error);
     });
@@ -54,13 +68,13 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	$scope.login = function() {
 		$scope.errors = [];
 		
-		if(!$scope.newListing){
+		if(!$scope.existingProfile){
 			$scope.errors.push("Please enter an email and password");
 		}else{
-			if(!$scope.newListing.email)
+			if(!$scope.existingProfile.email)
 				$scope.errors.push("Please enter an email.");
 			
-			if(!$scope.newListing.password)
+			if(!$scope.existingProfile.password)
 				$scope.errors.push("Please enter a password.");
 		}
 			
@@ -68,7 +82,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			return;
 		}
 	
-    Listings.login($scope.newListing).then(function(response) {
+    Listings.login($scope.existingProfile).then(function(response) {
 	  $window.location.href = '/profile.html';
 	  console.log(response);
 	  return response;
@@ -151,5 +165,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		console.log($scope.userProfile);
 	}
 	
+	$scope.getSignUp = function(){
+		$window.location.href = '/signup.html';
+	};
   }
 ]);
