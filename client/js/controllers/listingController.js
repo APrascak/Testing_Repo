@@ -63,7 +63,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			console.log();
 			return;
 		}
-	    Listings.google($scope.newProfile).then(function(response) {
+	    Listings.signUp($scope.newProfile).then(function(response) {
 		  $window.location.href = '/profile.html';
 		}, function(error) {
 		  
@@ -202,6 +202,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.comm = $scope.userProfile.communication;
 			$scope.time = $scope.userProfile.hours;
 			$scope.rating.username = $scope.userProfile.username;
+			//$scope.ratings = 
 		}, function(error) {
 			$scope.errors.push("There was an error loading your profile.");
 		});
@@ -223,7 +224,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 	};
 		
-	$scope.getSelectedRating = function (newRating) {
+		$scope.getSelectedRating = function (newRating) {
 		$scope.rating.rating = newRating;
 		$scope.rating.username = "Trying";
 		console.log($scope.rating);
@@ -234,9 +235,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 		};
 	  
-	  $scope.sendRate = function(){
-		alert("Thanks for your rates!\n\nFirst Rate: " + $scope.ratings[0].current+"/"+$scope.ratings[0].max);
-	  }
   }
 ]);
 

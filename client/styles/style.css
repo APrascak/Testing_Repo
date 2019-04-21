@@ -38,7 +38,7 @@ form [type=checkbox]{
 
 button{
 	border-radius: 4px;
-	background: #00529b;
+	background: green;
 	color: white;
 	padding: 10px;
 	font-size: 15px;
@@ -203,4 +203,33 @@ a:hover{
 
 .centerhorizontal{
 	margin-left: 30%;
+}
+
+.centerhorizontal2{
+margin-left:40%;
+}
+
+.backgroundgrey{
+	background-color: lightgrey;
+}
+
+.backgroundgreen{
+	background-color: lightgreen;
+}
+
+.backgroundblue{
+	background-color: lightblue;
+}
+
+.backgroundred{
+	background-color: pink;
+}
+
+.quarterlength{
+	width: 25%;
+}
+
+.inputcheck{
+	length: 250px;
+	height: 25px;
 }

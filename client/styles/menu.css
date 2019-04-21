@@ -1,13 +1,13 @@
 .subnav{
-	overflow: hidden;
-	background-color: #444;
-	margin-bottom: 10px;
-	font-weight: 500;
+  overflow: hidden;
+  background-color: grey;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .subnav.container{
-	padding: 0;
-	margin-bottom: 0;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .subnav a {
@@ -21,13 +21,13 @@
 }
 
 .subnav a:hover {
-  background-color: #F4BB33;
-  color: black;
+  background-color: #168635;
+  color: white;
 }
 
 .active {
-  background-color: #F4BB33;
-  color: black !important;
+  background-color: #168635;
+  color: white !important;
 }
 
 .subnav .icon {
@@ -35,31 +35,31 @@
 }
 
 .preview{
-	background: #1578C1;
+  background: #1578C1;
 }
 
 @media screen and (max-width: 768px) {
   .subnav{
-  	background: #F4BB33;
+    background: #F4BB33;
   }
 
   .subnav .home{
-  	color: black !important;
+    color: white !important;
   }
 
  .subnav a:not(:first-child) {
-  	display: none;
+    display: none;
   }
 
   .subnav a.icon {
     float: right;
     display: block;
-    color: black;
+    color: white;
   }
 
   .subnav.responsive {
-  	position: relative;
-  	background: #444 !important;
+    position: relative;
+    background: #444 !important;
   }
 
   .subnav.responsive .icon {
@@ -76,6 +76,6 @@
     color: #fff !important;
   }
     .responsive .home:hover{
-    color: #000 !important;
+    color: #fff !important;
   }
 }
