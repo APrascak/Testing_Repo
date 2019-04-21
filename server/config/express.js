@@ -4,7 +4,7 @@ var path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    listingsRouter = require('../routes/listings.server.routes'),
+    usersRouter = require('../routes/users.server.routes'),
 	passport = require('passport'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
@@ -27,6 +27,11 @@ require('./passport')(passport);
   app.use(morgan('dev'));
   
   app.use(cookieParser()); // read cookies (needed for auth)
+  
+	  app.use(bodyParser.urlencoded({
+		extended: true
+	}));
+
 
   //body parsing middleware 
   app.use(bodyParser.json());
@@ -39,7 +44,7 @@ require('./passport')(passport);
   /**TODO
   Serve static files */
 	
-	app.use('/api/listings/', listingsRouter); 
+	app.use('/api/listings/', usersRouter); 
 	
 	app.use('/', express.static('client'));
 	
@@ -48,7 +53,7 @@ require('./passport')(passport);
 	});
 
 	app.get('/signup', function(req, res){
-		res.redirect('signup.html');
+		res.redirect('index.html');
 	});
 	
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
@@ -56,15 +61,12 @@ require('./passport')(passport);
 	});
 
 	app.get('/login', function(req, res){
-		res.redirect('create.html');
+		res.redirect('index.html');
 	});
 	
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-	//If it doesn't the listingController will display error
-    res.send();
-  });
+		res.send();
+	});
 	
 	 // =====================================
     // PROFILE SECTION =====================
@@ -75,7 +77,7 @@ require('./passport')(passport);
         /*res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
         });*/
-		res.redirect('profile.html');
+		res.redirect('/profile.html');
     });
 	
   /**TODO 

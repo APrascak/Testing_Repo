@@ -1,4 +1,3 @@
-
 /* Dependencies */
 var mongoose = require('mongoose'), 
     Listing = require('../models/listings.server.model.js'),
@@ -6,6 +5,7 @@ var mongoose = require('mongoose'),
 	Match = require('../models/matching.server.model.js');
 	
 
+<<<<<<< HEAD
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message. 
@@ -218,6 +218,8 @@ exports.algorithm = function(req, res){
 
 
 };
+=======
+>>>>>>> 5a1e3a917a118fd57bc16f765872c3021a7e8472
 
 /* Create a listing */
 exports.create = function(req, res) {
