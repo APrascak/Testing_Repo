@@ -1,5 +1,5 @@
-var path = require('path'),  
-    express = require('express'), 
+var path = require('path'),
+    express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
@@ -15,9 +15,9 @@ var path = require('path'),
 	session = require('express-session');
 
 module.exports.init = function() {
-	//connect to database	
+	//connect to database
 	mongoose.connect(config.db.uri);
-  
+
 	//initialize app
 	var app = express();
 
@@ -33,20 +33,16 @@ module.exports.init = function() {
 	app.use(passport.session()); // persistent login sessions
 
 
-	
-	app.use('/api/listings/', usersRouter); 
-	
+
+	app.use('/api/listings/', usersRouter);
+
 	app.use('/', express.static('client'));
-	
-	app.get('/create', function(req, res){
-		res.redirect('index.html');
-	});
 
 	// GET & POST Methods for 'signup'
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
 		res.send();
 	});
@@ -55,41 +51,45 @@ module.exports.init = function() {
 	app.get('/login', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
 		res.send();
 	});
-	
+
 	// Implementation for Google OAuth
 	app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 	app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
-		res.redirect('/profile/');
+		res.redirect('/create/');
 	});
-	
+
+  app.get('/create', function(req, res) {
+    res.redirect('/create.html');
+  });
+
 	//Profile Check
     /*app.get('/google',isLoggedIn, function(req, res) {
 		res.redirect('/google.html');
     });*/
-	
+
 	//Profile Check
     app.get('/profile',isLoggedIn, function(req, res) {
 		res.redirect('/profile.html');
     });
-	
+
 	app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
-	
+
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');
 	});
   return app;
-};  
+};
 
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 
