@@ -3,9 +3,12 @@ angular.module('listings', []).factory('Listings', function($http) {
     algorithm: function() {
       return $http.get('http://localhost:8080/api/listings/algorithm');
     },
-	algorithm: function() {
+	logout: function() {
       return $http.get('http://localhost:8080/logout');
     },
+	rating: function(newRating) {
+	  return $http.post('http://localhost:8080/api/listings/rating', newRating);
+    }, 
 	
 	update: function(user) {
 	  return $http.post('http://localhost:8080/api/listings', user);

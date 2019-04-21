@@ -10,6 +10,9 @@ router.route('/')
 router.route('/algorithm')
   .get(users.algorithm);
   
+router.route('/rating')
+  .post(users.ratings);
+  
 router.route('/google')
   .post(users.google);
 

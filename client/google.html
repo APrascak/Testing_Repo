@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
   <body ng-app="directoryApp">
-	<div ng-controller="ListingsController">
+	<div ng-controller="ListingsController" data-ng-init="checkGoogle()">
   <div class="row ">
         <div class="container main-page">
   <form style = "margin-top: 10px; margin-left: 20px;">
@@ -48,38 +48,24 @@
   <br>
   <select id = "demographic" name = "demographic" required aria-required="true" ng-model="newProfile.ethnicity">
   <option selected disabled> </option>
-  <option value="Nativeamerican">Native American</option>
-  <option value="Africanamerican">African American</option>
-  <option value="Middleeastern">Middle Eastern</option>
+  <option value="Native American">Native American</option>
+  <option value="African American">African American</option>
+  <option value="Middle Eastern">Middle Eastern</option>
   <option value="Asian">Asian</option>
   <option value="Hispanic">Hispanic</option>
   <option value="European">European</option>
   <option value="White">White American</option>
   <option value="Eurasian">Eurasian</option>
-  <option value="Nopreferance">I prefer not to answer</option>
+  <option value="Other">Other</option>
+  <option value="I prefer not to answer">I prefer not to answer</option>
   </select>
 </div>
 
 <div>
-  <button class = "centerhorizontal" style = "background-color: lightgreen;" ng-click="signUp()"> Submit</button>
+  <button class = "centerhorizontal" style = "background-color: lightgreen;" ng-click="googleRegister()"> Submit</button>
 </div>
 </div>
 </div>
-<!--<script>
-function validate()
-{
- var ddl = document.getElementById("gender");
- var selectedValue = ddl.options[ddl.selectedIndex].value;
-
- var ddl2 = document.getElementById("demographic");
- var selectedValue2 = ddl2.options[ddl2.selectedIndex].value;
-      if (selectedValue2 == "Null" || selectedValue == "Null")
-     {
-      alert("Please select an option for both Gender and Race/Ethnicity");
-     }
-}
-
-</script>-->
 </form>
 </div>
 </div>

@@ -16,6 +16,16 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
 	$scope.changedProfile = undefined;
 	
+    $scope.ratings = [{
+        current: 3,
+        max: 5
+    }];
+	
+	$scope.rating = {
+		username: String,
+		rating: Number
+	};
+	
 	
 	$scope.signUp = function() {
 		$scope.errors = [];
@@ -165,19 +175,18 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		$scope.userProfile.communication = $scope.comm;
 		
 		$scope.userProfile.hours = $scope.time;
-		
-		
-		console.log($scope.userProfile);
 			
 		Listings.update($scope.userProfile).then(function(response) {
-			if($scope.userProfile.mentee){
+			if($scope.userProfile.usertype.mentee){
 				Listings.algorithm().then(function(response) {
 				  console.log("Updated matches.");
+				  $window.location.href = '/profile.html';
 				}, function(error) {
 				  	$scope.errors.push("Error with algorithm.");
 				});
-			}
+			}else{
 				$window.location.href = '/profile.html';
+			}
 			}, function(error) {
 				$scope.errors.push("There was an error updating your profile.");
 			  //console.log('Unable to update listings:', error);
@@ -192,10 +201,9 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.userProfile = response.data;
 			$scope.comm = $scope.userProfile.communication;
 			$scope.time = $scope.userProfile.hours;
+			$scope.rating.username = $scope.userProfile.username;
 		}, function(error) {
-		$scope.errors.push("There was an error loading your profile.");
-      //console.log('Unable to update listings:', error);
-	  
+			$scope.errors.push("There was an error loading your profile.");
 		});
 
     };
@@ -203,5 +211,72 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	$scope.getSignUp = function(){
 		$window.location.href = '/signup.html';
 	};
+	
+	$scope.checkGoogle = function(){
+		Listings.profile().then(function(response) {
+			$scope.userProfile = response.data;
+			if($scope.userProfile.username){
+				$window.location.href = '/profile.html';
+			}
+		}, function(error) {
+			$scope.errors.push("There was an error loading your profile.");
+		});
+	};
+		
+	$scope.getSelectedRating = function (newRating) {
+		$scope.rating.rating = newRating;
+		$scope.rating.username = "Trying";
+		console.log($scope.rating);
+		Listings.rating($scope.rating).then(function(response) {
+			console.log(response);
+		}, function(error) {
+			$scope.errors.push("There was an error saving your rating.");
+		});
+		};
+	  
+	  $scope.sendRate = function(){
+		alert("Thanks for your rates!\n\nFirst Rate: " + $scope.ratings[0].current+"/"+$scope.ratings[0].max);
+	  }
   }
 ]);
+
+
+angular.module('listings').directive('starRating', function () {
+    return {
+        restrict: 'A',
+        template: '<ul class="rating">' +
+            '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
+            '\u2605' +
+            '</li>' +
+            '</ul>',
+        scope: {
+            ratingValue: '=',
+            max: '=',
+            onRatingSelected: '&'
+        },
+        link: function (scope, elem, attrs) {
+
+            var updateStars = function () {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled: i < scope.ratingValue
+                    });
+                }
+            };
+
+            scope.toggle = function (index) {
+                scope.ratingValue = index + 1;
+                scope.onRatingSelected({
+                    rating: index + 1
+                });
+            };
+
+            scope.$watch('ratingValue', function (oldVal, newVal) {
+                if (newVal) {
+                    updateStars();
+                }
+            });
+        }
+    }
+});

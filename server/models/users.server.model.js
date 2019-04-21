@@ -53,7 +53,10 @@ var userSchema = new Schema({
     hours: [String],
     communication: [String],
 	add_info: String,
-	ratings: [Number],
+	ratings: [{
+		username: String,
+		rating: Number
+	}],
 	curr_rating: Number
 });
 

@@ -1,6 +1,34 @@
 var mongoose = require('mongoose'), 
     User = require('../models/users.server.model.js'),
+	Match = require('../models/matching.server.model.js'),
 	bcrypt = require('bcrypt-nodejs');
+
+exports.ratings = function(req, res) {
+	let obj;
+	User.find({_id : req.session.passport.user}, {ratings:1}, function(err,ratingslist){
+		if (err)
+			res.status(400).send(err);
+		
+		//console.log(ratings[0].ratings);
+		let obj = ratingslist[0].ratings.find(o => o.username === req.body.username);
+		if(obj){
+			ratingslist[0].ratings.find((o, i) => {
+				if (o => o.username === req.body.username) {
+					ratingslist[0].ratings[i].rating = req.body.rating;
+					//console.log(ratingslist[0].ratings[i]);
+				}
+			});
+			
+			User.findOneAndUpdate({_id : req.session.passport.user}, {$set:{ratings: ratingslist[0].ratings}}, {new: true}, function(err,updatedRatings){
+				console.log( updatedRatings);
+			});
+		}else{
+			User.update({_id : req.session.passport.user},{$push: { ratings: req.body}}, function(err,updatedRatings){
+				console.log( updatedRatings);
+			});
+		}
+	});
+};
 
 exports.update = function(req, res) {
 	
@@ -18,7 +46,7 @@ exports.update = function(req, res) {
 exports.google = function(req, res) {
 	
 	
-	User.findOne({username : req.body.username, },function(err,user){
+	User.findOne({username : req.body.username},function(err,user){
 		if (err){
 			console.log("Error " + err);
 			res.status(400).send(err);

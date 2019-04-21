@@ -63,7 +63,7 @@ module.exports.init = function() {
 	});
 
   app.get('/create', function(req, res) {
-    res.redirect('/create.html');
+    res.redirect('/google.html');
   });
 
 	//Profile Check
