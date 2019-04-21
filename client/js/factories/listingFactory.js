@@ -3,6 +3,9 @@ angular.module('listings', []).factory('Listings', function($http) {
     algorithm: function() {
       return $http.get('http://localhost:8080/api/listings/algorithm');
     },
+	algorithm: function() {
+      return $http.get('http://localhost:8080/logout');
+    },
 	
 	update: function(user) {
 	  return $http.post('http://localhost:8080/api/listings', user);

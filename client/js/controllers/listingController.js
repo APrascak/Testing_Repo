@@ -53,13 +53,12 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			console.log();
 			return;
 		}
-	  $window.location.href = '/profile.html';
-    }, function(error) {
-      
-	  $scope.errors.push("Email or username is already in use.");
-	  
-	  //console.log('Unable to update listings:', error);
-    });
+	    Listings.google($scope.newProfile).then(function(response) {
+		  $window.location.href = '/profile.html';
+		}, function(error) {
+		  
+		  $scope.errors.push("Email or username is already in use.");
+		});
 
     };
 
@@ -118,8 +117,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
     Listings.login($scope.existingProfile).then(function(response) {
 	  $window.location.href = '/profile.html';
-	  console.log(response);
-	  return response;
     }, function(error) {
 		$scope.errors.push("Email or password is wrong.");
       //console.log('Unable to update listings:', error);
@@ -180,12 +177,12 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 				  	$scope.errors.push("Error with algorithm.");
 				});
 			}
-		$window.location.href = '/profile.html';
-    }, function(error) {
-		$scope.errors.push("There was an error updating your profile.");
-      //console.log('Unable to update listings:', error);
-	  
-    });
+				$window.location.href = '/profile.html';
+			}, function(error) {
+				$scope.errors.push("There was an error updating your profile.");
+			  //console.log('Unable to update listings:', error);
+			  
+			});
 
     };
 	
@@ -193,6 +190,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		console.log("called");
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
+			$scope.comm = $scope.userProfile.communication;
+			$scope.time = $scope.userProfile.hours;
 		}, function(error) {
 		$scope.errors.push("There was an error loading your profile.");
       //console.log('Unable to update listings:', error);

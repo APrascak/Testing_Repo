@@ -76,6 +76,11 @@ module.exports.init = function() {
 		res.redirect('/profile.html');
     });
 	
+	app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+	
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');
 	});

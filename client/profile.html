@@ -34,7 +34,7 @@
     Username
   </label>
  </p>
-  <p id = "menteesubjectvar"> {{userProfile.username}}</p>
+  <p id = "menteesubjectvar" style="text-transform:capitalize;"> {{userProfile.username}}</p>
 </div>
 <br>
 <div>
@@ -118,7 +118,7 @@
      Meeting Preferance
    </label>
   </p>
- <p id = "meetupvar"> Online and/or In Person </p>
+  <p id = "meetuptimesvar" ng-repeat="communication in userProfile.communication" > {{communication}} </p>
 </div>
 
 <br>
@@ -126,7 +126,7 @@
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-     Available times
+     Times you're available
    </label>
  </p>
  <p id = "meetuptimesvar" ng-repeat="times in userProfile.hours" > {{times}} </p>

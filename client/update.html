@@ -125,10 +125,13 @@
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
-     Meeting Preferance
+     I like to meet
    </label>
   </p>
- <p id = "meetupvar"> Online and/or In Person </p>
+ <label><input type="checkbox" name="communication[]" value="Email" ng-click="addComm('Email')" ng-checked="comm.indexOf('Email')>-1">Email</label>
+ <label><input type="checkbox" name="communication[]"value="In Person" ng-click="addComm('In Person')" ng-checked="comm.indexOf('In Person')>-1">In Person</label>
+ <label><input type="checkbox" name="communication[]"value="Text" ng-click="addComm('Text')" ng-checked="comm.indexOf('Text')>-1">Text</label>
+ <label><input type="checkbox" name="communication[]"value="Video Call" ng-click="addComm('Video Call')" ng-checked="comm.indexOf('Video Call')>-1">Video Call</label>
 </div>
 
 <br>
@@ -139,12 +142,12 @@
      I am normally available during
    </label>
  </p>
- <label><input type="checkbox" name="earlymorning" value="EarlyMorning" ng-click="addTime('Early Morning')">Early Morning</label>
-<label> <input type="checkbox" name="latemorning" value="LateMorning" ng-click="addTime('Late Morning')">Late Morning</label>
-<label> <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon" ng-click="addTime('Early Afternoon')">Early Afternoon</label>
-<label> <input type="checkbox" name="lateafternoon" value="LateAfternoon" ng-click="addTime('Late Afternoon')">Late Afternoon</label>
-<label> <input type="checkbox" name="earlyevening" value="EarlyEvening" ng-click="addTime('Early Evening')">Early Evening</label>
-<label> <input type="checkbox" name="lateevening" value="LateEvening" ng-click="addTime('Late Evening')">Late Evening</label>
+ <label><input type="checkbox" value="Early Morning" ng-click="addTime('Early Morning')" ng-checked="time.indexOf('Early Morning')>-1">Early Morning</label>
+<label> <input type="checkbox" value="Late Morning" ng-click="addTime('Late Morning')" ng-checked="time.indexOf('Late Morning')>-1">Late Morning</label>
+<label> <input type="checkbox" value="Early Afternoon" ng-click="addTime('Early Afternoon')" ng-checked="time.indexOf('Early Afternoon')>-1">Early Afternoon</label>
+<label> <input type="checkbox" value="Late Afternoon" ng-click="addTime('Late Afternoon')" ng-checked="time.indexOf('Late Afternoon')>-1">Late Afternoon</label>
+<label> <input type="checkbox" value="Early Evening" ng-click="addTime('Early Evening')" ng-checked="time.indexOf('Early Evening')>-1">Early Evening</label>
+<label> <input type="checkbox" value="Late Evening" ng-click="addTime('Late Evening')" ng-checked="time.indexOf('Late Evening')>-1">Late Evening</label>
 </div>
 <br>
   <label class="bold">
