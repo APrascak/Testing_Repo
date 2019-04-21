@@ -1,7 +1,7 @@
 angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
-    getAll: function() {
-      return $http.get('http://localhost:8080/api/listings');
+    algorithm: function() {
+      return $http.get('http://localhost:8080/api/listings/algorithm');
     },
 	
 	update: function(user) {

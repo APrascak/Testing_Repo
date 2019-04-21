@@ -53,7 +53,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			console.log();
 			return;
 		}
-    Listings.signUp($scope.newProfile).then(function(response) {
 	  $window.location.href = '/profile.html';
     }, function(error) {
       
@@ -174,7 +173,13 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		console.log($scope.userProfile);
 			
 		Listings.update($scope.userProfile).then(function(response) {
-			console.log(response);
+			if($scope.userProfile.mentee){
+				Listings.algorithm().then(function(response) {
+				  console.log("Updated matches.");
+				}, function(error) {
+				  	$scope.errors.push("Error with algorithm.");
+				});
+			}
 		$window.location.href = '/profile.html';
     }, function(error) {
 		$scope.errors.push("There was an error updating your profile.");

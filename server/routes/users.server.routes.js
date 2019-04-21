@@ -7,6 +7,9 @@ router.route('/')
   .get(users.profile)
   .post(users.update);
   
+router.route('/algorithm')
+  .get(users.algorithm);
+  
 router.route('/google')
   .post(users.google);
 

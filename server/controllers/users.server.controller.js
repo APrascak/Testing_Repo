@@ -43,7 +43,7 @@ exports.google = function(req, res) {
 };
 
 exports.profile = function(req,res){
-	User.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,info){
+	User.findOne({_id : req.session.passport.user }, { _id: 0, local: 0, google:0 }, function(err,info){
 		if (err)
 		res.status(400).send(err);
 		info._id = null;
@@ -64,7 +64,7 @@ exports.algorithm = function(req, res){
 
 
   //get mentee
-  Listing.findOne({_id : req.session.passport.user, "usertype.mentee" : true }, function(err, mentee) {
+  User.findOne({_id : req.session.passport.user, "usertype.mentee" : true }, function(err, mentee) {
     if (err){
       res.status(400).send(err);
     };
@@ -72,11 +72,10 @@ exports.algorithm = function(req, res){
   console.log("Mentee \n" + mentee);
 	
 	  //get ALL users
-	Listing.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
+	User.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
     if (err){
       res.status(400).send(err);
     };
-    //users = listings;
 	console.log("Mentors \n" + mentors);
 	
 	//loop through users and find where usertype.mentor = true
