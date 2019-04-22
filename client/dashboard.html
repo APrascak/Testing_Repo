@@ -8,31 +8,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/menu.css">
   <link rel="stylesheet" href="styles/style2.css">
-  
-<style>
-img {
-  width: 100px;
-}
-</style>
-
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
 </head>
-<!--
-Form Layout
-<form class="ifYouWant" action="pageThatHandlesForms" method="post">
-Textbox (One line text input)
-<label for="idName">Text to display</label>
-<input type="text" name="idName" value="idName">
-Select Option (Drop down)
-<select class="" name="">
-  <option value="valueToDatabase"> Text you want in drop down</option>
-</select>
-</form>
--->
-<body>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
     <div class="subnav container" id="customNav">
       <a href="dashboard.html" class="home active">Home Page</a>
-      <a href= "viewprofile.html"> Profile </a>
+      <a href= "profile.html"> Profile </a>
       <a href= "matchresults.html"> Find Mentors </a>
       <a href= "menteerequests.html"> Mentee Requests </a>
       <a href= "matchlist.html"> Matches </a>
@@ -42,18 +28,10 @@ Select Option (Drop down)
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
 
 <div class="span-12 omega">
-    <h1> Home Page <h1>
+    <h1> Welcome, {{userProfile.username}} </h1>
 
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <br>
-<div>
- <label>
-   <p class="bold">
-   Username:
- </p>
-</label>
- <label id = "name"> name here </label>
-</div>
 
 <div>
  <label>
@@ -67,22 +45,43 @@ Select Option (Drop down)
 <div>
  <label>
    <p class="bold">
-   Mentor/Mentee Status:
+   Mentor Status:
  </p>
 </label>
- <label id = "mentormenteestatus"> status here </label>
+<div ng-if="userProfile.usertype.mentor">
+ <label> You're currently a mentor</label>
 </div>
-
+<div ng-if="!userProfile.usertype.mentor">
+ <label> You're currently not a mentor</label>
+</div>
+</div>
 <div>
+<div>
+ <label>
+   <p class="bold">
+   Mentee Status:
+ </p>
+</label>
+<div ng-if="userProfile.usertype.mentee">
+ <label> You're currently a mentee</label>
+</div>
+<div ng-if="!userProfile.usertype.mentee">
+ <label> You're currently not a mentee</label>
+</div>
+</div>
   <label class="bold">
-    Rating:
+    Current Rating:
   </label>
   <br>
-  <span class="fa fa-star checked" id = "star1" name = "star1"></span>
-  <span class="fa fa-star checked" id = "star2" name = "star2"></span>
-  <span class="fa fa-star checked" id = "star3" name = "star3"></span>
-  <span class="fa fa-star" id = "star4" name = "star4"></span>
-  <span class="fa fa-star" id = "star5" name = "star5"></span>
+  <div class="stars" style="font-size: 20px;">
+    <span ng-repeat="item in items|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in items|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
 </div>
 
 <br>
@@ -141,5 +140,6 @@ function myFunction() {
   }
 }
 </script>
+</div>
 </body>
 </html>

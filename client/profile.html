@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/base.css">
   <link rel="stylesheet" href="styles/menu.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
 <style>
 img {
   width: 100px;
@@ -13,19 +17,8 @@ img {
 </style>
 
 </head>
-<!--
-Form Layout
-<form class="ifYouWant" action="pageThatHandlesForms" method="post">
-Textbox (One line text input)
-<label for="idName">Text to display</label>
-<input type="text" name="idName" value="idName">
-Select Option (Drop down)
-<select class="" name="">
-  <option value="valueToDatabase"> Text you want in drop down</option>
-</select>
-</form>
--->
-<body>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
     <div class="subnav container" id="customNav">
     <a href="dashboard.html" class="home active">Home Page</a>
@@ -38,7 +31,7 @@ Select Option (Drop down)
         <div class="container main-page">
   <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
 
-<h1> Edit Profile </h1>
+<h1>Edit Profile</h1>
 
 <div class = "span-4" style="text-align: left !important">
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
@@ -48,6 +41,21 @@ Select Option (Drop down)
 </div>
 
 <div class= "span-4">
+  <div>
+ <p style="padding-right: 10px;">
+  <label class="bold">
+   I am a
+ </label>
+   </p>
+   <label class="checkboxContainer">Are you available?
+ <input type="radio" name="mentor" ng-model="userProfile.available" value="true" ng-value="true">
+ <span class="checkmark" style="left: 35px !important";></span>
+</label>
+ <label class="checkboxContainer">No
+ <input type="radio" name="mentee"ng-model="userProfile.available" value="false" ng-value="false">
+ <span class="checkmark" style="left: 35px !important";></span>
+</div>
+
 <div>
  <p style="padding-right: 10px;">
   <label class="bold">
@@ -55,11 +63,11 @@ Select Option (Drop down)
  </label>
    </p>
    <label class="checkboxContainer">Mentor
- <input type="checkbox" name="mentor" value="Mentor">
+ <input type="checkbox" name="mentor" value="Mentor" value="true" ng-model="userProfile.usertype.mentor" ng-checked="userProfile.usertype.mentor">
  <span class="checkmark" style="left: 35px !important";></span>
 </label>
  <label class="checkboxContainer">Mentee
- <input type="checkbox" name="mentee" value="Mentee">
+ <input type="checkbox" name="mentee" value="Mentee" value="true" ng-model="userProfile.usertype.mentee" ng-checked="userProfile.usertype.mentee">
  <span class="checkmark" style="left: 35px !important";></span>
 </div>
 </div>
@@ -71,16 +79,16 @@ Select Option (Drop down)
       What Area Would You Like to Be Mentored In?
     </label>
    </p>
-    <select>
-    <option value="" selected disabled></option>
-    <option value="Biology">Biology</option>
-    <option value="Physics">Physics</option>
-    <option value="Computer Science">Computer Science</option>
-    <option value="Chemistry">Chemistry</option>
-    <option value="Business">Business</option>
-    <option value="ProfessionalWriting">Professional Writing</option>
-    <option value="Psychology">Psychology</option>
-  </select>
+ <select ng-model="userProfile.mentee_topic">
+  <option disabled></option>
+  <option value="Biology" ng-selected="userProfile.mentee_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentee_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentee_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentee_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentee_topic == 'Business'">Business</option>
+  <option value="Professional Writing" ng-selected="userProfile.mentee_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentee_topic == 'Pyschology'">Psychology</option>
+</select>
   </div>
   <br>
   <div>
@@ -89,16 +97,16 @@ Select Option (Drop down)
         What Area Would You Like to Mentor?
       </label>
      </p>
-    <select>
-    <option value="Null"> </option>
-    <option value="Biology">Biology</option>
-    <option value="Physics">Physics</option>
-    <option value="Computer Science">Computer Science</option>
-    <option value="Chemistry">Chemistry</option>
-    <option value="Business">Business</option>
-    <option value="ProfessionalWriting">Professional Writing</option>
-    <option value="Psychology">Psychology</option>
-  </select>
+   <select ng-model="userProfile.mentor_topic">
+  <option disabled selected></option>
+  <option value="Biology" ng-selected="userProfile.mentor_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentor_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentor_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentor_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentor_topic == 'Business'">Business</option>
+  <option value="Professional Writing" ng-selected="userProfile.mentor_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentor_topic == 'Pyschology'">Psychology</option>
+</select>
   </div>
 </div>
 
@@ -110,13 +118,13 @@ Select Option (Drop down)
       Which University Have You Attended?
     </label>
    </p>
-  <select>
-  <option value="Null"> </option>
-  <option value="UF">University of Florida</option>
-  <option value="SF">Santa Fe</option>
-  <option value="UCF">University of Central Florida</option>
-  <option value="FSU">Florida State University</option>
-  <option value="UM">University of Miami</option>
+  <select  ng-model="userProfile.university">
+  <option selected="" disabled=""> </option>
+  <option value="University of Florida" ng-selected="userProfile.university == 'University of Florida'">University of Florida</option>
+  <option value="Santa Fe College" ng-selected="userProfile.university == 'Santa Fe College'">Santa Fe College</option>
+  <option value="University of Central Florida" ng-selected="userProfile.university == 'University of Central Florida'">University of Central Florida</option>
+  <option value="Florida State University" ng-selected="userProfile.university == 'Florida State University'">Florida State University</option>
+  <option value="University of Miami" ng-selected="userProfile.university == 'University of Miami'">University of Miami</option>
 </select>
 </div>
 </div>
@@ -128,7 +136,7 @@ Select Option (Drop down)
       What City Are You In?
     </label>
   </p>
-  <textarea name="location" rows="1" cols="20"></textarea>
+  <input type="text" name="location" ng-init="userProfile.city" ng-model="userProfile.city">
 </div>
 </div>
 
@@ -140,23 +148,23 @@ Select Option (Drop down)
    </label>
   </p>
   <label class="checkboxContainer" style="left: 30px !important";>
-    <input type="checkbox" name="inperson" value="InPerson">In Person
+    <input type="checkbox" name="communication[]" value="In Person" ng-click="addComm('In Person')" ng-checked="comm.indexOf('In Person')>-1">In Person
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Video Chat
-    <input type="checkbox" name="videochat" value="VideoChat">
+  <label class="checkboxContainer" style="left: 30px !important";>Video Call
+    <input type="checkbox" name="communication[]" value="Video Call" ng-click="addComm('Video Call')" ng-checked="comm.indexOf('Video Call')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
   <label class="checkboxContainer" style="left: 30px !important";>Phone Call
-    <input type="checkbox" name="phonecall" value="PhoneCall">
+    <input type="checkbox" name="communication[]" value="Phone Call" ng-click="addComm('Phone Call')" ng-checked="comm.indexOf('Phone Call')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Text
-    <input type="checkbox" name="textmsg" value="TextMsg">
+  <label class="checkboxContainer" style="left: 30px !important";>Text Message
+    <input type="checkbox" value="Text Message" ng-click="addComm('Text Message')" ng-checked="comm.indexOf('Text Message')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
   <label class="checkboxContainer" style="left: 30px !important";>Email
-    <input type="checkbox" name="email" value="Email">
+    <input type="checkbox" name="communication[]" value="Email" ng-click="addComm('Email')" ng-checked="comm.indexOf('Email')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
 </div>
@@ -171,27 +179,27 @@ Select Option (Drop down)
    </label>
  </p>
  <label class="checkboxContainer" style="left:30px !important">Early Morning
-   <input type="checkbox" name="earlymorning" value="EarlyMorning">
+   <input type="checkbox" value="Early Morning" ng-click="addTime('Early Morning')" ng-checked="time.indexOf('Early Morning')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
  </label>
 <label class="checkboxContainer" style="left:30px !important">Late Morning
-  <input type="checkbox" name="latemorning" value="LateMorning">
+  <input type="checkbox" value="Late Morning" ng-click="addTime('Late Morning')" ng-checked="time.indexOf('Late Morning')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
 <label class="checkboxContainer" style="left:30px !important">Early Afternoon
-  <input type="checkbox" name="earlyafternoon" value="EarlyAfternoon">
+  <input type="checkbox" value="Early Afternoon" ng-click="addTime('Early Afternoon')" ng-checked="time.indexOf('Early Afternoon')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
 <label class="checkboxContainer" style="left:30px !important">Late Afternoon
-  <input type="checkbox" name="lateafternoon" value="LateAfternoon">
+  <input type="checkbox" nvalue="Late Afternoon" ng-click="addTime('Late Afternoon')" ng-checked="time.indexOf('Late Afternoon')>-1">
   <span class="checkmark" style="left:-30px !important"></span>
 </label>
 <label class="checkboxContainer" style="left:30px !important">Early Evening
-  <input type="checkbox" name="earlyevening" value="EarlyEvening">
+  <input type="checkbox" value="Early Evening" ng-click="addTime('Early Evening')" ng-checked="time.indexOf('Early Evening')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
 <label class="checkboxContainer" style="left:30px !important">Late Evening
-  <input type="checkbox" name="lateevening" value="LateEvening">
+  <input type="checkbox" ng-click="addTime('Late Evening')" ng-checked="time.indexOf('Late Evening')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
 </div>
@@ -201,7 +209,7 @@ Select Option (Drop down)
   Goals For Scrumble:
 </label>
 <div>
- <textarea name="about" rows="10" cols="80"></textarea>
+ <textarea name="about" rows="10" cols="80" ng-model="userProfile.scrumble_goals"></textarea>
 </div>
 <br>
 
@@ -209,7 +217,7 @@ Select Option (Drop down)
 Career Goals:
 </label>
 <div>
-<textarea name="careerGoals" rows="10" cols="80"></textarea>
+<textarea name="careerGoals" rows="10" cols="80" ng-model="userProfile.career_goals"></textarea>
 </div>
 <br>
 
@@ -217,7 +225,7 @@ Career Goals:
 Industry Experiences:
 </label>
 <div>
-<textarea name="experiences" rows="10" cols="80"></textarea>
+<textarea name="experiences" rows="10" cols="80" ng-model="userProfile.industry_exp"></textarea>
 </div>
 <br>
 
@@ -225,7 +233,7 @@ Industry Experiences:
 Strengths in Field of Interest:
 </label>
 <div>
-<textarea name="strengths" rows="10" cols="80"></textarea>
+<textarea name="strengths" rows="10" cols="80" ng-model="userProfile.strengths"></textarea>
 </div>
 <br>
 
@@ -233,7 +241,7 @@ Strengths in Field of Interest:
 Current Occupation:
 </label>
 <div>
-<textarea name="currentJob" rows="10" cols="80"></textarea>
+<textarea name="currentJob" rows="10" cols="80" ng-model="userProfile.occupation"></textarea>
 </div>
 <br>
 
@@ -241,7 +249,7 @@ Current Occupation:
 Anything Interesting You Would Like to Add:
 </label>
 <div>
-<textarea name="miscellaneous" rows="10" cols="80"></textarea>
+<textarea name="miscellaneous" rows="10" cols="80" ng-model="userProfile.add_info"></textarea>
 </div>
 <div>
 <button> Submit </button>
@@ -263,5 +271,6 @@ function myFunction() {
   }
 }
 </script>
+</div> <!--/.App-->
 </body>
 </html>
