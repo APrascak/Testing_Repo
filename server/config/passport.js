@@ -46,14 +46,14 @@ module.exports = function(passport) {
 				console.log("User email taken: " + user);
                 return done(null, false );
             } else {
-				
+
 				 User.findOne({ 'username' :  req.body.username }, function(error, username) {
-					 
+
 					if (error){
 						console.log("Error " + error);
 						return done(error);
 					}
-					
+
 					if(username){
 						console.log("Username taken: " + req.username);
 						return done(null, false );
@@ -84,12 +84,12 @@ module.exports = function(passport) {
 				});
             }
 
-        });    
+        });
 
         });
 
     }));
-	
+
 	// =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
@@ -144,6 +144,7 @@ module.exports = function(passport) {
           done(null, currUser);
         } else {
           new User({
+              img: google._json.picture,
               gmail: {
                 id: profile.id
               }
@@ -153,6 +154,6 @@ module.exports = function(passport) {
         }
       });
     }));
-	
+
 
 };
