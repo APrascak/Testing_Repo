@@ -281,7 +281,7 @@ exports.algorithm = function(req, res){
       for(var i = 0; i < matching.length; i++){
         matchid = matching[i];
 
-        if(matchid.mentor_id == user._id){
+        if(matchid.mentor_name == user.username && matchid.mentee_name == mentee.username){
           console.log("match exists");
           exists = true;
         }
