@@ -41,11 +41,11 @@
    Are you available?
  </label>
    </p>
-   <label class="checkboxContainer">Yes
+   <label class="checkboxContainer" style="font-size:14px !important">Yes
  <input type="radio" name="mentor" ng-model="userProfile.available" value="true" ng-value="true">
  <span class="checkmark" style="left: 35px !important";></span>
 </label>
- <label class="checkboxContainer">No
+ <label class="checkboxContainer" style="font-size:14px !important">No
  <input type="radio" name="mentee"ng-model="userProfile.available" value="false" ng-value="false">
  <span class="checkmark" style="left: 35px !important";></span>
 </div>
@@ -56,11 +56,11 @@
    I am a
  </label>
    </p>
-   <label class="checkboxContainer">Mentor
+   <label class="checkboxContainer" style="font-size:14px !important">Mentor
  <input type="checkbox" name="mentor" value="Mentor" value="true" ng-model="userProfile.usertype.mentor" ng-checked="userProfile.usertype.mentor">
  <span class="checkmark" style="left: 35px !important";></span>
 </label>
- <label class="checkboxContainer">Mentee
+ <label class="checkboxContainer" style="font-size:14px !important">Mentee
  <input type="checkbox" name="mentee" value="Mentee" value="true" ng-model="userProfile.usertype.mentee" ng-checked="userProfile.usertype.mentee">
  <span class="checkmark" style="left: 35px !important";></span>
 </div>
@@ -141,23 +141,23 @@
      How Would You Like to Meet?
    </label>
   </p>
-  <label class="checkboxContainer" style="left: 30px !important";>
+  <label class="checkboxContainer" style="left: 30px; font-size:14px !important";>
     <input type="checkbox" name="communication[]" value="In Person" ng-click="addComm('In Person')" ng-checked="comm.indexOf('In Person')>-1">In Person
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Video Call
+  <label class="checkboxContainer" style="left: 30px; font-size:14px !important";>Video Call
     <input type="checkbox" name="communication[]" value="Video Call" ng-click="addComm('Video Call')" ng-checked="comm.indexOf('Video Call')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Phone Call
+  <label class="checkboxContainer" style="left: 30px; font-size:14px !important";>Phone Call
     <input type="checkbox" name="communication[]" value="Phone Call" ng-click="addComm('Phone Call')" ng-checked="comm.indexOf('Phone Call')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Text Message
+  <label class="checkboxContainer" style="left: 30px; font-size:14px !important";>Text Message
     <input type="checkbox" value="Text Message" ng-click="addComm('Text Message')" ng-checked="comm.indexOf('Text Message')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
-  <label class="checkboxContainer" style="left: 30px !important";>Email
+  <label class="checkboxContainer" style="left: 30px; font-size:14px !important";>Email
     <input type="checkbox" name="communication[]" value="Email" ng-click="addComm('Email')" ng-checked="comm.indexOf('Email')>-1">
 <span class="checkmark" style="left: -30px !important";></span>
   </label>
@@ -172,27 +172,27 @@
      When Are You Normally Available?
    </label>
  </p>
- <label class="checkboxContainer" style="left:30px !important">Early Morning
+ <label class="checkboxContainer" style="left:30px; font-size:14px !important">Early Morning
    <input type="checkbox" value="Early Morning" ng-click="addTime('Early Morning')" ng-checked="time.indexOf('Early Morning')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
  </label>
-<label class="checkboxContainer" style="left:30px !important">Late Morning
+<label class="checkboxContainer" style="left:30px; font-size:14px !important">Late Morning
   <input type="checkbox" value="Late Morning" ng-click="addTime('Late Morning')" ng-checked="time.indexOf('Late Morning')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
-<label class="checkboxContainer" style="left:30px !important">Early Afternoon
+<label class="checkboxContainer" style="left:30px; font-size:14px !important">Early Afternoon
   <input type="checkbox" value="Early Afternoon" ng-click="addTime('Early Afternoon')" ng-checked="time.indexOf('Early Afternoon')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
-<label class="checkboxContainer" style="left:30px !important">Late Afternoon
+<label class="checkboxContainer" style="left:30px; font-size:14px !important">Late Afternoon
   <input type="checkbox" nvalue="Late Afternoon" ng-click="addTime('Late Afternoon')" ng-checked="time.indexOf('Late Afternoon')>-1">
   <span class="checkmark" style="left:-30px !important"></span>
 </label>
-<label class="checkboxContainer" style="left:30px !important">Early Evening
+<label class="checkboxContainer" style="left:30px; font-size:14px !important">Early Evening
   <input type="checkbox" value="Early Evening" ng-click="addTime('Early Evening')" ng-checked="time.indexOf('Early Evening')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
-<label class="checkboxContainer" style="left:30px !important">Late Evening
+<label class="checkboxContainer" style="left:30px; font-size:14px !important">Late Evening
   <input type="checkbox" ng-click="addTime('Late Evening')" ng-checked="time.indexOf('Late Evening')>-1">
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
