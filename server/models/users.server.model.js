@@ -57,7 +57,8 @@ var userSchema = new Schema({
 		username: String,
 		rating: Number
 	}],
-	curr_rating: Number
+	curr_rating: Number,
+	occupation: String
 });
 
 
