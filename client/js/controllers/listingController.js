@@ -202,7 +202,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.comm = $scope.userProfile.communication;
 			$scope.time = $scope.userProfile.hours;
 			$scope.rating.username = $scope.userProfile.username;
-			//$scope.ratings = 
+			$scope.ratings.current = $scope.userProfile.curr_rating;
+			console.log("rating " + $scope.userProfile.curr_rating);
 		}, function(error) {
 			$scope.errors.push("There was an error loading your profile.");
 		});
@@ -220,11 +221,11 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 				$window.location.href = '/profile.html';
 			}
 		}, function(error) {
-			$scope.errors.push("There was an error loading your profile.");
+			$scope.errors.push("There was an error updating your profile.");
 		});
 	};
 		
-		$scope.getSelectedRating = function (newRating) {
+	$scope.getSelectedRating = function (newRating) {
 		$scope.rating.rating = newRating;
 		$scope.rating.username = "Trying";
 		console.log($scope.rating);
@@ -233,7 +234,15 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		}, function(error) {
 			$scope.errors.push("There was an error saving your rating.");
 		});
-		};
+	};
+	
+	$scope.viewOtherUser = function(){
+		Listings.viewProfile("test3").then(function(response) {
+			console.log(response);
+		}, function(error) {
+			$scope.errors.push("There was an error get mentor/mentee.");
+		});
+	}
 	  
   }
 ]);

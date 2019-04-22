@@ -27,6 +27,9 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 	profile: function(){
 		return $http.get('http://localhost:8080/api/listings');
+	},
+	viewProfile: function(name){
+		return $http.get('http://localhost:8080/api/listings/'+name);
 	}
 
   };

@@ -80,6 +80,15 @@ exports.profile = function(req,res){
 	
 };
 
+exports.loadUser = function(req,res){
+	User.findOne({username: req.params.username }, { _id: 0, local: 0, google:0 }, function(err,info){
+		if (err)
+		res.status(400).send(err);
+	   res.json(info);
+	});
+	//console.log(req.params.username);
+};
+
 exports.algorithm = function(req, res){
 	console.log(">>>>>>>>>>>>got here");
   //variables
