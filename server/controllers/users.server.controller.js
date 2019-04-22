@@ -80,17 +80,8 @@ exports.profile = function(req,res){
 	
 };
 
-exports.loadUser = function(req,res){
-	User.findOne({username: req.params.username }, { _id: 0, local: 0, google:0 }, function(err,info){
-		if (err)
-		res.status(400).send(err);
-	   res.json(info);
-	});
-	//console.log(req.params.username);
-};
-
 exports.algorithm = function(req, res){
-	console.log(">>>>>>>>>>>>got here");
+	//console.log(">>>>>>>>>>>>got here");
   //variables
   var mentee;
   var users = [];
@@ -106,22 +97,29 @@ exports.algorithm = function(req, res){
       res.status(400).send(err);
     };
 	
-  console.log("Mentee \n" + mentee);
+  //console.log("Mentee \n" + mentee);
 	
 	  //get ALL users
 	User.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
     if (err){
       res.status(400).send(err);
     };
-	console.log("Mentors \n" + mentors);
+	//console.log("Mentors \n" + mentors);
 	
-	//loop through users and find where usertype.mentor = true
+	Match.find({}, function(err, matching){
+    if(err){
+      res.status(400).send(err);
+    };
+
+    //loop through users and find where usertype.mentor = true
   //also check to make sure it isn't our current mentee
   for(var userCount = 0; userCount < mentors.length; userCount++){
     //console.log("inside forloop");
     var user = mentors[userCount];
     //console.log("Mentors: \n" + user);
-    
+    if(user.available == true){
+      //console.log("user is available?: ", user.available);
+      //console.log("user ", user.username);
         var menteeTopic = mentee.mentee_topic;
         var mentorTopic = user.mentor_topic;
         if(menteeTopic.localeCompare(mentorTopic) != 0){
@@ -176,6 +174,10 @@ exports.algorithm = function(req, res){
             isMatch = true;
           }
         }
+      }
+      else{
+        isMatch = false;
+      }
   
         //check if match is still true then check for communication
         if(isMatch != false){
@@ -211,21 +213,37 @@ exports.algorithm = function(req, res){
     
     //if mentor and mentee matches, update matchSchema
     if(isMatch == true){
-    console.log("Got a match!");
-    console.log("You", mentee.username, "matched with", user.username);
-      var match = new Match();
-      match.mentor_id = user._id;
-      match.status = "pending"
-      match.save(function(err){
-        if (err){
-          console.log(err);
-          throw err;
+      var exists = false;
+      var matchid;
+      for(var i = 0; i < matching.length; i++){
+        matchid = matching[i];
+
+        if(matchid.mentor_id == user._id){
+          console.log("match exists");
+          exists = true;
         }
-      });
+      }
+
+      if(exists == false){
+        console.log("Got a match!");
+        console.log("You", mentee.username, "matched with", user.username);
+        var match = new Match();
+        match.mentor_id = user._id;
+        match.status = "pending"
+        match.save(function(err){
+          if (err){
+            console.log(err);
+            throw err;
+          }
+        });
+      }
+    
     }
     
     
   }
+
+  });
 
 	});
 
