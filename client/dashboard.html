@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" type="text/css" href="styles/base.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/menu.css">
+  <link rel="stylesheet" href="styles/style2.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+</head>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
+  <div class="row ">
+    <div class="subnav container" id="customNav">
+      <a href="/dashboard" class="home active">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "matchresults.html"> Find Mentors </a>
+      <a href= "menteerequests.html"> Mentee Requests </a>
+      <a href= "matchlist.html"> Current Matches </a>
+      <a href= "/logout"> Log Out </a>
+    </div>
+        <div class="container main-page">
+  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+
+<div class="span-12 omega">
+    <h1> Welcome, {{userProfile.username}} </h1>
+
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+<br>
+
+<div>
+ <label>
+   <p class="bold">
+   Availability Status:
+ </p>
+</label>
+ <label ng-if="userProfile.availale" id = "availabilitystatus"> Available </label>
+  <label ng-if="!userProfile.availale" id = "availabilitystatus"> Unavailable </label>
+</div>
+
+<div>
+ <label>
+   <p class="bold">
+   Mentor Status:
+ </p>
+</label>
+<div ng-if="userProfile.usertype.mentor">
+ <label> You're currently a mentor</label>
+</div>
+<div ng-if="!userProfile.usertype.mentor">
+ <label> You're currently not a mentor</label>
+</div>
+</div>
+<div>
+<div>
+ <label>
+   <p class="bold">
+   Mentee Status:
+ </p>
+</label>
+<div ng-if="userProfile.usertype.mentee">
+ <label> You're currently a mentee</label>
+</div>
+<div ng-if="!userProfile.usertype.mentee">
+ <label> You're currently not a mentee</label>
+</div>
+</div>
+  <label class="bold">
+    Current Rating:
+  </label>
+  <br>
+  <div class="stars" style="font-size: 20px;">
+    <span ng-repeat="item in items|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in items|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked" ></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+</div>
+</div>
+
+<br>
+</div>
+<div class="span-12 omega">
+<h1> Features </h1>
+</div>
+
+<div style="width: 100%; overflow: hidden; display: flex;">
+<div class="span-3">
+<div class = backgroundgreen style = "padding: 10px; margin-right: 10px">
+<label class = bold style="color: white; text-shadow: 1px 1px black;"> Profile Editing: </label>
+<p style="color: white; text-shadow: 1px 1px black;"> You can manage your profile information, change your preferences for matching, and change your status as a mentee and mentor.
+    You may also view your profile and rating. </p>
+</div>
+</div>
+
+<div class="span-3">
+<div class = backgroundgrey style = "padding: 10px; margin-right: 10px">
+<label class = bold  style="color: white; text-shadow: 1px 1px black;"> Mentor Requests: </label>
+<p style="color: white; text-shadow: 1px 1px black;"> You can look up a list of available mentors, view their profiles, and send a request to add them. </p>
+<br>
+<br>
+</div>
+</div>
+
+<div class="span-3">
+<div class = backgroundgreen style = "padding: 10px; margin-right: 10px">
+<label class = bold style="color: white; text-shadow: 1px 1px black;"> Mentee Requests: </label>
+<p style="color: white; text-shadow: 1px 1px black;"> You can view a list of users who want you to be their mentor, look at thier profiles, and either accept or decline their request. </p>
+<br>
+</div>
+</div>
+
+<div class="span-3 omega">
+<div class = "backgroundgrey" style = "padding: 10px">
+<label class = bold style="color: white; text-shadow: 1px 1px black;"> Match Viewing: </label>
+<p style="color: white; text-shadow: 1px 1px black;"> You can look at the list of people who you are matched with, and if your relation to them is mentee, you can rate them as mentors when you view their profile </p>
+</div>
+</div>
+
+</div>
+
+<br>
+
+</form>
+</div>
+</div>
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
+</div>
+</body>
+</html>

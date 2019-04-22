@@ -1,190 +1,270 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Scrumble - Profile</title>
+  <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/base.css">
-  <link rel="stylesheet" href="menu.css">
-  <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+  <link rel="stylesheet" href="styles/menu.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script>
-	
-	<style>
-	.rating {
-		color: #a9a9a9;
-		margin: 0;
-		padding: 0;
-	}
-	ul.rating {
-		display: inline-block;
-	}
-	.rating li {
-		list-style-type: none;
-		display: inline-block;
-		padding: 1px;
-		text-align: center;
-		font-weight: bold;
-		cursor: pointer;
-		font-size:20px;
-	}
-	.rating .filled {
-		color: orangered;
-	}
-	.clear{
-	  margin-top:20px;
-	}
-	</style>
 </head>
-<body ng-app="directoryApp">
-	<div ng-controller="ListingsController"  data-ng-init="profileLoad()">
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
-   <div class="subnav container" id="customNav">
-    <a href="dashboard.html" class="home active">Home Page</a>
-    <a href= "viewprofile.html"> Profile </a>
-    <a href= "matchresults.html"> Find Mentors </a>
-    <a href= "viewprofile.html"> Mentee Requests </a>
-    <a href= "viewprofile.html"> Matches </a>
-    <a href= "login.html"> Log Out </a>
+    <div class="subnav container" id="customNav">
+      <a href="/dashboard" class="home active">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "matchresults.html"> Find Mentors </a>
+      <a href= "menteerequests.html"> Mentee Requests </a>
+      <a href= "matchlist.html"> Current Matches </a>
+      <a href= "/logout"> Log Out </a>
     </div>
         <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
+  <form style = "margin-top: 10px; margin-left: 20px;">
+
+<h1>Edit Profile</h1>
+
+<div class = "span-4" style="text-align: left !important">
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <div>
-  <button> View Profile Picture </button>
+  <button> Change Profile Picture </button>
 </div>
-<div>
-  <p>
-    <label class="bold">
-    Username
-  </label>
- </p>
-  <p id = "menteesubjectvar" style="text-transform:capitalize;"> {{userProfile.username}}</p>
 </div>
-<br>
-<div>
-  <p>
-    <label class="bold">
-    Aavailable
-  </label>
- </p>
-  <p id = "menteesubjectvar" style="text-transform:capitalize;"> {{userProfile.available}}</p>
-</div>
-<br>
-<div>
+
+<div class= "span-4">
+  <div>
  <p style="padding-right: 10px;">
-   <label class="bold">
-   Your Roles
+  <label class="bold">
+   Are you available?
  </label>
    </p>
- <p id = "mentormenteevar" ng-repeat="(index,type) in userProfile.usertype" style="text-transform:capitalize;"> {{index}} : {{type}} </p>
+   <label class="checkboxContainer">Yes
+ <input type="radio" name="mentor" ng-model="userProfile.available" value="true" ng-value="true">
+ <span class="checkmark" style="left: 35px !important";></span>
+</label>
+ <label class="checkboxContainer">No
+ <input type="radio" name="mentee"ng-model="userProfile.available" value="false" ng-value="false">
+ <span class="checkmark" style="left: 35px !important";></span>
 </div>
-<br>
-<div>
-  <p>
-    <label class="bold">
-    Area you're being mentored in
-  </label>
- </p>
-  <p id = "menteesubjectvar"> {{userProfile.mentee_topic}}</p>
-</div>
-
-<br>
-<div>
-  <p>
-    <label class="bold">
-      Area you're mentoring in
-    </label>
-   </p>
-  <p id = "mentorsubjectvar"> {{userProfile.mentor_topic}}</p>
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Year of school
-    </label>
-  </p>
-  <p id = "yearvar"> {{userProfile.year}} </p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      Level of experience as mentor
-    </label>
-   </p>
-  <p id = "experiencevar"> {{userProfile.topic_level}} </p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      City/location
-    </label>
-  </p>
-  <p id = "location var">{{userProfile.city}}</p>
-
-</div>
-
-<br>
 
 <div>
  <p style="padding-right: 10px;">
-   <label class="bold">
-     Meeting Preferance
-   </label>
-  </p>
-  <p id = "meetuptimesvar" ng-repeat="communication in userProfile.communication" > {{communication}} </p>
-</div>
-
-<br>
-
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Times you're available
-   </label>
- </p>
- <p id = "meetuptimesvar" ng-repeat="times in userProfile.hours" > {{times}} </p>
-</div>
-<br>
   <label class="bold">
-  Other info
+   I am a
+ </label>
+   </p>
+   <label class="checkboxContainer">Mentor
+ <input type="checkbox" name="mentor" value="Mentor" value="true" ng-model="userProfile.usertype.mentor" ng-checked="userProfile.usertype.mentor">
+ <span class="checkmark" style="left: 35px !important";></span>
+</label>
+ <label class="checkboxContainer">Mentee
+ <input type="checkbox" name="mentee" value="Mentee" value="true" ng-model="userProfile.usertype.mentee" ng-checked="userProfile.usertype.mentee">
+ <span class="checkmark" style="left: 35px !important";></span>
+</div>
+</div>
+
+<div class="span-4 omega">
+  <div>
+    <p>
+      <label class="bold">
+      What Area Would You Like to Be Mentored In?
+    </label>
+   </p>
+ <select ng-model="userProfile.mentee_topic">
+  <option disabled></option>
+  <option value="Biology" ng-selected="userProfile.mentee_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentee_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentee_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentee_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentee_topic == 'Business'">Business</option>
+  <option value="Professional Writing" ng-selected="userProfile.mentee_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentee_topic == 'Pyschology'">Psychology</option>
+</select>
+  </div>
+  <br>
+  <div>
+    <p>
+      <label class="bold">
+        What Area Would You Like to Mentor?
+      </label>
+     </p>
+   <select ng-model="userProfile.mentor_topic">
+  <option disabled selected></option>
+  <option value="Biology" ng-selected="userProfile.mentor_topic == 'Biology'">Biology</option>
+  <option value="Physics" ng-selected="userProfile.mentor_topic == 'Physics'">Physics</option>
+  <option value="Computer Science" ng-selected="userProfile.mentor_topic == 'Computer Science'">Computer Science</option>
+  <option value="Chemistry" ng-selected="userProfile.mentor_topic == 'Chemistry'">Chemistry</option>
+  <option value="Business" ng-selected="userProfile.mentor_topic == 'Business'">Business</option>
+  <option value="Professional Writing" ng-selected="userProfile.mentor_topic == 'Professional Writing'">Professional Writing</option>
+  <option value="Psychology" ng-selected="userProfile.mentor_topic == 'Pyschology'">Psychology</option>
+</select>
+  </div>
+</div>
+
+<div class="span-12 omega" style="text-align:left !important";>
+<div class= "span-4" style="text-align:left !important">
+<div>
+  <p>
+    <label class="bold">
+      Which University Have You Attended?
+    </label>
+   </p>
+  <select  ng-model="userProfile.university">
+  <option selected="" disabled=""> </option>
+  <option value="University of Florida" ng-selected="userProfile.university == 'University of Florida'">University of Florida</option>
+  <option value="Santa Fe College" ng-selected="userProfile.university == 'Santa Fe College'">Santa Fe College</option>
+  <option value="University of Central Florida" ng-selected="userProfile.university == 'University of Central Florida'">University of Central Florida</option>
+  <option value="Florida State University" ng-selected="userProfile.university == 'Florida State University'">Florida State University</option>
+  <option value="University of Miami" ng-selected="userProfile.university == 'University of Miami'">University of Miami</option>
+</select>
+</div>
+</div>
+
+<div class= "span-4" style="text-align:left !important">
+<div>
+  <p>
+    <label class="bold">
+      What City Are You In?
+    </label>
+  </p>
+  <input type="text" name="location" ng-init="userProfile.city" ng-model="userProfile.city">
+</div>
+</div>
+
+<div class= "span-4 omega" style="text-align:left !important">
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     How Would You Like to Meet?
+   </label>
+  </p>
+  <label class="checkboxContainer" style="left: 30px !important";>
+    <input type="checkbox" name="communication[]" value="In Person" ng-click="addComm('In Person')" ng-checked="comm.indexOf('In Person')>-1">In Person
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Video Call
+    <input type="checkbox" name="communication[]" value="Video Call" ng-click="addComm('Video Call')" ng-checked="comm.indexOf('Video Call')>-1">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Phone Call
+    <input type="checkbox" name="communication[]" value="Phone Call" ng-click="addComm('Phone Call')" ng-checked="comm.indexOf('Phone Call')>-1">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Text Message
+    <input type="checkbox" value="Text Message" ng-click="addComm('Text Message')" ng-checked="comm.indexOf('Text Message')>-1">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+  <label class="checkboxContainer" style="left: 30px !important";>Email
+    <input type="checkbox" name="communication[]" value="Email" ng-click="addComm('Email')" ng-checked="comm.indexOf('Email')>-1">
+<span class="checkmark" style="left: -30px !important";></span>
+  </label>
+</div>
+</div>
+
+</div>
+<div class= "span-12 omega" style="text-align:left !important";>
+<div>
+ <p style="padding-right: 10px;">
+   <label class="bold">
+     When Are You Normally Available?
+   </label>
+ </p>
+ <label class="checkboxContainer" style="left:30px !important">Early Morning
+   <input type="checkbox" value="Early Morning" ng-click="addTime('Early Morning')" ng-checked="time.indexOf('Early Morning')>-1">
+<span class="checkmark" style="left: -30px !important"></span>
+ </label>
+<label class="checkboxContainer" style="left:30px !important">Late Morning
+  <input type="checkbox" value="Late Morning" ng-click="addTime('Late Morning')" ng-checked="time.indexOf('Late Morning')>-1">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Early Afternoon
+  <input type="checkbox" value="Early Afternoon" ng-click="addTime('Early Afternoon')" ng-checked="time.indexOf('Early Afternoon')>-1">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Late Afternoon
+  <input type="checkbox" nvalue="Late Afternoon" ng-click="addTime('Late Afternoon')" ng-checked="time.indexOf('Late Afternoon')>-1">
+  <span class="checkmark" style="left:-30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Early Evening
+  <input type="checkbox" value="Early Evening" ng-click="addTime('Early Evening')" ng-checked="time.indexOf('Early Evening')>-1">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+<label class="checkboxContainer" style="left:30px !important">Late Evening
+  <input type="checkbox" ng-click="addTime('Late Evening')" ng-checked="time.indexOf('Late Evening')>-1">
+<span class="checkmark" style="left: -30px !important"></span>
+</label>
+</div>
+<br>
+
+  <label class="bold">
+  Goals For Scrumble:
 </label>
 <div>
- <textarea readonly name="about" rows="10" cols="80">{{userProfile.add_info}}</textarea>
+ <textarea name="about" rows="10" cols="80" ng-model="userProfile.scrumble_goals"></textarea>
 </div>
-
 <br>
 
- <label class="bold">
-    Your Rating
-  </label>
-
-
-	<div ng-repeat="rating in ratings">
-		<p>{{rating.current}} / {{rating.max}}</p>
-        <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
-    </div>
- <div>
- <a href="update.html" style="color:blue;"> Edit Profile </a>
- <button type="button" data-ng-click="viewOtherUser()">View User</button>
+<label class="bold">
+Career Goals:
+</label>
+<div>
+<textarea name="careerGoals" rows="10" cols="80" ng-model="userProfile.career_goals"></textarea>
 </div>
+<br>
+
+<label class="bold">
+Industry Experiences:
+</label>
+<div>
+<textarea name="experiences" rows="10" cols="80" ng-model="userProfile.industry_exp"></textarea>
+</div>
+<br>
+
+<label class="bold">
+Strengths in Field of Interest:
+</label>
+<div>
+<textarea name="strengths" rows="10" cols="80" ng-model="userProfile.strengths"></textarea>
+</div>
+<br>
+
+<label class="bold">
+Current Occupation:
+</label>
+<div>
+<textarea name="currentJob" rows="10" cols="80" ng-model="userProfile.occupation"></textarea>
+</div>
+<br>
+
+<label class="bold">
+Anything Interesting You Would Like to Add:
+</label>
+<div>
+<textarea name="miscellaneous" rows="10" cols="80" ng-model="userProfile.add_info"></textarea>
+</div>
+<div>
+<button ng-click="profileUpdate()"> Update </button>
+</div>
+</div>
+<br>
+
+
 </form>
 </div>
 </div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-	
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
+</div> <!--/.App-->
 </body>
 </html>

@@ -64,7 +64,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			return;
 		}
 	    Listings.signUp($scope.newProfile).then(function(response) {
-		  $window.location.href = '/profile.html';
+		  $window.location.href = '/dashboard';
 		}, function(error) {
 		  
 		  $scope.errors.push("Email or username is already in use.");
@@ -97,7 +97,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			return;
 		}
     Listings.google($scope.newProfile).then(function(response) {
-	  $window.location.href = '/profile.html';
+	  $window.location.href = '/dashboard';
     }, function(error) {
       
 	  $scope.errors.push("Email or username is already in use.");
@@ -126,7 +126,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		}
 	
     Listings.login($scope.existingProfile).then(function(response) {
-	  $window.location.href = '/profile.html';
+	  $window.location.href = '/dashboard';
     }, function(error) {
 		$scope.errors.push("Email or password is wrong.");
       //console.log('Unable to update listings:', error);
@@ -160,6 +160,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	};
 	
 	$scope.profileUpdate = function() {
+		
 		//need to add validation
 		$scope.errors = [];
 		if(!$scope.userProfile){
@@ -180,12 +181,12 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			if($scope.userProfile.usertype.mentee){
 				Listings.algorithm().then(function(response) {
 				  console.log("Updated matches.");
-				  $window.location.href = '/profile.html';
+				  $window.location.href = '/profile';
 				}, function(error) {
 				  	$scope.errors.push("Error with algorithm.");
 				});
 			}else{
-				$window.location.href = '/profile.html';
+				$window.location.href = '/profile';
 			}
 			}, function(error) {
 				$scope.errors.push("There was an error updating your profile.");
@@ -196,7 +197,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     };
 	
 	$scope.profileLoad = function() {
-		console.log("called");
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			$scope.comm = $scope.userProfile.communication;
@@ -211,14 +211,14 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     };
 	
 	$scope.getSignUp = function(){
-		$window.location.href = '/signup.html';
+		$window.location.href = '/signup';
 	};
 	
 	$scope.checkGoogle = function(){
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			if($scope.userProfile.username){
-				$window.location.href = '/profile.html';
+				$window.location.href = '/dashboard';
 			}
 		}, function(error) {
 			$scope.errors.push("There was an error updating your profile.");

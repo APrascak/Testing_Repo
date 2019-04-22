@@ -62,16 +62,15 @@ module.exports.init = function() {
 		res.redirect('/create/');
 	});
 
-  app.get('/create', function(req, res) {
-    res.redirect('/google.html');
-  });
-
-	//Profile Check
-    /*app.get('/google',isLoggedIn, function(req, res) {
+	app.get('/create', function(req, res) {
 		res.redirect('/google.html');
-    });*/
+	});
 
 	//Profile Check
+	app.get('/dashboard',isLoggedIn, function(req, res) {
+		res.redirect('/dashboard.html');
+    });
+
     app.get('/profile',isLoggedIn, function(req, res) {
 		res.redirect('/profile.html');
     });
