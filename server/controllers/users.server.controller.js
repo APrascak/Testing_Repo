@@ -36,7 +36,8 @@ exports.update = function(req, res) {
 
 	User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{usertype: existingUser.usertype, available: existingUser.available, mentor_topic: existingUser.mentor_topic, 
 	mentee_topic: existingUser.mentee_topic, topic_level: existingUser.topic_level, hours: existingUser.hours, city: existingUser.city, communication: existingUser.communication, 
-	add_info: existingUser.add_info}}, {new: true}, function(err,updated){
+	add_info: existingUser.add_info, scrumble_goals: existingUser.scrumble_goals, career_goals: existingUser.career_goals, industry_exp: existingUser.industry_exp,
+	strengths: existingUser.strengths, ethnicity: existingUser.ethnicity, occupation: existingUser.occupation, university: existingUser.university }}, {new: true}, function(err,updated){
 		if (err)
 			res.status(400).send(err);
 	   res.send();
@@ -74,14 +75,76 @@ exports.profile = function(req,res){
 	User.findOne({_id : req.session.passport.user }, { _id: 0, local: 0, google:0 }, function(err,info){
 		if (err)
 		res.status(400).send(err);
-		info._id = null;
 	   res.json(info);
 	});
 	
 };
 
+exports.loadUser = function(req,res){
+	User.findOne({username : req.params.username }, { _id: 0, 'local.password': 0, google:0 }, function(err,info){
+		if (err)
+			res.status(400).send(err);
+	   res.json(info);
+	});
+	
+};
+
+exports.mentors = function(req,res){
+	Match.find({mentee_id : req.session.passport.user, status: 'new' }, function(err,mentors){
+		if (err)
+		res.status(400).send(err);
+		res.json(mentors);
+	});
+	
+};
+
+exports.mentess = function(req,res){
+	Match.find({mentor_id : req.session.passport.user, status : {$ne: 'new' }}, function(err,mentees){
+		if (err){
+			console.log(err);
+		res.status(400).send(err);
+		}
+		res.json(mentees);
+	});
+	
+};
+
+exports.matches = function(req,res){
+	Match.find({mentee_id : req.session.passport.user, status : {$ne: 'new' }}, function(err,matches){
+		if (err)
+		res.status(400).send(err);
+		res.json(matches);
+	});
+	
+};
+
+exports.make = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "new"}, {$set: {status: "pending"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+};
+
+exports.accept = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "pending"}, {$set: {status: "accepted"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+}
+
+
 exports.algorithm = function(req, res){
-	//console.log(">>>>>>>>>>>>got here");
+	console.log(">>>>>>>>>>>>got here");
   //variables
   var mentee;
   var users = [];
@@ -228,8 +291,10 @@ exports.algorithm = function(req, res){
         console.log("Got a match!");
         console.log("You", mentee.username, "matched with", user.username);
         var match = new Match();
+		match.mentee_name = mentee.username;
+		match.mentor_name = user.username;
         match.mentor_id = user._id;
-        match.status = "pending"
+        match.status = "new"
         match.save(function(err){
           if (err){
             console.log(err);

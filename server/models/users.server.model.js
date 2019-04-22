@@ -58,7 +58,8 @@ var userSchema = new Schema({
 		rating: Number
 	}],
 	curr_rating: Number,
-	occupation: String
+	occupation: String,
+	university: String
 });
 
 

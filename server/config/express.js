@@ -65,7 +65,41 @@ module.exports.init = function() {
 	app.get('/create', function(req, res) {
 		res.redirect('/google.html');
 	});
-
+	// view engine setup
+	app.set('views', path.join('client/views'));
+	app.set('view engine', 'ejs');
+	
+	var hold;
+	app.post('/viewprofile', function(req, res) {
+		hold = req.body;
+		console.log("set variable");
+		res.send();
+	});
+	
+	app.get('/viewprofile', function(req, res) {
+		console.log("hopeful\n " + hold.username);
+	  res.render('viewprofile',{
+		 username :hold.username,
+		 city: hold.city,
+		 university: hold.university,
+		 rating: hold.curr_rating,
+		 communication: hold.communication,
+		 topic: hold.mentor_topic,
+		 scrumble_goals: hold.scrumble_goals,
+		 career_goals: hold.career_goals,
+		 industry_exp: hold.industry_exp,
+		 age: hold.age,
+		 ethnicty: hold.ethnicty,
+		 topic_level: hold.topic_level,
+		 hours: hold.hours,
+		 add_info: hold.add_info,
+		 strengths: hold.strengths,
+		 gender: hold.gender,
+		 occupation: hold.occupation,
+		 matchStat: hold.status,
+		 email: hold.local.email
+	  });
+	});
 	//Profile Check
 	app.get('/dashboard',isLoggedIn, function(req, res) {
 		res.redirect('/dashboard.html');
@@ -73,6 +107,14 @@ module.exports.init = function() {
 
     app.get('/profile',isLoggedIn, function(req, res) {
 		res.redirect('/profile.html');
+    });
+	
+    app.get('/mentors',isLoggedIn, function(req, res) {
+		res.redirect('/matchresults.html');
+    });
+	
+	app.get('/mentees',isLoggedIn, function(req, res) {
+		res.redirect('/requests.html');
     });
 
 	app.get('/logout', function(req, res) {
@@ -93,5 +135,5 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/index.html');
 }

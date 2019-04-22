@@ -19,13 +19,12 @@
     <div class="subnav container" id="customNav">
       <a href="/dashboard" class="home active">Home Page</a>
       <a href= "/profile"> Profile </a>
-      <a href= "matchresults.html"> Find Mentors </a>
-      <a href= "menteerequests.html"> Mentee Requests </a>
-      <a href= "matchlist.html"> Current Matches </a>
+      <a href= "/mentors"> Find Mentors </a>
+      <a href= "/mentees"> Mentee Requests </a>
+      <a href= "matchlist.html"> Mentor Matches </a>
       <a href= "/logout"> Log Out </a>
     </div>
         <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
 
 <div class="span-12 omega">
     <h1> Welcome, {{userProfile.username}} </h1>
@@ -39,8 +38,8 @@
    Availability Status:
  </p>
 </label>
- <label ng-if="userProfile.availale" id = "availabilitystatus"> Available </label>
-  <label ng-if="!userProfile.availale" id = "availabilitystatus"> Unavailable </label>
+ <label ng-if="userProfile.available" id = "availabilitystatus"> Available </label>
+  <label ng-if="!userProfile.available" id = "availabilitystatus"> Unavailable </label>
 </div>
 
 <div>
@@ -75,13 +74,8 @@
   </label>
   <br>
   <div class="stars" style="font-size: 20px;">
-    <span ng-repeat="item in items|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
-    <span ng-repeat="item in items|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star checked" ></span>
-  <span class="fa fa-star checked" ></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star"></span>
-  <span class="fa fa-star"></span>
+    <span ng-repeat="item in size|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in size|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star" ></span>
 </div>
 </div>
 
@@ -127,8 +121,6 @@
 </div>
 
 <br>
-
-</form>
 </div>
 </div>
 <script>

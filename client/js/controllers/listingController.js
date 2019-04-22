@@ -20,6 +20,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
         current: 3,
         max: 5
     }];
+	$scope.size = [1,2,3,4,5];
 	
 	$scope.rating = {
 		username: String,
@@ -211,7 +212,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     };
 	
 	$scope.getSignUp = function(){
-		$window.location.href = '/signup';
+		$window.location.href = '/signup.html';
 	};
 	
 	$scope.checkGoogle = function(){
@@ -236,12 +237,74 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 	};
 	
-	$scope.viewOtherUser = function(){
-		Listings.viewProfile("test3").then(function(response) {
-			console.log(response);
+	$scope.viewOtherUser = function(username, matchStat){
+		Listings.getProfile(username).then(function(response) {
+			//console.log(response);
+			response.data.status = matchStat;
+			Listings.viewProfile(response.data).then(function(){
+				$window.location.href = '/viewprofile';
+			});
 		}, function(error) {
 			$scope.errors.push("There was an error get mentor/mentee.");
 		});
+	}
+	
+	$scope.getMentors = function(){
+		Listings.profile().then(function(response) {
+			$scope.userProfile = response.data;
+			if(!$scope.userProfile.usertype.mentee){
+				$scope.errors = [];
+				$scope.errors.push("You're not registered as a mentee. Update your profile and try again.");
+			}else{
+				Listings.mentors().then(function(response) {
+					console.log(response);
+					$scope.mentors = response.data;
+				}, function(error) {
+					$scope.errors.push("There was an error loading your mentors.");
+				});
+			}
+		}, function(error) {
+			$scope.errors.push("There was an error loading your profile.");
+		});
+	}
+	
+	$scope.getMentees = function(){
+		Listings.profile().then(function(response) {
+			$scope.userProfile = response.data;
+			if(!$scope.userProfile.usertype.mentor){
+				$scope.errors = [];
+				$scope.errors.push("You're not registered as a mentor. Update your profile and try again.");
+			}else{
+				Listings.mentees().then(function(response) {
+					console.log(response);
+					$scope.mentees = response.data;
+				}, function(error) {
+					$scope.errors.push("There was an error loading your mentees.");
+				});
+			}
+		}, function(error) {
+			$scope.errors.push("There was an error loading your profile.");
+		});
+		
+	}
+	  
+  
+  	$scope.makeRequest = function(id){
+		Listings.makeRequest({'id': id}).then(function(response) {
+			$window.location.href = '/mentors';
+		}, function(error) {
+			$scope.errors.push("There was an error making your request.");
+		});
+		
+	}
+	
+  	$scope.acceptRequest = function(id){
+		Listings.acceptRequest({'id': id}).then(function(response) {
+			$window.location.href = '/mentees';
+		}, function(error) {
+			$scope.errors.push("There was an error accepting your request.");
+		});
+		
 	}
 	  
   }
