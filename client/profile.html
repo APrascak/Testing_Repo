@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Latest compiled and minified CSS -->
+  <title>Scrumble</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/base.css">
@@ -43,6 +43,9 @@
     float: right;
     clear: both;
   }
+  img{
+    width: 100%;
+  }
 </style>
  <body ng-app="directoryApp">
   <div ng-controller="ListingsController" data-ng-init="profileLoad()">
@@ -59,15 +62,12 @@
     <div class="container main-page">
   <form style = "margin-top: 10px; margin-left: 20px;">
 
-<h1>Edit Profile</h1>
+<h1>Edit Your Profile</h1>
 <div class="span-12 omega" style="margin: 0; padding: 0;">
 <button ng-click="profileUpdate()"> Update </button>
 </div>
 <div class = "span-4" style="text-align: left !important">
-<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
-<div>
-  <button> Change Profile Picture </button>
-</div>
+<img src = "https://i.ibb.co/ZKVGWpD/scrumblelogo-Final.png">
 </div>
 
 <div class= "span-4 texts">

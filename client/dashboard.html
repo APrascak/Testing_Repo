@@ -18,6 +18,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
+    text-shadow: rgba(0, 0, 0, 0.7) 1px 0 10px;
   }
   .features .span-3{
     color: white;
@@ -28,7 +29,6 @@
   .features p{
     text-transform: none;
     font-size: 15px;
-    text-shadow: rgba(0, 0, 0, 0.) 1px 0 10px;
   }
   .features label{
     display: inline-block;
@@ -41,6 +41,10 @@
     border-bottom: 1px lightgrey solid;
     width: 100%;
     padding: 10px
+  }
+
+  img{
+    width: 30%;
   }
   @media screen and (max-width: 768px) {
     .features{
@@ -64,9 +68,9 @@
         <div class="container main-page">
 
 <div class="span-12 omega">
+  <img src = "https://i.ibb.co/ZKVGWpD/scrumblelogo-Final.png">
     <h1> Welcome, {{userProfile.username}} </h1>
 
-<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <br>
 
 <div>
@@ -111,8 +115,8 @@
   </label>
   <br>
   <div class="stars" style="font-size: 20px;">
-    <span ng-repeat="item in size|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
-    <span ng-repeat="item in size|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star" ></span>
+    <span ng-repeat="item in size|limitTo:displayRating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in size|limitTo:(5 - displayRating)" class="fa fa-star" ></span>
 </div>
 </div>
 

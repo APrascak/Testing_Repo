@@ -28,6 +28,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		rating: Number
 	};
 	
+	$scope.displayRating = 5;
+	
 	
 	$scope.signUp = function() {
 		$scope.errors = [];
@@ -40,12 +42,18 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			
 			if(!$scope.newProfile.email)
 				$scope.errors.push("Please enter an email.");
+
+			if(!$scope.newProfile.emailCheck)
+				$scope.errors.push("Please confirm your email.");
 			
 			if(!angular.equals($scope.newProfile.email,$scope.newProfile.emailCheck))
 				$scope.errors.push("The emails you entered are different.");
 			
 			if(!$scope.newProfile.password)
 				$scope.errors.push("Please enter a password.");
+
+			if(!$scope.newProfile.password)
+				$scope.errors.push("Please confirm your password.");
 			
 			if(!angular.equals($scope.newProfile.password,$scope.newProfile.passwordCheck))
 				$scope.errors.push("The passwords you entered are different.");
@@ -204,7 +212,10 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.comm = $scope.userProfile.communication;
 			$scope.time = $scope.userProfile.hours;
 			$scope.rating.username = $scope.userProfile.username;
-			$scope.ratings.current = $scope.userProfile.curr_rating;
+			if($scope.userProfile.curr_rating){
+				if($scope.userProfile.ratings.length > 5)
+					$scope.displayRating = $scope.userProfile.curr_rating;
+			}
 			console.log("rating " + $scope.userProfile.curr_rating);
 		}, function(error) {
 			$scope.errors.push("There was an error loading your profile.");

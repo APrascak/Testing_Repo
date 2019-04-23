@@ -78,18 +78,23 @@ module.exports.init = function() {
 	
 	app.get('/viewprofile', function(req, res) {
 		console.log("hopeful\n " + hold.username);
+		var displayRating = 5
+		if(hold.ratings){
+			if(hold.ratings.length > 5)
+				displayRating = username.curr_rating;
+		}
 	  res.render('viewprofile',{
 		 username :hold.username,
 		 city: hold.city,
 		 university: hold.university,
-		 rating: hold.curr_rating,
+		 rating: displayRating,
 		 communication: hold.communication,
 		 topic: hold.mentor_topic,
 		 scrumble_goals: hold.scrumble_goals,
 		 career_goals: hold.career_goals,
 		 industry_exp: hold.industry_exp,
 		 age: hold.age,
-		 ethnicty: hold.ethnicty,
+		 ethnicity: hold.ethnicity,
 		 topic_level: hold.topic_level,
 		 hours: hold.hours,
 		 add_info: hold.add_info,
@@ -98,7 +103,6 @@ module.exports.init = function() {
 		 occupation: hold.occupation,
 		 matchStat: hold.status,
 		 email: hold.local.email,
-		 ratings: hold.ratings
 	  });
 	});
 	//Profile Check

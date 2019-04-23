@@ -1,53 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Latest compiled and minified CSS -->
+  <title>Scrumble</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/base.css">
 </head>
+<style type="text/css">
+  img{
+    width: 300px;
+    margin: 0 auto;
+  }
+  input, select{
+    width: 100%;
+    float: left;
+    clear: both;
+  }
+  label{
+    width: 100%;
+    text-align: left !important;
+  }
+  .clear{
+    clear: both;
+  }
+  h4.span-12, p.span-12{
+    text-align: left;
+  }
+  p{
+    font-size: 14px;
+    text-transform: none;
+  }
+  input, select{
+    font-size: 
+  }
+  .required{
+    color: red;
+  }
+</style>
   <body ng-app="directoryApp">
-	<div ng-controller="ListingsController" data-ng-init="checkGoogle()">
+	<div ng-controller="ListingsController">
   <div class="row ">
         <div class="container main-page">
-  <form style = "margin-top: 10px; margin-left: 20px;">
-<div style = " background-color: lightgrey; width: 400px;" class = centerhorizontal>
-<h1 class = centerhorizontal> Sign Up </h1>
-  <div class = centerhorizontal>
+          <div style="width: 100%">
+          <img src = "https://i.ibb.co/ZKVGWpD/scrumblelogo-Final.png" style="text-align: center; display: inherit;">
+        </div>
+          <h1> Sign Up </h1>
+  <form>
   		<div ng-if="errors.length > 0" style=" width: 100%;">
 			<p style=" font-family: Arial">Oops! Something went wrong.</p>
 				<p ng-repeat="error in errors" style=" font-family: Arial">{{error}}</p>
 		</div>
-    <label class = "textboxquestion"> Username: </label>
-    <br>
-  <input type="text" name="name" id="name" required aria-required="true" class = "inputcheck" ng-model="newProfile.username">
-</div>
-<br>
-<div class = centerhorizontal>
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Age: </label>
+    <h4 class="span-12 omega">Scrumble Information</h4>
+    <p class="span-12 omega">Required fields are indicated by (<span  class="required">*</span>).</p>
+<div class="clear">
+<div class="span-4">
+  <label > Password <span  class="required">*</span></label>
   <br>
-<input type="number" name="age" id="age" required aria-required="true" class = "inputcheck" ng-model="newProfile.age">
+<input type="password" name="password" id="password" required aria-required="true"  ng-model="newProfile.password">
 </div>
-<br>
-
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Gender: </label>
+<div class="span-4 omega">
+  <label > Confirm Password <span  class="required">*</span></label>
+  <br>
+<input type="password" name="confirmpassword" id="confirmpassword" required aria-required="true"  ng-model="newProfile.passwordCheck">
+</div>
+</div>
+<h4 class="span-12 omega">Personal Information</h4>
+<div class="clear">
+<div class="span-4">
+  <label > Age <span  class="required">*</span></label>
+  <br>
+<input type="number" name="age" id="age" required aria-required="true"  ng-model="newProfile.age">
+</div>
+<div class="span-4">
+  <label > Gender <span  class="required">*</span></label>
   <br>
   <select id = "gender" name = "gender" required aria-required="true" ng-model="newProfile.gender">
-  <option selected disabled> </option>
   <option value="Male">Male</option>
   <option value="Female">Female</option>
-  <option value="Nonbinary"> Non-binary </option>
-  <option value="Nopreferance">I prefer not to answer</option>
+  <option value="Non-binary"> Non-binary </option>
+  <option value="I prefer not to answer">I prefer not to answer</option>
   </select>
 </div>
-<br>
 
-<div class = centerhorizontal>
-  <label class = "textboxquestion"> Ethnicity/Race: </label>
+  <div class="span-4 omega">
+  <label > Ethnicity/Race <span  class="required">*</span></label>
   <br>
   <select id = "demographic" name = "demographic" required aria-required="true" ng-model="newProfile.ethnicity">
-  <option selected disabled> </option>
   <option value="Native American">Native American</option>
   <option value="African American">African American</option>
   <option value="Middle Eastern">Middle Eastern</option>
@@ -60,13 +98,12 @@
   <option value="I prefer not to answer">I prefer not to answer</option>
   </select>
 </div>
-
-<div>
-  <button class = "centerhorizontal" style = "background-color: lightgreen;" ng-click="googleRegister()"> Submit</button>
 </div>
-</div>
+<div class="clear">
+  <button ng-click="signUp()"> Submit</button>
 </div>
 </form>
+</div>
 </div>
 </div>
 
