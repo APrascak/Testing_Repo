@@ -17,7 +17,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	$scope.changedProfile = undefined;
 	
     $scope.ratings = [{
-        current: 3,
+        current: 0,
         max: 5
     }];
 	$scope.size = [1,2,3,4,5];
@@ -136,6 +136,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		}
 	
     Listings.login($scope.existingProfile).then(function(response) {
+		$scope.getMentors();
 	  $window.location.href = '/dashboard';
     }, function(error) {
 		$scope.errors.push("Email or password is wrong.");

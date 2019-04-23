@@ -63,7 +63,7 @@ module.exports.init = function() {
 	});
 
 	app.get('/create', function(req, res) {
-		res.redirect('/google.html');
+		res.redirect('/create.html');
 	});
 	// view engine setup
 	app.set('views', path.join('client/views'));
