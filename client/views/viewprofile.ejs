@@ -78,7 +78,7 @@
 	<div>
 		<h4>Rate your experience with <span style="text-transform:capitalize"><%= username%></span></h4>
             <div ng-repeat="rating in ratings">
-            <div star-rating rating-value="" max="rating.max" on-rating-selected="getSelectedRating(rating, userProfile.username,'<%= username%>')"></div>
+            <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, userProfile.username,'<%= username%>')"></div>
         </div>
 		<hr>
 	</div>

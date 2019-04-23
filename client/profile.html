@@ -6,27 +6,63 @@
   <link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/base.css">
   <link rel="stylesheet" href="styles/menu.css">
+  <link rel="stylesheet" href="styles/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script>
 </head>
+<style type="text/css">
+  .texts label{
+    text-align: left !important;
+    width: 100%;
+  }
+  textarea{
+  width: 100%;
+  height: 100px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+  }
+  input,textarea,select{
+    font-size: 13px;
+  }
+  select, input[type="text"]{
+    width: 100%;
+  }
+
+  h4{
+    width: 100%;
+    text-align: left;
+  }
+  .span-12 button{
+    float: right;
+    clear: both;
+  }
+</style>
  <body ng-app="directoryApp">
   <div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
-    <div class="subnav container" id="customNav">
+    <div class="subnav" id="customNav">
       <a href="/dashboard" class="home">Home Page</a>
       <a href= "/profile" class="active"> Profile </a>
       <a href= "/mentors"> Find Mentors </a>
       <a href= "/mentees"> Mentee Requests </a>
       <a href= "/matches"> Mentor Matches </a>
       <a href= "/logout"> Log Out </a>
+	  <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
     </div>
-        <div class="container main-page">
+    <div class="container main-page">
   <form style = "margin-top: 10px; margin-left: 20px;">
 
 <h1>Edit Profile</h1>
-
+<div class="span-12 omega" style="margin: 0; padding: 0;">
+<button ng-click="profileUpdate()"> Update </button>
+</div>
 <div class = "span-4" style="text-align: left !important">
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
 <div>
@@ -34,7 +70,52 @@
 </div>
 </div>
 
-<div class= "span-4">
+<div class= "span-4 texts">
+  <h4> Personal Information</h4>
+  <div>
+  <p>
+    <label class="bold">
+     Age
+    </label>
+  </p>
+  <input type="text" name="location" ng-init="userProfile.age" ng-model="userProfile.age">
+</div>
+  <div>
+  <p>
+    <label class="bold">
+     Gender
+    </label>
+  </p>
+   <select ng-model="userProfile.gender">
+  <option selected disabled> </option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Non-binary"> Non-binary </option>
+  <option value="I prefer not to answer">I prefer not to answer</option>
+  </select>
+</div>
+  <div>
+  <p>
+    <label class="bold">
+     Ethnicity
+    </label>
+  </p>
+  <select ng-model="userProfile.ethnicity">
+  <option value="Native American" ng-selected="userProfile.ethnicity == 'Native American'">Native American</option>
+  <option value="African American" ng-selected="userProfile.ethnicity == 'African American'">African American</option>
+  <option value="Middle Eastern" ng-selected="userProfile.ethnicity == 'Middle Eastern'">Middle Eastern</option>
+  <option value="Asian" ng-selected="userProfile.ethnicity == 'Asian'">Asian</option>
+  <option value="Hispanic" ng-selected="userProfile.ethnicity == 'Hispanic'">Hispanic</option>
+  <option value="European" ng-selected="userProfile.ethnicity == 'European'">European</option>
+  <option value="White" ng-selected="userProfile.ethnicity == 'White American'">White American</option>
+  <option value="Eurasian" ng-selected="userProfile.ethnicity == 'Eurasian'">Eurasian</option>
+  <option value="Other" ng-selected="userProfile.ethnicity == 'Other'">Other</option>
+  <option value="I prefer not to answer" ng-selected="userProfile.ethnicity == 'I prefer not to answer'">I prefer not to answer</option>
+  </select>
+</div>
+</div>
+  <div class="span-4 omega">
+     <h4>Scrumble Settings</h4>
   <div>
  <p style="padding-right: 10px;">
   <label class="bold">
@@ -63,10 +144,13 @@
  <label class="checkboxContainer" style="font-size:14px !important">Mentee
  <input type="checkbox" name="mentee" value="Mentee" value="true" ng-model="userProfile.usertype.mentee" ng-checked="userProfile.usertype.mentee">
  <span class="checkmark" style="left: 35px !important";></span>
+</label>
 </div>
 </div>
 
-<div class="span-4 omega">
+<h4 class="span-12 omega">Scrumble Information</h4>
+<div class="span-12 omega texts">
+<div class="span-3">
   <div>
     <p>
       <label class="bold">
@@ -74,7 +158,6 @@
     </label>
    </p>
  <select ng-model="userProfile.mentee_topic">
-  <option disabled></option>
   <option value="Biology" ng-selected="userProfile.mentee_topic == 'Biology'">Biology</option>
   <option value="Physics" ng-selected="userProfile.mentee_topic == 'Physics'">Physics</option>
   <option value="Computer Science" ng-selected="userProfile.mentee_topic == 'Computer Science'">Computer Science</option>
@@ -84,7 +167,8 @@
   <option value="Psychology" ng-selected="userProfile.mentee_topic == 'Pyschology'">Psychology</option>
 </select>
   </div>
-  <br>
+</div>
+<div class="span-3">
   <div>
     <p>
       <label class="bold">
@@ -92,7 +176,6 @@
       </label>
      </p>
    <select ng-model="userProfile.mentor_topic">
-  <option disabled selected></option>
   <option value="Biology" ng-selected="userProfile.mentor_topic == 'Biology'">Biology</option>
   <option value="Physics" ng-selected="userProfile.mentor_topic == 'Physics'">Physics</option>
   <option value="Computer Science" ng-selected="userProfile.mentor_topic == 'Computer Science'">Computer Science</option>
@@ -104,8 +187,7 @@
   </div>
 </div>
 
-<div class="span-12 omega" style="text-align:left !important";>
-<div class= "span-4" style="text-align:left !important">
+<div class= "span-3" style="text-align:left !important">
 <div>
   <p>
     <label class="bold">
@@ -113,7 +195,6 @@
     </label>
    </p>
   <select  ng-model="userProfile.university">
-  <option selected="" disabled=""> </option>
   <option value="University of Florida" ng-selected="userProfile.university == 'University of Florida'">University of Florida</option>
   <option value="Santa Fe College" ng-selected="userProfile.university == 'Santa Fe College'">Santa Fe College</option>
   <option value="University of Central Florida" ng-selected="userProfile.university == 'University of Central Florida'">University of Central Florida</option>
@@ -123,7 +204,7 @@
 </div>
 </div>
 
-<div class= "span-4" style="text-align:left !important">
+<div class= "span-3 omega" style="text-align:left !important">
 <div>
   <p>
     <label class="bold">
@@ -133,8 +214,9 @@
   <input type="text" name="location" ng-init="userProfile.city" ng-model="userProfile.city">
 </div>
 </div>
+</div>
 
-<div class= "span-4 omega" style="text-align:left !important">
+<div class= "span-6" style="text-align:left !important">
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
@@ -164,8 +246,7 @@
 </div>
 </div>
 
-</div>
-<div class= "span-12 omega" style="text-align:left !important";>
+<div class= "span-6 omega" style="text-align:left !important";>
 <div>
  <p style="padding-right: 10px;">
    <label class="bold">
@@ -197,13 +278,13 @@
 <span class="checkmark" style="left: -30px !important"></span>
 </label>
 </div>
-<br>
-
+</div>
+<div class="span-12 omega texts" >
   <label class="bold">
   Goals For Scrumble:
 </label>
 <div>
- <textarea name="about" rows="10" cols="80" ng-model="userProfile.scrumble_goals"></textarea>
+ <textarea name="about"  ng-model="userProfile.scrumble_goals"></textarea>
 </div>
 <br>
 
@@ -211,7 +292,7 @@
 Career Goals:
 </label>
 <div>
-<textarea name="careerGoals" rows="10" cols="80" ng-model="userProfile.career_goals"></textarea>
+<textarea name="careerGoals" ng-model="userProfile.career_goals"></textarea>
 </div>
 <br>
 
@@ -219,7 +300,7 @@ Career Goals:
 Industry Experiences:
 </label>
 <div>
-<textarea name="experiences" rows="10" cols="80" ng-model="userProfile.industry_exp"></textarea>
+<textarea name="experiences" ng-model="userProfile.industry_exp"></textarea>
 </div>
 <br>
 
@@ -227,7 +308,7 @@ Industry Experiences:
 Strengths in Field of Interest:
 </label>
 <div>
-<textarea name="strengths" rows="10" cols="80" ng-model="userProfile.strengths"></textarea>
+<textarea name="strengths" ng-model="userProfile.strengths"></textarea>
 </div>
 <br>
 
@@ -235,7 +316,7 @@ Strengths in Field of Interest:
 Current Occupation:
 </label>
 <div>
-<textarea name="currentJob" rows="10" cols="80" ng-model="userProfile.occupation"></textarea>
+<textarea name="currentJob"  ng-model="userProfile.occupation"></textarea>
 </div>
 <br>
 
@@ -243,14 +324,12 @@ Current Occupation:
 Anything Interesting You Would Like to Add:
 </label>
 <div>
-<textarea name="miscellaneous" rows="10" cols="80" ng-model="userProfile.add_info"></textarea>
+<textarea name="miscellaneous" ng-model="userProfile.add_info"></textarea>
 </div>
 <div>
 <button ng-click="profileUpdate()"> Update </button>
 </div>
 </div>
-<br>
-
 
 </form>
 </div>

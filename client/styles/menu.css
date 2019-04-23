@@ -1,13 +1,13 @@
 .subnav{
   overflow: hidden;
-  background-color: grey;
+  background-color: #585858;
   margin-bottom: 10px;
   font-weight: 500;
-}
-
-.subnav.container{
   padding: 0;
   margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
 }
 
 .subnav a {
@@ -30,8 +30,9 @@
   color: white !important;
 }
 
-.subnav .icon {
+.subnav a.icon {
   display: none;
+  margin-right: 6px;
 }
 
 .preview{
@@ -40,7 +41,7 @@
 
 @media screen and (max-width: 768px) {
   .subnav{
-    background: #F4BB33;
+    background: #168635;
   }
 
   .subnav .home{

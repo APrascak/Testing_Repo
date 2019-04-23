@@ -13,16 +13,53 @@
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script>
 </head>
+<style type="text/css">
+  .features{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+  .features .span-3{
+    color: white;
+    background: #168635;
+    border-radius: 4px;
+  }
+
+  .features p{
+    text-transform: none;
+    font-size: 15px;
+    text-shadow: rgba(0, 0, 0, 0.) 1px 0 10px;
+  }
+  .features label{
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px white solid;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  h3{
+    border-bottom: 1px lightgrey solid;
+    width: 100%;
+    padding: 10px
+  }
+  @media screen and (max-width: 768px) {
+    .features{
+      flex-direction: column;
+    }
+  }
+
+</style>
  <body ng-app="directoryApp">
   <div ng-controller="ListingsController" data-ng-init="profileLoad()">
   <div class="row ">
-    <div class="subnav container" id="customNav">
+    <div class="subnav" id="customNav">
       <a href="/dashboard" class="home active">Home Page</a>
       <a href= "/profile"> Profile </a>
       <a href= "/mentors"> Find Mentors </a>
       <a href= "/mentees"> Mentee Requests </a>
       <a href= "/matches"> Mentor Matches </a>
       <a href= "/logout"> Log Out </a>
+	  <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
     </div>
         <div class="container main-page">
 
@@ -82,45 +119,32 @@
 <br>
 </div>
 <div class="span-12 omega">
-<h1> Features </h1>
+<h3> Features </h3>
 </div>
-
-<div style="width: 100%; overflow: hidden; display: flex;">
+<p style="font-size: 17px;">New to Scrumble? Here's some useful features to keep in mind so you can get the most out of our site.</p>
+<div class="features">
 <div class="span-3">
-<div class = backgroundgreen style = "padding: 10px; margin-right: 10px">
-<label class = bold style="color: white; text-shadow: 1px 1px black;"> Profile Editing: </label>
-<p style="color: white; text-shadow: 1px 1px black;"> You can manage your profile information, change your preferences for matching, and change your status as a mentee and mentor.
+<label> Profile Editing</label>
+<p> You can manage your profile information, change your preferences for matching, and change your status as a mentee and mentor.
     You may also view your profile and rating. </p>
 </div>
+<div class="span-3">
+<label> Mentor Requests</label>
+<p> You can look up a list of available mentors, view their profiles, and send a request to add them. </p>
 </div>
 
 <div class="span-3">
-<div class = backgroundgrey style = "padding: 10px; margin-right: 10px">
-<label class = bold  style="color: white; text-shadow: 1px 1px black;"> Mentor Requests: </label>
-<p style="color: white; text-shadow: 1px 1px black;"> You can look up a list of available mentors, view their profiles, and send a request to add them. </p>
-<br>
-<br>
-</div>
-</div>
-
-<div class="span-3">
-<div class = backgroundgreen style = "padding: 10px; margin-right: 10px">
-<label class = bold style="color: white; text-shadow: 1px 1px black;"> Mentee Requests: </label>
-<p style="color: white; text-shadow: 1px 1px black;"> You can view a list of users who want you to be their mentor, look at thier profiles, and either accept or decline their request. </p>
-<br>
-</div>
+<label> Mentee Requests</label>
+<p > You can view a list of users who want you to be their mentor, look at thier profiles, and either accept or decline their request. </p>
 </div>
 
 <div class="span-3 omega">
-<div class = "backgroundgrey" style = "padding: 10px">
-<label class = bold style="color: white; text-shadow: 1px 1px black;"> Match Viewing: </label>
-<p style="color: white; text-shadow: 1px 1px black;"> You can look at the list of people who you are matched with, and if your relation to them is mentee, you can rate them as mentors when you view their profile </p>
-</div>
+<label> Match Viewing</label>
+<p> You can look at the list of people who you are matched with, and if your relation to them is mentee, you can rate them as mentors when you view their profile </p>
 </div>
 
 </div>
 
-<br>
 </div>
 </div>
 <script>
