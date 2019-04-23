@@ -1,82 +1,82 @@
 .subnav{
-  overflow hidden;
-  background-color #585858;
-  margin-bottom 10px;
-  font-weight 500;
-  padding 0;
-  margin-bottom 0;
-  margin-left auto;
-  margin-right auto;
-  max-width 1200px;
+  overflow: hidden;
+  background-color: #585858;
+  margin-bottom: 10px;
+  font-weight: 500;
+  padding: 0;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
 }
 
 .subnav a {
-  float left;
-  display block;
-  color #fff;
-  text-align center;
-  padding 14px 16px;
-  text-decoration none;
-  font-size 17px;
+  float: left;
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.subnav ahover {
-  background-color #168635;
-  color white;
+.subnav a:hover {
+  background-color: #168635;
+  color: white;
 }
 
 .active {
-  background-color #168635;
-  color white !important;
+  background-color: #168635;
+  color: white !important;
 }
 
 .subnav a.icon {
-  display none;
-  margin-right 6px;
+  display: none;
+  margin-right: 6px;
 }
 
 .preview{
-  background #1578C1;
+  background: #1578C1;
 }
 
-@media screen and (max-width 768px) {
+@media screen and (max-width: 768px) {
   .subnav{
-    background #168635;
+    background: #168635;
   }
 
   .subnav .home{
-    color white !important;
+    color: white !important;
   }
 
- .subnav anot(first-child) {
-    display none;
+ .subnav a:not(:first-child) {
+    display: none;
   }
 
   .subnav a.icon {
-    float right;
-    display block;
-    color white;
+    float: right;
+    display: block;
+    color: white;
   }
 
   .subnav.responsive {
-    position relative;
-    background #444 !important;
+    position: relative;
+    background: #444 !important;
   }
 
   .subnav.responsive .icon {
-    position absolute;
-    right 0;
-    top 0;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
   .subnav.responsive a {
-    float none;
-    display block;
-    text-align left;
+    float: none;
+    display: block;
+    text-align: left;
   }
   .responsive .home{
-    color #fff !important;
+    color: #fff !important;
   }
-    .responsive .homehover{
-    color #fff !important;
+    .responsive .home:hover{
+    color: #fff !important;
   }
 }
