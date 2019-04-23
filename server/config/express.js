@@ -97,7 +97,8 @@ module.exports.init = function() {
 		 gender: hold.gender,
 		 occupation: hold.occupation,
 		 matchStat: hold.status,
-		 email: hold.local.email
+		 email: hold.local.email,
+		 ratings: hold.ratings
 	  });
 	});
 	//Profile Check
@@ -115,6 +116,10 @@ module.exports.init = function() {
 	
 	app.get('/mentees',isLoggedIn, function(req, res) {
 		res.redirect('/requests.html');
+    });
+	
+	app.get('/matches',isLoggedIn, function(req, res) {
+		res.redirect('/matches.html');
     });
 
 	app.get('/logout', function(req, res) {

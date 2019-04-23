@@ -9,19 +9,15 @@ angular.module('listings', []).factory('Listings', function($http) {
 	rating: function(newRating) {
 	  return $http.post('http://localhost:8080/api/listings/rating', newRating);
     }, 
-	
 	update: function(user) {
 	  return $http.post('http://localhost:8080/api/listings', user);
     }, 
-	
 	signUp: function(user) {
 	  return $http.post('http://localhost:8080/signup', user);
     }, 
-	
 	google: function(user) {
 	  return $http.post('http://localhost:8080/api/listings/google', user);
     }, 	
-
 	login: function(user) {
 	  return $http.post('http://localhost:8080/login', user);
     },
@@ -48,6 +44,9 @@ angular.module('listings', []).factory('Listings', function($http) {
 	},
 	acceptRequest: function(id){
 		return $http.post('http://localhost:8080/api/listings/accept',id);
+	},
+	rejectRequest: function(id){
+		return $http.post('http://localhost:8080/api/listings/reject',id);
 	}
   };
   return methods;

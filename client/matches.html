@@ -10,14 +10,14 @@
     <script src="js/controllers/listingController.js"></script>
 </head>
  <body ng-app="directoryApp">
-  <div ng-controller="ListingsController" data-ng-init="getMentees()">
+  <div ng-controller="ListingsController" data-ng-init="getMatches()">
   <div class="row ">
     <div class="subnav container" id="customNav">
       <a href="/dashboard" class="home">Home Page</a>
       <a href= "/profile"> Profile </a>
       <a href= "/mentors"> Find Mentors </a>
-      <a href= "/mentees" class="active"> Mentee Requests </a>
-      <a href= "/matches"> Mentor Matches </a>
+      <a href= "/mentees"> Mentee Requests </a>
+      <a href= "/matches" class="active"> Mentor Matches </a>
       <a href= "/logout"> Log Out </a>
     </div>
     <div class="container">
@@ -43,14 +43,13 @@
                 <th>View Profile</th>
                 <th>Status</th>
               </tr>
-			  <tr ng-if="!mentees"><td colspan="3" style="text-align:center">No new mentee requests.</td></tr>
-              <tr ng-repeat="mentee in mentees | filter: { code: query }">
-                <td>{{mentee.mentee_name}}</td>
-                <td><a ng-click="viewOtherUser(mentee.mentee_name,mentee.status)">View Profile</a></td>
-				<td ng-if="mentee.status == 'pending'"><button ng-click=acceptRequest(mentee._id)>Accept</button></td>
-				<td ng-if="mentee.status == 'pending'"><button ng-click=rejectRequest(mentee._id)>Reject</button></td>
-                <td ng-if="mentee.status == 'accepted'">Accepted</td>
-				<td ng-if="mentee.status == 'rejected'">Rejected</td>
+			  <tr ng-if="!matches"><td colspan="3" style="text-align:center">No ongoing matches.</td></tr>
+              <tr ng-repeat="match in matches | filter: { code: query }">
+                <td>{{match.mentor_name}}</td>
+                <td><a ng-click="viewOtherUser(match.mentor_name,match.status)">View Profile</a></td>
+				<td ng-if="match.status == 'rejected'">Mentor Unavailable</td>
+                <td ng-if="match.status == 'accepted'">Accepted</td>
+				<td ng-if="match.status == 'pending'">Pending</td>
               </tr>
             </table>
           </div>

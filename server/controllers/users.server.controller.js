@@ -4,7 +4,86 @@ var mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs');
 
 exports.ratings = function(req, res) {
-	let obj;
+	Match.findOne({$or: [{mentee_name:req.body.username},{mentor_name:req.body.username}], $or: [{mentee_name:req.body.matchname},{mentor_name:req.body.matchname}],
+	status: "accepted"}, function(err, match){
+		console.log("in ratings");
+		if(err){
+			console.log(err);
+			throw err;
+		}
+		
+		if(!match){
+			console.log("No accepted match found");
+			res.status(400).send("No accepted match found");
+		}else{
+			User.findOne({username: req.body.matchname, 'ratings.username': req.body.username},{ratings: 1},function(error,user){
+				if(error){
+					console.log("Internal error\n" + error);
+					throw err;
+				}
+			
+				if(user){
+					User.update({_id : user._id}, {$set:{ratings: {username: req.body.username, rating: req.body.rating }}}, {new: true}, function(err,updated){
+						if(err){
+							console.log(err);
+							throw err;
+						}
+						if(updated){
+							User.aggregate([
+								{ $match: { _id: user._id }},
+								{$unwind: "$ratings"},
+								{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+							], function(err, result){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								console.log("Result " + JSON.stringify(result));
+								User.update({_id: user._id}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+									if(err){
+										console.log("Error\n" + err);
+										throw err;
+									}
+									res.send();
+								});
+							});
+						}
+					});
+				}else{
+					User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
+						if(err){
+							console.log("Error\n" + err);
+							throw err;
+						}
+						if(updated){
+							User.aggregate([
+								{ $match: {"username" : req.body.matchname }},
+								{$unwind: "$ratings"},
+								{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+							], function(err, result){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								console.log("Result " + JSON.stringify(result));
+								User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+									if(err){
+										console.log("Error\n" + err);
+										throw err;
+									}
+									res.send();
+								});
+							});
+						}
+						
+					});	
+				}
+			});
+		}
+		
+		
+	});
+	/*let obj;
 	User.find({_id : req.session.passport.user}, {ratings:1}, function(err,ratingslist){
 		if (err)
 			res.status(400).send(err);
@@ -27,7 +106,7 @@ exports.ratings = function(req, res) {
 				console.log( updatedRatings);
 			});
 		}
-	});
+	});*/
 };
 
 exports.update = function(req, res) {
@@ -133,6 +212,18 @@ exports.make = function(req,res){
 exports.accept = function(req,res){
 	//console.log(req.body.id);
 	Match.findOneAndUpdate({_id : req.body.id, status: "pending"}, {$set: {status: "accepted"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+}
+
+exports.reject = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "pending"}, {$set: {status: "rejected"}},{new: true}, function(err,match){
 		if (err){
 			console.log(err);
 			res.status(400).send(err);
@@ -294,7 +385,8 @@ exports.algorithm = function(req, res){
 		match.mentee_name = mentee.username;
 		match.mentor_name = user.username;
         match.mentor_id = user._id;
-        match.status = "new"
+		match.mentee_id = mentee._id;
+        match.status = "new";
         match.save(function(err){
           if (err){
             console.log(err);

@@ -22,8 +22,9 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     }];
 	$scope.size = [1,2,3,4,5];
 	
-	$scope.rating = {
+	$scope.rating ={
 		username: String,
+		matchname: String,
 		rating: Number
 	};
 	
@@ -226,9 +227,10 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 	};
 		
-	$scope.getSelectedRating = function (newRating) {
+	$scope.getSelectedRating = function (newRating, username, matchname) {
 		$scope.rating.rating = newRating;
-		$scope.rating.username = "Trying";
+		$scope.rating.username = username;
+		$scope.rating.matchname = matchname;
 		console.log($scope.rating);
 		Listings.rating($scope.rating).then(function(response) {
 			console.log(response);
@@ -287,7 +289,26 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		});
 		
 	}
-	  
+
+	$scope.getMatches = function(){
+		Listings.profile().then(function(response) {
+			$scope.userProfile = response.data;
+			$scope.errors = [];
+			if(!$scope.userProfile.usertype.mentee){
+				$scope.errors.push("You're not registered as a mentee. Update your profile and try again.");
+			}else{
+				Listings.matches().then(function(response) {
+					console.log(response);
+					$scope.matches = response.data;
+				}, function(error) {
+					$scope.errors.push("There was an error loading your mentors.");
+				});
+			}
+		}, function(error) {
+			$scope.errors.push("There was an error loading your profile.");
+		});
+		
+	}
   
   	$scope.makeRequest = function(id){
 		Listings.makeRequest({'id': id}).then(function(response) {
@@ -300,6 +321,15 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	
   	$scope.acceptRequest = function(id){
 		Listings.acceptRequest({'id': id}).then(function(response) {
+			$window.location.href = '/mentees';
+		}, function(error) {
+			$scope.errors.push("There was an error accepting your request.");
+		});
+		
+	}
+	
+  	$scope.rejectRequest = function(id){
+		Listings.rejectRequest({'id': id}).then(function(response) {
 			$window.location.href = '/mentees';
 		}, function(error) {
 			$scope.errors.push("There was an error accepting your request.");

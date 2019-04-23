@@ -22,10 +22,12 @@ router.route('/matches')
 
 router.route('/make')
   .post(users.make);
-
   
 router.route('/accept')
   .post(users.accept);
+  
+router.route('/reject')
+  .post(users.reject);
   
 router.route('/rating')
   .post(users.ratings);
