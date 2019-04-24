@@ -86,7 +86,6 @@ exports.ratings = function(req, res) {
 									throw err;
 								}
 								if(updated){
-									if
 									User.aggregate([
 										{ $match: {"username" : req.body.matchname }},
 										{$unwind: "$ratings"},
