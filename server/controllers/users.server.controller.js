@@ -51,8 +51,8 @@ exports.ratings = function(req, res) {
 					});
 				}else{
 					User.findOne({username : req.body.matchname}, function(error, founduser){
-						if(founduser.ratings.length == 0){
-							User.update({username : req.body.matchname},{$push: { ratings:  [{username: req.body.username, rating: req.body.rating }]}}, {new:true}, function(err,updated){
+						if(founduser.ratings.constructor === Array){
+							User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
 								if(err){
 									console.log("Error\n" + err);
 									throw err;
@@ -80,7 +80,7 @@ exports.ratings = function(req, res) {
 								
 							});	
 						}else{
-							User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
+							User.update({username : req.body.matchname},{$push: { ratings:  [{username: req.body.username, rating: req.body.rating }]}}, {new:true}, function(err,updated){
 								if(err){
 									console.log("Error\n" + err);
 									throw err;

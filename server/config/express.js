@@ -97,6 +97,7 @@ module.exports.init = function() {
 	app.set('view engine', 'ejs');
 	
 	var hold;
+	var displayRating = 5;
 	app.post('/viewprofile', function(req, res) {
 		hold = req.body;
 		console.log("set variable");
@@ -105,7 +106,6 @@ module.exports.init = function() {
 	
 	app.get('/viewprofile', function(req, res) {
 		console.log("hopeful\n " + hold.username);
-		var displayRating = 5
 		if(hold.ratings){
 			if(hold.ratings.length > 5)
 				displayRating = username.curr_rating;
