@@ -13,6 +13,24 @@
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script>
 </head>
+<style>
+	th{
+		font-size: 17px;
+	}
+	td{
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	button{
+		margin: 0;
+	}
+	
+	td a{
+		color: green;
+		text-decoration: underline;
+	}
+</style>	
  <body ng-app="directoryApp">
   <div ng-controller="ListingsController" data-ng-init="getMentors()">
   <div class="row ">
