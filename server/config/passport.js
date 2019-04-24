@@ -144,7 +144,6 @@ module.exports = function(passport) {
           done(null, currUser);
         } else {
           new User({
-              img: google._json.picture,
               gmail: {
                 id: profile.id
               }

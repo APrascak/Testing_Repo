@@ -65,6 +65,33 @@ module.exports.init = function() {
 	app.get('/create', function(req, res) {
 		res.redirect('/create.html');
 	});
+
+	//Profile Check
+	app.get('/dashboard',isLoggedIn, function(req, res) {
+		res.redirect('/dashboard.html');
+    });
+
+    app.get('/profile',isLoggedIn, function(req, res) {
+		res.redirect('/profile.html');
+    });
+	
+    app.get('/mentors',isLoggedIn, function(req, res) {
+		res.redirect('/matchresults.html');
+    });
+	
+	app.get('/mentees',isLoggedIn, function(req, res) {
+		res.redirect('/requests.html');
+    });
+	
+	app.get('/matches',isLoggedIn, function(req, res) {
+		res.redirect('/matches.html');
+    });
+
+	app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+	
 	// view engine setup
 	app.set('views', path.join('client/views'));
 	app.set('view engine', 'ejs');
@@ -105,31 +132,6 @@ module.exports.init = function() {
 		 email: hold.local.email,
 	  });
 	});
-	//Profile Check
-	app.get('/dashboard',isLoggedIn, function(req, res) {
-		res.redirect('/dashboard.html');
-    });
-
-    app.get('/profile',isLoggedIn, function(req, res) {
-		res.redirect('/profile.html');
-    });
-	
-    app.get('/mentors',isLoggedIn, function(req, res) {
-		res.redirect('/matchresults.html');
-    });
-	
-	app.get('/mentees',isLoggedIn, function(req, res) {
-		res.redirect('/requests.html');
-    });
-	
-	app.get('/matches',isLoggedIn, function(req, res) {
-		res.redirect('/matches.html');
-    });
-
-	app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
 
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');

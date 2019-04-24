@@ -31,14 +31,14 @@
     text-transform: none;
   }
   input, select{
-    font-size: 
+    font-size: 15px;
   }
   .required{
     color: red;
   }
 </style>
   <body ng-app="directoryApp">
-  <div ng-controller="ListingsController">
+  <div ng-controller="ListingsController" data-ng-init="checkGoogle()">
   <div class="row ">
         <div class="container main-page">
           <div style="width: 100%">
@@ -53,15 +53,10 @@
     <h4 class="span-12 omega">Scrumble Information</h4>
     <p class="span-12 omega">Required fields are indicated by (<span  class="required">*</span>).</p>
 <div class="clear">
-<div class="span-4">
-  <label > Password <span  class="required">*</span></label>
+<div class="span-4 oemga">
+  <label > Username <span  class="required">*</span></label>
   <br>
-<input type="password" name="password" id="password" required aria-required="true"  ng-model="newProfile.password">
-</div>
-<div class="span-4 omega">
-  <label > Confirm Password <span  class="required">*</span></label>
-  <br>
-<input type="password" name="confirmpassword" id="confirmpassword" required aria-required="true"  ng-model="newProfile.passwordCheck">
+<input type="text" name="password" id="password" required aria-required="true"  ng-model="newProfile.username">
 </div>
 </div>
 <h4 class="span-12 omega">Personal Information</h4>
@@ -100,7 +95,7 @@
 </div>
 </div>
 <div class="clear">
-  <button ng-click="signUp()"> Submit</button>
+  <button ng-click="googleRegister()"> Submit</button>
 </div>
 </form>
 </div>
