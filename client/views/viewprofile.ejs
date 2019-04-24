@@ -75,7 +75,7 @@
     </div>
         <div class="container main-page">
 	<h1 class="span-12 omega" style="text-transform:capitalize"><%= username%>'s Profile</h1>
-	<div>
+	<div ng-if="'<%= matchStat%>' == 'accepted'">
 		<h4>Rate your experience with <span style="text-transform:capitalize"><%= username%></span></h4>
             <div ng-repeat="rating in ratings">
             <div star-rating rating-value="5" max="rating.max" on-rating-selected="getSelectedRating(rating, userProfile.username,'<%= username%>')"></div>

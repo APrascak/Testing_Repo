@@ -111,7 +111,7 @@ module.exports.init = function() {
 				displayRating = username.curr_rating;
 		}
 	  res.render('viewprofile',{
-		 username :hold.username,
+		 username: hold.username,
 		 city: hold.city,
 		 university: hold.university,
 		 rating: displayRating,
