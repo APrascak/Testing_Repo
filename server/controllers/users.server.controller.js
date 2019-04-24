@@ -50,8 +50,8 @@ exports.ratings = function(req, res) {
 						}
 					});
 				}else{
-					User.findOne({username : req.body.matchname}, function(error, user){
-						if(user.ratings.length == 0){
+					User.findOne({username : req.body.matchname}, function(error, founduser){
+						if(founduser.ratings.length == 0){
 							User.update({username : req.body.matchname},{$push: { ratings:  [{username: req.body.username, rating: req.body.rating }]}}, {new:true}, function(err,updated){
 								if(err){
 									console.log("Error\n" + err);
