@@ -50,33 +50,67 @@ exports.ratings = function(req, res) {
 						}
 					});
 				}else{
-					User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
-						if(err){
-							console.log("Error\n" + err);
-							throw err;
-						}
-						if(updated){
-							User.aggregate([
-								{ $match: {"username" : req.body.matchname }},
-								{$unwind: "$ratings"},
-								{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
-							], function(err, result){
+					User.findOne({username : req.body.matchname}, function(error, user){
+						if(user.ratings.length == 0){
+							User.update({username : req.body.matchname},{$push: { ratings:  [{username: req.body.username, rating: req.body.rating }]}}, {new:true}, function(err,updated){
 								if(err){
 									console.log("Error\n" + err);
 									throw err;
 								}
-								console.log("Result " + JSON.stringify(result));
-								User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
-									if(err){
-										console.log("Error\n" + err);
-										throw err;
-									}
-									res.send();
-								});
-							});
+								if(updated){
+									if
+									User.aggregate([
+										{ $match: {"username" : req.body.matchname }},
+										{$unwind: "$ratings"},
+										{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+									], function(err, result){
+										if(err){
+											console.log("Error\n" + err);
+											throw err;
+										}
+										console.log("Result " + JSON.stringify(result));
+										User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+											if(err){
+												console.log("Error\n" + err);
+												throw err;
+											}
+											res.send();
+										});
+									});
+								}
+								
+							});	
+						}else{
+							User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								if(updated){
+									if
+									User.aggregate([
+										{ $match: {"username" : req.body.matchname }},
+										{$unwind: "$ratings"},
+										{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+									], function(err, result){
+										if(err){
+											console.log("Error\n" + err);
+											throw err;
+										}
+										console.log("Result " + JSON.stringify(result));
+										User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+											if(err){
+												console.log("Error\n" + err);
+												throw err;
+											}
+											res.send();
+										});
+									});
+								}
+								
+							});	
 						}
-						
-					});	
+					});
 				}
 			});
 		}
