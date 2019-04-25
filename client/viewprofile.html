@@ -3,140 +3,94 @@
 <head>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="style2.css">
-  <link rel="stylesheet" href="menu.css">
-<style>
-img {
-  width: 100px;
-}
-</style>
-
+  <link rel="stylesheet" href="styles/style2.css">
+  <link rel="stylesheet" href="styles/menu.css">
+      <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+  <style>
+  .span-4 {
+		display: block;
+		float: left;
+		margin-right: 2.35765%;
+		width: 31.76157%;
+	}
+	.omega {
+		margin-right: 0 !important;
+	}
+	.clear{
+		clear:both;
+	}
+	.span-6 {
+		display: block;
+		float: left;
+		margin-right: 2.35765%;
+		width: 48.82117%
+	}
+	.span-12 {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 100%;
+	}
+  </style>
 </head>
-<!--
-Form Layout
-<form class="ifYouWant" action="pageThatHandlesForms" method="post">
-Textbox (One line text input)
-<label for="idName">Text to display</label>
-<input type="text" name="idName" value="idName">
-Select Option (Drop down)
-<select class="" name="">
-  <option value="valueToDatabase"> Text you want in drop down</option>
-</select>
-</form>
--->
-<body>
-  <div class="row ">
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
     <div class="subnav container" id="customNav">
-    <a href="dashboard.html" class="home active">Home Page</a>
-    <a href= "viewprofile.html"> Profile </a>
-    <a href= "matchresults.html"> Find Mentors </a>
-    <a href= "viewprofile.html"> Mentee Requests </a>
-    <a href= "viewprofile.html"> Matches </a>
-    <a href= "login.html"> Log Out </a>
-  </div>
+      <a href="/dashboard" class="home active">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "matchresults.html"> Find Mentors </a>
+      <a href= "menteerequests.html"> Mentee Requests </a>
+      <a href= "matchlist.html"> Current Matches </a>
+      <a href= "/logout"> Log Out </a>
+    </div>
         <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
-
-<h1> Profile </h1>
+	<h1 class="span-12 omega"> {{userProfile.username}}'s Profile </h1>
+<div class="clear">
+		
+<div class="span-4 " style="text-align:left !important">
 <img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
-<div>
-  <button> View Profile Picture </button>
+  <p>
 </div>
 
-<div>
+<div class="span-4 omega">
+	<p><span class="bold">Mentor Topic:</span> {{userProfile.mentor_topic}}</p>
+	<p><span class="bold">City/Location:</span> {{userProfile.city}}</p>
+	<p><span class="bold">University:</span> City</p>
+	<p><span class="bold">Rating</span></p>
+  <div class="stars" style="font-size: 20px;">
+    <span ng-repeat="item in size|limitTo:userProfile.curr_rating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in size|limitTo:(5 - userProfile.curr_rating)" class="fa fa-star" ></span>
+</div>
+	
+	
+</div>
+
+</div>
+<div class="clear">
+<div class="span-6">
  <p style="padding-right: 10px;">
-   <label class="bold">
-   Name/username:
- </label>
-   </p>
- <p id = "name"> name here </p>
-</div>
-<br>
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-   Roles:
- </label>
-   </p>
- <p id = "mentormenteevar"> Mentor and/or Mentee </p>
-</div>
-<br>
-<div>
-  <p>
-    <label class="bold">
-    Area being mentored in:
-  </label>
- </p>
-  <p id = "menteesubjectvar"> Subject Here </p>
-</div>
-
-<br>
-<div>
-  <p>
-    <label class="bold">
-      Area mentoring in:
-    </label>
-   </p>
-  <p id = "mentorsubjectvar"> Subject Here </p>
-</div>
-
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      University Attended:
-    </label>
-   </p>
-  <p id = "universityvar"> University Here </p>
-
-</div>
-
-<br>
-
-<div>
-  <p>
-    <label class="bold">
-      City/location:
-    </label>
+	<p><span class="bold">Meeting/Communication Preferences</span></p>
+	<p ng-repeat="item in comm">{{item}}</p>
   </p>
-  <p id = "location var"> Location Here </p>
-
 </div>
-
-<br>
-
-<div>
+<div class="span-6 omega">
  <p style="padding-right: 10px;">
-   <label class="bold">
-     Meeting Preferance:
-   </label>
+	<p><span class="bold">Available Times</span></p>
+	<p ng-repeat="item in time">{{item}}</p>
   </p>
- <p id = "meetupvar"> Online and/or In Person </p>
+</div>
 </div>
 
-<br>
-
+<div class="clear">
 <div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Available times:
-   </label>
- </p>
- <p id = "meetuptimesvar"> Times Here </p>
+<p><span class="bold">Goals For Scrumble</span></p>
+{{userProfile.}}
 </div>
-<br>
-
-  <label class="bold">
-  Goals For Scrumble:
-</label>
-<div>
- <textarea readonly name="goalsscrumble" rows="10" cols="80"></textarea>
-</div>
-
 <br>
 
 <label class="bold">
@@ -182,46 +136,10 @@ Additional Info:
 <textarea readonly name="about" rows="10" cols="80"></textarea>
 </div>
 
-<br>
-
-<div>
-  <label class="bold">
-    Rating:
-  </label>
-  <br>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star"></span>
-  <span class="fa fa-star"></span>
-</div>
-
-<br>
-
-<div>
- <p style="padding-right: 10px;">
-   <label class="bold">
-     Email:
-   </label>
-  </p>
- <p id = "email"> Email Here </p>
-</div>
-
- <div>
- <button> Edit Profile </button>
-</div>
-</form>
 </div>
 </div>
-<script>
-function myFunction() {
-  var x = document.getElementById("customNav");
-  if (x.className === "subnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "subnav";
-  }
-}
-</script>
+</div>
+</div>
+</div>
 </body>
 </html>

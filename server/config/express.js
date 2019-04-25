@@ -1,5 +1,5 @@
-var path = require('path'),  
-    express = require('express'), 
+var path = require('path'),
+    express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
@@ -15,85 +15,136 @@ var path = require('path'),
 	session = require('express-session');
 
 module.exports.init = function() {
-  //connect to database
-  mongoose.connect(config.db.uri);
-  
+	//connect to database
+	mongoose.connect(config.db.uri);
 
-  //initialize app
-  var app = express();
+	//initialize app
+	var app = express();
 
-require('./passport')(passport);
-  //enable request logging for development debugging
-  app.use(morgan('dev'));
-  
-  app.use(cookieParser()); // read cookies (needed for auth)
-  
-	  app.use(bodyParser.urlencoded({
-		extended: true
-	}));
+	require('./passport')(passport);
 
-
-  //body parsing middleware 
-  app.use(bodyParser.json());
+	app.use(morgan('dev'));     // Enable request logging for development debugging
+	app.use(cookieParser());    // Need for auth, reading cookies
+	app.use(bodyParser.json()); //Body parsing middleware
 
 	// required for passport
 	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 
-  /**TODO
-  Serve static files */
-	
-	app.use('/api/listings/', usersRouter); 
-	
-	app.use('/', express.static('client'));
-	
-	app.get('/create', function(req, res){
-		res.redirect('index.html');
-	});
 
+
+	app.use('/api/listings/', usersRouter);
+
+	app.use('/', express.static('client'));
+
+	// GET & POST Methods for 'signup'
 	app.get('/signup', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
 		res.send();
 	});
 
+	// GET & POST Methods for 'signup'
 	app.get('/login', function(req, res){
 		res.redirect('index.html');
 	});
-	
+
 	app.post('/login', passport.authenticate('local-login'),function(req, res) {
 		res.send();
 	});
-	
-	 // =====================================
-    // PROFILE SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+
+	// Implementation for Google OAuth
+	app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+	app.get('/auth/google/redirect', passport.authenticate('google'), function(req,res){
+		res.redirect('/create/');
+	});
+
+	app.get('/create', function(req, res) {
+		res.redirect('/create.html');
+	});
+
+	//Profile Check
+	app.get('/dashboard',isLoggedIn, function(req, res) {
+		res.redirect('/dashboard.html');
+    });
+
     app.get('/profile',isLoggedIn, function(req, res) {
-        /*res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });*/
 		res.redirect('/profile.html');
     });
 	
-  /**TODO 
-  Go to homepage for all routes not specified */ 
+    app.get('/mentors',isLoggedIn, function(req, res) {
+		res.redirect('/matchresults.html');
+    });
+	
+	app.get('/mentees',isLoggedIn, function(req, res) {
+		res.redirect('/requests.html');
+    });
+	
+	app.get('/matches',isLoggedIn, function(req, res) {
+		res.redirect('/matches.html');
+    });
+
+	app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+	
+	// view engine setup
+	app.set('views', path.join('client/views'));
+	app.set('view engine', 'ejs');
+	
+	var hold;
+	var displayRating = 5;
+	app.post('/viewprofile', function(req, res) {
+		hold = req.body;
+		console.log("set variable");
+		res.send();
+	});
+	
+	app.get('/viewprofile', function(req, res) {
+		console.log("hopeful\n " + hold.username);
+		if(hold.ratings){
+			if(hold.ratings.length > 5)
+				displayRating = username.curr_rating;
+		}
+	  res.render('viewprofile',{
+		 username: hold.username,
+		 city: hold.city,
+		 university: hold.university,
+		 rating: displayRating,
+		 communication: hold.communication,
+		 topic: hold.mentor_topic,
+		 scrumble_goals: hold.scrumble_goals,
+		 career_goals: hold.career_goals,
+		 industry_exp: hold.industry_exp,
+		 age: hold.age,
+		 ethnicity: hold.ethnicity,
+		 topic_level: hold.topic_level,
+		 hours: hold.hours,
+		 add_info: hold.add_info,
+		 strengths: hold.strengths,
+		 gender: hold.gender,
+		 occupation: hold.occupation,
+		 matchStat: hold.status,
+		 email: hold.local.email,
+	  });
+	});
+
   	app.all('/*', function(req, res){
 		res.redirect('/index.html');
 	});
   return app;
-};  
+};
 
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/index.html');
 }

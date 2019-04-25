@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../styles/style2.css">
+  <link rel="stylesheet" href="../styles/menu.css">
+  <link rel="stylesheet" href="../styles/style.css">
+      <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/factories/listingFactory.js"></script>
+    <script src="../js/controllers/listingController.js"></script>
+  <style>
+  .span-4 {
+		display: block;
+		float: left;
+		margin-right: 2.35765%;
+		width: 31.76157%;
+	}
+	.omega {
+		margin-right: 0 !important;
+	}
+	.clear{
+		clear:both;
+	}
+	.span-6 {
+		display: block;
+		float: left;
+		margin-right: 2.35765%;
+		width: 48.82117%
+	}
+	.span-12 {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 100%;
+	}
+	.rating {
+		color: #a9a9a9;
+		margin: 0;
+		padding: 0;
+	}
+	ul.rating {
+		display: inline-block;
+	}
+	.rating li {
+		list-style-type: none;
+		display: inline-block;
+		padding: 1px;
+		text-align: center;
+		font-weight: bold;
+		cursor: pointer;
+		font-size:20px;
+	}
+	/*.rating .filled{
+		color: orangered;
+	}*/
+	.rating li:hover{
+		color: #f9a602;
+		background: none;
+	}
+  </style>
+</head>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
+    <div class="subnav container" id="customNav">
+      <a href="/dashboard" class="home active">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "/matches"> Find Mentors </a>
+      <a href= "/mentees"> Mentee Requests </a>
+      <a href= "/matches"> Current Matches </a>
+      <a href= "/logout"> Log Out </a>
+    </div>
+        <div class="container main-page">
+	<h1 class="span-12 omega" style="text-transform:capitalize"><%= username%>'s Profile</h1>
+	<div ng-if="'<%= matchStat%>' == 'accepted'">
+		<h4>Rate your experience with <span style="text-transform:capitalize"><%= username%></span></h4>
+            <div ng-repeat="rating in ratings">
+            <div star-rating rating-value="5" max="rating.max" on-rating-selected="getSelectedRating(rating, userProfile.username,'<%= username%>')"></div>
+        </div>
+		<hr>
+	</div>
+
+<div class="clear" style="margin-bottom: 15px">
+		
+<div class="span-4" style="text-align:left !important">
+<img src = "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" alt="HTML5 Icon" width = "128" height = "128">
+  <p>
+</div>
+
+<div class="span-4">
+	<h4>Personal Information</h4>
+	<p><span class="bold">Age: </span><%= age%></p>
+	<p><span class="bold">Ethnicty: </span><%= ethnicity%></p>
+	<p><span class="bold">Gender: </span><%= gender%></p>
+	<p ng-if="'<%= matchStat%>' == 'accepted'"><span class="bold">Email: </span><%= email%></p>
+</div>
+<div class="span-4 omega">
+	<h4>Scrumble Information</h4>
+	<p><span class="bold">Mentor Topic: </span><%= topic%></p>
+	<p><span class="bold">City/Location: </span><%= city%></p>
+	<p><span class="bold">University: </span> <%= university%></p>
+	<p><span class="bold">Rating</span></p>
+  <div class="stars" style="font-size: 20px;">
+    <span ng-repeat="item in size|limitTo:<%= rating%>" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in size|limitTo:(5 - <%= rating%>)" class="fa fa-star" ></span>
+</div>
+	
+	
+</div>
+</div>
+<div class="clear">
+<hr>
+<p><span class="bold">Meeting/Communication Preferences</span></p>
+<p><%= communication%></p>
+<br>
+<p><span class="bold">Available Times</span></p>
+<p><%= hours%></p>
+<br>
+<p><span class="bold">Goals For Scrumble</span></p>
+<p><%= scrumble_goals%></p>
+<br>
+<p><span class="bold">Career Goals</span></p>
+<p><%= career_goals%></p>
+<br>
+<p><span class="bold">Industry Experiences</span></p>
+<p><%= industry_exp%></p>
+<br>
+<p><span class="bold">Strengths in Field of Interest</span></p>
+<p><%= strengths%></p>
+<br>
+<p><span class="bold">Current Occupation</span></p>
+<p><%= occupation%></p>
+<br>
+<p><span class="bold">Addtional Information</span></p>
+<p><%= add_info%></p>
+<br>
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

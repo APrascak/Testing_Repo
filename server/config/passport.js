@@ -5,15 +5,11 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
 var User = require('../models/users.server.model.js');
-// expose this function to our app using module.exports
-module.exports = function(passport) {
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
+const GoogleStrategy = require('passport-google-oauth20');
+const config = require('./config');
 
-    // used to serialize the user for the session
+
+module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
@@ -24,12 +20,6 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
-
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
@@ -56,14 +46,14 @@ module.exports = function(passport) {
 				console.log("User email taken: " + user);
                 return done(null, false );
             } else {
-				
+
 				 User.findOne({ 'username' :  req.body.username }, function(error, username) {
-					 
+
 					if (error){
 						console.log("Error " + error);
 						return done(error);
 					}
-					
+
 					if(username){
 						console.log("Username taken: " + req.username);
 						return done(null, false );
@@ -94,12 +84,12 @@ module.exports = function(passport) {
 				});
             }
 
-        });    
+        });
 
         });
 
     }));
-	
+
 	// =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
@@ -141,7 +131,28 @@ module.exports = function(passport) {
 
     }));
 
-	
-	
+	// Passport Implementation for Google Login
+    passport.use('google', new GoogleStrategy({
+      callbackURL: '/auth/google/redirect',
+      clientID: config.google.clientID,
+      clientSecret: config.google.clientSecret
+    }, function(accessToken, refreshToken, profile, done) {
+      User.findOne({gmail: {id: profile.id}}).then((currUser) => {
+        console.log(profile);
+        if (currUser) {
+          console.log('User Information: ' + currUser);
+          done(null, currUser);
+        } else {
+          new User({
+              gmail: {
+                id: profile.id
+              }
+          }).save().then(function(newUser){
+            console.log('New User has been created: ' + newUser);
+          });
+        }
+      });
+    }));
+
 
 };

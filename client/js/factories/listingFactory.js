@@ -1,49 +1,54 @@
-/*angular.module('listings', []).factory('Listings', function($http) {
-  var methods = {
-    getAll: function() {
-      return $http.get('http://localhost:8080/api/listings');
-    },
-	
-	update: function(listing) {
-	  return $http.post('http://localhost:8080/api/listings', listing);
-    }, 
-	
-	signUp: function(user) {
-	  return $http.post('http://localhost:8080/signup', user);
-    }, 
-
-	login: function(listing) {
-	  return $http.post('http://localhost:8080/login', listing);
-    },
-	profile: function(){
-		return $http.get('http://localhost:8080/api/listings');
-	}
-
-  };
-  return methods;
-});*/
-
 angular.module('listings', []).factory('Listings', function($http) {
   var methods = {
-    getAll: function() {
-      return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
+    algorithm: function() {
+      return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings/algorithm');
     },
-	
-	update: function(listing) {
-	  return $http.post('http://localhost:8080/api/listings', listing);
+	logout: function() {
+      return $http.get('https://apple-shortcake-58416.herokuapp.com/logout');
+    },
+	rating: function(newRating) {
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings/rating', newRating);
     }, 
-	
+	update: function(user) {
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings', user);
+    }, 
 	signUp: function(user) {
-	  return $http.post('http://localhost:8080/signup', user);
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/signup', user);
     }, 
-
-	login: function(listing) {
-	  return $http.post('https://apple-shortcake-58416.herokuapp.com/login', listing);
+	google: function(user) {
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings/google', user);
+    }, 	
+	login: function(user) {
+	  return $http.post('https://apple-shortcake-58416.herokuapp.com/login', user);
     },
 	profile: function(){
 		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings');
+	},
+	getProfile: function(name){
+		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings/'+name);
+	},
+	viewProfile: function(user){
+		return $http.post('https://apple-shortcake-58416.herokuapp.com/viewprofile',user);
+	},
+	mentors: function(){
+		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings/mentors');
+	},
+	mentees: function(){
+		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings/mentees');
+	},
+	matches: function(){
+		return $http.get('https://apple-shortcake-58416.herokuapp.com/api/listings/matches');
+	},
+	makeRequest: function(id){
+		return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings/make',id);
+	},
+	acceptRequest: function(id){
+		return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings/accept',id);
+	},
+	rejectRequest: function(id){
+		return $http.post('https://apple-shortcake-58416.herokuapp.com/api/listings/reject',id);
 	}
   };
-
   return methods;
+
 });

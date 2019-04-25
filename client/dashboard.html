@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scrumble</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" type="text/css" href="styles/base.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/menu.css">
+  <link rel="stylesheet" href="styles/style2.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+</head>
+<style type="text/css">
+  .features{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-shadow: rgba(0, 0, 0, 0.7) 1px 0 10px;
+	margin-bottom: 30px;
+  }
+  .features .span-3{
+    color: white;
+    background: #168635;
+    border-radius: 4px;
+  }
+  .features p{
+    text-transform: none;
+    font-size: 15px;
+  }
+  .features label{
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px white solid;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  h3{
+    border-bottom: 1px lightgrey solid;
+    width: 100%;
+    padding: 10px
+  }
+  img{
+    width: 30%;
+  }
+  @media screen and (max-width: 768px) {
+    .features{
+      flex-direction: column;
+    }
+  }
+</style>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="profileLoad()">
+  <div class="row ">
+    <div class="subnav" id="customNav">
+      <a href="/dashboard" class="home active">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "/mentors"> Find Mentors </a>
+      <a href= "/mentees"> Mentee Requests </a>
+      <a href= "/matches"> Mentor Matches </a>
+      <a href= "/logout"> Log Out </a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+    </div>
+        <div class="container main-page">
+
+<div class="span-12 omega">
+  <img src = "https://i.ibb.co/ZKVGWpD/scrumblelogo-Final.png">
+    <h1> Welcome, {{userProfile.username}} </h1>
+
+<br>
+
+<div>
+ <label>
+   <p class="bold">
+   Availability Status:
+ </p>
+</label>
+ <label ng-if="userProfile.available" id = "availabilitystatus"> Available </label>
+  <label ng-if="!userProfile.available" id = "availabilitystatus"> Unavailable </label>
+</div>
+
+<div>
+ <label>
+   <p class="bold">
+   Mentor Status:
+ </p>
+</label>
+<div ng-if="userProfile.usertype.mentor">
+ <label> You're currently a mentor</label>
+</div>
+<div ng-if="!userProfile.usertype.mentor">
+ <label> You're currently not a mentor</label>
+</div>
+</div>
+<div>
+<div>
+ <label>
+   <p class="bold">
+   Mentee Status:
+ </p>
+</label>
+<div ng-if="userProfile.usertype.mentee">
+ <label> You're currently a mentee</label>
+</div>
+<div ng-if="!userProfile.usertype.mentee">
+ <label> You're currently not a mentee</label>
+</div>
+</div>
+  <label class="bold">
+    Current Rating:
+  </label>
+  <br>
+  <div class="stars" style="font-size: 20px;">
+    <span ng-repeat="item in size|limitTo:displayRating" class="fa fa-star checked" ></span>
+    <span ng-repeat="item in size|limitTo:(5 - displayRating)" class="fa fa-star" ></span>
+</div>
+</div>
+
+<br>
+</div>
+<div class="span-12 omega">
+<h3> Features </h3>
+</div>
+<p style="font-size: 17px;">New to Scrumble? Here's some useful features to keep in mind so you can get the most out of our site.</p>
+<div class="features">
+<div class="span-3">
+<label> Profile Editing</label>
+<p> You can manage your profile information, change your preferences for matching, and change your status as a mentee and mentor.
+    You may also view your profile and rating. </p>
+</div>
+<div class="span-3">
+<label> Mentor Requests</label>
+<p> You can look up a list of available mentors, view their profiles, and send a request to add them. </p>
+</div>
+
+<div class="span-3">
+<label> Mentee Requests</label>
+<p > You can view a list of users who want you to be their mentor, look at thier profiles, and either accept or decline their request. </p>
+</div>
+
+<div class="span-3 omega">
+<label> Match Viewing</label>
+<p> You can look at the list of people who you are matched with, and if your relation to them is mentee, you can rate them as mentors when you view their profile </p>
+</div>
+
+</div>
+
+</div>
+</div>
+<script>
+function myFunction() {
+  var x = document.getElementById("customNav");
+  if (x.className === "subnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "subnav";
+  }
+}
+</script>
+</div>
+</body>
+</html>

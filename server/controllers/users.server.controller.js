@@ -1,6 +1,145 @@
 var mongoose = require('mongoose'), 
     User = require('../models/users.server.model.js'),
+	Match = require('../models/matching.server.model.js'),
 	bcrypt = require('bcrypt-nodejs');
+
+exports.ratings = function(req, res) {
+	Match.findOne({$or: [{mentee_name:req.body.username},{mentor_name:req.body.username}], $or: [{mentee_name:req.body.matchname},{mentor_name:req.body.matchname}],
+	status: "accepted"}, function(err, match){
+		console.log("in ratings");
+		if(err){
+			console.log(err);
+			throw err;
+		}
+		
+		if(!match){
+			console.log("No accepted match found");
+			res.status(400).send("No accepted match found");
+		}else{
+			User.findOne({username: req.body.matchname, 'ratings.username': req.body.username},{ratings: 1},function(error,user){
+				if(error){
+					console.log("Internal error\n" + error);
+					throw err;
+				}
+			
+				if(user){
+					User.update({_id : user._id}, {$set:{ratings: {username: req.body.username, rating: req.body.rating }}}, {new: true}, function(err,updated){
+						if(err){
+							console.log(err);
+							throw err;
+						}
+						if(updated){
+							User.aggregate([
+								{ $match: { _id: user._id }},
+								{$unwind: "$ratings"},
+								{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+							], function(err, result){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								console.log("Result " + JSON.stringify(result));
+								User.update({_id: user._id}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+									if(err){
+										console.log("Error\n" + err);
+										throw err;
+									}
+									res.send();
+								});
+							});
+						}
+					});
+				}else{
+					User.findOne({username : req.body.matchname}, function(error, founduser){
+						if(founduser.ratings.constructor === Array){
+							User.update({username : req.body.matchname},{$push: { ratings:  {username: req.body.username, rating: req.body.rating }}}, {new:true}, function(err,updated){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								if(updated){
+									User.aggregate([
+										{ $match: {"username" : req.body.matchname }},
+										{$unwind: "$ratings"},
+										{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+									], function(err, result){
+										if(err){
+											console.log("Error\n" + err);
+											throw err;
+										}
+										console.log("Result " + JSON.stringify(result));
+										User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+											if(err){
+												console.log("Error\n" + err);
+												throw err;
+											}
+											res.send();
+										});
+									});
+								}
+								
+							});	
+						}else{
+							User.update({username : req.body.matchname},{$push: { ratings:  [{username: req.body.username, rating: req.body.rating }]}}, {new:true}, function(err,updated){
+								if(err){
+									console.log("Error\n" + err);
+									throw err;
+								}
+								if(updated){
+									User.aggregate([
+										{ $match: {"username" : req.body.matchname }},
+										{$unwind: "$ratings"},
+										{$group:{ _id: null, avgRating: {$avg: "$ratings.rating"}}}
+									], function(err, result){
+										if(err){
+											console.log("Error\n" + err);
+											throw err;
+										}
+										console.log("Result " + JSON.stringify(result));
+										User.update({username : req.body.matchname}, {$set: {curr_rating: result[0].avgRating}}, function(err, upd){
+											if(err){
+												console.log("Error\n" + err);
+												throw err;
+											}
+											res.send();
+										});
+									});
+								}
+								
+							});	
+						}
+					});
+				}
+			});
+		}
+		
+		
+	});
+	/*let obj;
+	User.find({_id : req.session.passport.user}, {ratings:1}, function(err,ratingslist){
+		if (err)
+			res.status(400).send(err);
+		
+		//console.log(ratings[0].ratings);
+		let obj = ratingslist[0].ratings.find(o => o.username === req.body.username);
+		if(obj){
+			ratingslist[0].ratings.find((o, i) => {
+				if (o => o.username === req.body.username) {
+					ratingslist[0].ratings[i].rating = req.body.rating;
+					//console.log(ratingslist[0].ratings[i]);
+				}
+			});
+			
+			User.findOneAndUpdate({_id : req.session.passport.user}, {$set:{ratings: ratingslist[0].ratings}}, {new: true}, function(err,updatedRatings){
+				console.log( updatedRatings);
+			});
+		}else{
+			User.update({_id : req.session.passport.user},{$push: { ratings: req.body}}, function(err,updatedRatings){
+				console.log( updatedRatings);
+			});
+		}
+	});*/
+};
 
 exports.update = function(req, res) {
 	
@@ -8,22 +147,124 @@ exports.update = function(req, res) {
 
 	User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{usertype: existingUser.usertype, available: existingUser.available, mentor_topic: existingUser.mentor_topic, 
 	mentee_topic: existingUser.mentee_topic, topic_level: existingUser.topic_level, hours: existingUser.hours, city: existingUser.city, communication: existingUser.communication, 
-	add_info: existingUser.add_info}}, {new: true}, function(err,updated){
+	add_info: existingUser.add_info, scrumble_goals: existingUser.scrumble_goals, career_goals: existingUser.career_goals, industry_exp: existingUser.industry_exp,
+	strengths: existingUser.strengths, ethnicity: existingUser.ethnicity, occupation: existingUser.occupation, university: existingUser.university }}, {new: true}, function(err,updated){
 		if (err)
 			res.status(400).send(err);
 	   res.send();
 	});
 };
 
+exports.google = function(req, res) {
+	
+	
+	User.findOne({username : req.body.username},function(err,user){
+		if (err){
+			console.log("Error " + err);
+			res.status(400).send(err);
+		}
+		
+		if(user){
+			console.log("Username already exists");
+			res.status(400).send();
+		} else{
+
+			User.findOneAndUpdate({_id : req.session.passport.user }, {$set:{username: req.body.username, age: req.body.age, 
+			gender: req.body.gender, ethnicity: req.body.ethnicity}}, {new: true}, function(err,updated){
+				if (err){
+					console.log("Error " + err);
+					res.status(400).send(err);
+				}
+			   res.send();
+			});
+		}
+	
+	});
+};
+
 exports.profile = function(req,res){
-	User.findOne({_id : req.session.passport.user }, { id: 0, local: 0, google:0 }, function(err,info){
+	User.findOne({_id : req.session.passport.user }, { _id: 0, local: 0, google:0 }, function(err,info){
 		if (err)
 		res.status(400).send(err);
-		info._id = null;
 	   res.json(info);
 	});
 	
 };
+
+exports.loadUser = function(req,res){
+	User.findOne({username : req.params.username }, { _id: 0, 'local.password': 0, google:0 }, function(err,info){
+		if (err)
+			res.status(400).send(err);
+	   res.json(info);
+	});
+	
+};
+
+exports.mentors = function(req,res){
+	Match.find({mentee_id : req.session.passport.user, status: 'new' }, function(err,mentors){
+		if (err)
+		res.status(400).send(err);
+		res.json(mentors);
+	});
+	
+};
+
+exports.mentess = function(req,res){
+	Match.find({mentor_id : req.session.passport.user, status : {$ne: 'new' }}, function(err,mentees){
+		if (err){
+			console.log(err);
+		res.status(400).send(err);
+		}
+		res.json(mentees);
+	});
+	
+};
+
+exports.matches = function(req,res){
+	Match.find({mentee_id : req.session.passport.user, status : {$ne: 'new' }}, function(err,matches){
+		if (err)
+		res.status(400).send(err);
+		res.json(matches);
+	});
+	
+};
+
+exports.make = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "new"}, {$set: {status: "pending"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+};
+
+exports.accept = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "pending"}, {$set: {status: "accepted"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+}
+
+exports.reject = function(req,res){
+	//console.log(req.body.id);
+	Match.findOneAndUpdate({_id : req.body.id, status: "pending"}, {$set: {status: "rejected"}},{new: true}, function(err,match){
+		if (err){
+			console.log(err);
+			res.status(400).send(err);
+		}
+		res.json(match);
+	});
+	
+}
+
 
 exports.algorithm = function(req, res){
 	console.log(">>>>>>>>>>>>got here");
@@ -37,28 +278,34 @@ exports.algorithm = function(req, res){
 
 
   //get mentee
-  Listing.findOne({_id : req.session.passport.user, "usertype.mentee" : true }, function(err, mentee) {
+  User.findOne({_id : req.session.passport.user, "usertype.mentee" : true }, function(err, mentee) {
     if (err){
       res.status(400).send(err);
     };
 	
-  console.log("Mentee \n" + mentee);
+  //console.log("Mentee \n" + mentee);
 	
 	  //get ALL users
-	Listing.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
+	User.find({"usertype.mentor": true, _id : { $ne: mentee._id}}, function(err, mentors) {
     if (err){
       res.status(400).send(err);
     };
-    //users = listings;
-	console.log("Mentors \n" + mentors);
+	//console.log("Mentors \n" + mentors);
 	
-	//loop through users and find where usertype.mentor = true
+	Match.find({}, function(err, matching){
+    if(err){
+      res.status(400).send(err);
+    };
+
+    //loop through users and find where usertype.mentor = true
   //also check to make sure it isn't our current mentee
   for(var userCount = 0; userCount < mentors.length; userCount++){
     //console.log("inside forloop");
     var user = mentors[userCount];
     //console.log("Mentors: \n" + user);
-    
+    if(user.available == true){
+      //console.log("user is available?: ", user.available);
+      //console.log("user ", user.username);
         var menteeTopic = mentee.mentee_topic;
         var mentorTopic = user.mentor_topic;
         if(menteeTopic.localeCompare(mentorTopic) != 0){
@@ -113,6 +360,10 @@ exports.algorithm = function(req, res){
             isMatch = true;
           }
         }
+      }
+      else{
+        isMatch = false;
+      }
   
         //check if match is still true then check for communication
         if(isMatch != false){
@@ -148,21 +399,40 @@ exports.algorithm = function(req, res){
     
     //if mentor and mentee matches, update matchSchema
     if(isMatch == true){
-    console.log("Got a match!");
-    console.log("You", mentee.username, "matched with", user.username);
-      var match = new Match();
-      match.mentor_id = user._id;
-      match.status = "pending"
-      match.save(function(err){
-        if (err){
-          console.log(err);
-          throw err;
+      var exists = false;
+      var matchid;
+      for(var i = 0; i < matching.length; i++){
+        matchid = matching[i];
+
+        if(matchid.mentor_name == user.username && matchid.mentee_name == mentee.username){
+          console.log("match exists");
+          exists = true;
         }
-      });
+      }
+
+      if(exists == false){
+        console.log("Got a match!");
+        console.log("You", mentee.username, "matched with", user.username);
+        var match = new Match();
+		match.mentee_name = mentee.username;
+		match.mentor_name = user.username;
+        match.mentor_id = user._id;
+		match.mentee_id = mentee._id;
+        match.status = "new";
+        match.save(function(err){
+          if (err){
+            console.log(err);
+            throw err;
+          }
+        });
+      }
+    
     }
     
     
   }
+
+  });
 
 	});
 

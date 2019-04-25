@@ -1,194 +1,90 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="resulttable.css">
-	<link rel="stylesheet" type="text/css" href="styles/base.css">
-<style>
-img {
-  width: 100px;
-}
-</style>
-
+  <head>
+    <title>Scrumble</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/base.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
 </head>
-<!--
-Form Layout
-<form class="ifYouWant" action="pageThatHandlesForms" method="post">
-Textbox (One line text input)
-<label for="idName">Text to display</label>
-<input type="text" name="idName" value="idName">
-Select Option (Drop down)
-<select class="" name="">
-  <option value="valueToDatabase"> Text you want in drop down</option>
-</select>
-</form>
--->
-<body style = "margin-left: 250px">
+<style>
+	th{
+		font-size: 17px;
+	}
+	td{
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	button{
+		margin: 0;
+	}
+	
+	td a{
+		color: green;
+		text-decoration: underline;
+	}
+</style>	
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="getMentors()">
   <div class="row ">
-        <div class="container main-page">
-  <form action="/action_page.php" style = "margin-top: 10px; margin-left: 20px;">
-
-<h1 style= "padding-left: 40%"> Matches </h1>
-
-
-<table style="width:100%">
-  <tr>
-    <th>Name</th>
-    <th>Major</th>
-    <th>Year</th>
-    <th>View Profile </th>
-    <th>Quick Request </th>
-  </tr>
-  <tr>
-    <td>Generic Name</td>
-    <td>Generic Subject</td>
-    <td>Year Here</td>
-    <td> <button> View Profile </button> </td>
-    <td> <button> Request Match </button> </td>
-  </tr>
-  <tr>
-    <td>Generic Name 2</td>
-    <td>Generic Subject 2</td>
-    <td>Year Here</td>
-    <td> <button> View Profile </button> </td>
-    <td> <button> Request Match </button> </td>
-  </tr>
-  <tr>
-    <td>Generic Name 3</td>
-    <td>Generic Subject 3</td>
-    <td>Year Here</td>
-    <td> <button> View Profile </button> </td>
-    <td> <button> Request Match </button> </td>
-  </tr>
-  <tr>
-    <td>Generic Name 4</td>
-    <td>Generic Subject 4</td>
-    <td>Year Here</td>
-    <td> <button> View Profile </button> </td>
-    <td> <button> Request Match </button> </td>
-  </tr>
-  <tr>
-    <td>Generic Name 5</td>
-    <td>Generic Subject 5</td>
-    <td>Year Here</td>
-    <td> <button> View Profile </button> </td>
-    <td> <button> Request Match </button> </td>
-  </tr>
-</table>
-
-<br>
-<br>
-
-<div style= "margin-left: 40%">
-<a href="#" class="previous">&laquo; Previous</a>
-<a href="#" class="next">Next &raquo;</a>
-</div>
-
-
-
-<div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Menu</h3>
+    <div class="subnav" id="customNav">
+      <a href="/dashboard" class="home">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "/mentors" class="active"> Find Mentors </a>
+      <a href= "/mentees"> Mentee Requests </a>
+      <a href= "/matches"> Mentor Matches </a>
+      <a href= "/logout"> Log Out </a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+    </div>
+    <div class="container">
+      <div class="span-12 omega">
+          <h1 style="text-align: center">Your Potential Mentors</h1>
+          <div ng-if="errors.length > 0" style=" width: 100%; font-size: 15px">
+                <p ng-repeat="error in errors" style=" font-family: Arial">{{error}}</p>
+          </div>
+          <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+          </div>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>Name</th>
+                <th>View Profile</th>
+                <th>Add</th>
+              </tr>
+			  <tr ng-if="!mentors || mentors.length == 0"><td colspan="3" style="text-align:center">No new mentor matches.</td></tr>
+              <tr ng-repeat="mentor in mentors | filter: { code: query }">
+                <td>{{mentor.mentor_name}}</td>
+                <td><a ng-click="viewOtherUser(mentor.mentor_name,mentor.status)">View Profile</a></td>
+                <td><button ng-click="makeRequest(mentor._id)">Add</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
         </div>
 
-        <ul class="list-unstyled components">
-            <p>Name Goes Here</p>
-            <img src ="mentorship.jpg">
+      </div>
 
-            <br>
-            <br>
-            <br>
-
-            <li class="active" >
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Profile</a>
-
-            </li>
-
-            <br>
-            <br>
-            <br>
-
-            <li class = "centervertical">
-                <a class = whitetext href="#">Matches</a>
-            </li>
-
-            <br>
-            <br>
-            <br>
-
-
-            <li>
-                <a class = whitetext href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="whitetext">Find Mentors</a>
-
-            </li>
-
-            <br>
-            <br>
-            <br>
-
-            <li>
-                <a class = whitetext href="#">Mentee Requests</a>
-            </li>
-
-            <br>
-            <br>
-            <br>
-
-
-            <li>
-                <a class = whitetext href="#">Notification</a>
-            </li>
-
-            <br>
-            <br>
-            <br>
-
-
-            <li>
-                <a class = whitetext href="#">Log Out</a>
-            </li>
-        </ul>
-
-    </nav>
-    <!-- Page Content -->
-    <div id="content">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-
-
-            </div>
-        </nav>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</form>
-</div>
-</div>
-
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script>
+    function myFunction() {
+      var x = document.getElementById("customNav");
+      if (x.className === "subnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "subnav";
+      }
+    }
+    </script>
+  </div>
+  </body>
 </html>

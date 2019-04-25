@@ -47,12 +47,19 @@ var userSchema = new Schema({
 	topic_level: String,
 	year: String,
     city: String,
-	age: String,
+	age: Number,
 	gender: String,
 	ethnicity: String,
     hours: [String],
     communication: [String],
-	add_info: String
+	add_info: String,
+	ratings: [{
+		username: String,
+		rating: Number
+	}],
+	curr_rating: Number,
+	occupation: String,
+	university: String
 });
 
 

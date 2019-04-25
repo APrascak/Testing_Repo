@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scrumble</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/base.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>
+</head>
+<style>
+	th{
+		font-size: 17px;
+	}
+	td{
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	button{
+		margin: 0;
+	}
+	
+	td a{
+		color: green;
+		text-decoration: underline;
+	}
+</style>
+ <body ng-app="directoryApp">
+  <div ng-controller="ListingsController" data-ng-init="getMentees()">
+  <div class="row ">
+    <div class="subnav" id="customNav">
+      <a href="/dashboard" class="home">Home Page</a>
+      <a href= "/profile"> Profile </a>
+      <a href= "/mentors"> Find Mentors </a>
+      <a href= "/mentees" class="active"> Mentee Requests </a>
+      <a href= "/matches"> Mentor Matches </a>
+      <a href= "/logout"> Log Out </a>
+    </div>
+    <div class="container">
+      <div class="span-12 omega">
+          <h1 style="text-align:style">Your Potential Mentors</h1>
+          <div ng-if="errors.length > 0" style=" width: 100%; font-size: 15px">
+                <p ng-repeat="error in errors" style=" font-family: Arial">{{error}}</p>
+          </div>
+          <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+          </div>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>Name</th>
+                <th>View Profile</th>
+                <th>Status</th>
+              </tr>
+			  <tr ng-if="!mentees || mentees.length == 0"><td colspan="3" style="text-align:center">No new mentee requests.</td></tr>
+              <tr ng-repeat="mentee in mentees | filter: { code: query }">
+                <td>{{mentee.mentee_name}}</td>
+                <td><a ng-click="viewOtherUser(mentee.mentee_name,mentee.status)">View Profile</a></td>
+				<td ng-if="mentee.status == 'pending'"><button ng-click=acceptRequest(mentee._id)>Accept</button><button ng-click=rejectRequest(mentee._id) style="margin-left: 20px;">Reject</button></td>
+                <td ng-if="mentee.status == 'accepted'">Accepted</td>
+				<td ng-if="mentee.status == 'rejected'">Rejected</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script>
+    function myFunction() {
+      var x = document.getElementById("customNav");
+      if (x.className === "subnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "subnav";
+      }
+    }
+    </script>
+  </div>
+  </body>
+</html>
