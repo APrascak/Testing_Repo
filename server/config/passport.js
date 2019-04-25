@@ -90,12 +90,6 @@ module.exports = function(passport) {
 
     }));
 
-	// =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
     passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
@@ -138,9 +132,9 @@ module.exports = function(passport) {
       clientSecret: config.google.clientSecret
     }, function(accessToken, refreshToken, profile, done) {
       User.findOne({gmail: {id: profile.id}}).then((currUser) => {
-        console.log(profile);
+        //console.log(profile);
         if (currUser) {
-          console.log('User Information: ' + currUser);
+          console.log('Current user');
           done(null, currUser);
         } else {
           new User({
@@ -148,7 +142,7 @@ module.exports = function(passport) {
                 id: profile.id
               }
           }).save().then(function(newUser){
-            console.log('New User has been created: ' + newUser);
+            console.log('New User has been created');
           });
         }
       });

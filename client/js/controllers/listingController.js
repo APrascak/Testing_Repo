@@ -1,6 +1,6 @@
 angular.module('listings').controller('ListingsController', ['$scope', '$window','Listings', 
   function($scope, $window, Listings) {
-    $scope.detailedInfo = undefined;
+    $scope.Math = window.Math;
 	
 	$scope.errors = [];
 	
@@ -178,6 +178,18 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			$scope.errors.push("Please fill out the required information.");
 		}
 		
+		if(!$scope.userProfile.age)
+			$scope.errors.push("Please enter an age.");
+
+		if(!$scope.userProfile.gender)
+			$scope.errors.push("Please select your gender information.");
+		
+		if(!$scope.userProfile.ethnicity)
+			$scope.errors.push("Please select your ethnicity information.");
+		
+		if(!$scope.userProfile.age)
+			$scope.userProfile.usertype.mentee = false;
+
 		if(!$scope.userProfile.usertype.mentor)
 			$scope.userProfile.usertype.mentor = false;
 		
@@ -187,6 +199,8 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		$scope.userProfile.communication = $scope.comm;
 		
 		$scope.userProfile.hours = $scope.time;
+		if($scope.errors.length > 0)
+			return;
 			
 		Listings.update($scope.userProfile).then(function(response) {
 			if($scope.userProfile.usertype.mentee){
@@ -201,7 +215,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 			}
 			}, function(error) {
 				$scope.errors.push("There was an error updating your profile.");
-			  //console.log('Unable to update listings:', error);
 			  
 			});
 
@@ -211,12 +224,15 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		$scope.errors = [];
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
+			if(!$scope.userProfile.username){
+				$window.location.href = '/google';
+			}
 			$scope.comm = $scope.userProfile.communication;
 			$scope.time = $scope.userProfile.hours;
 			$scope.rating.username = $scope.userProfile.username;
 			if($scope.userProfile.curr_rating){
 				if($scope.userProfile.ratings.length > 5)
-					$scope.displayRating = $scope.userProfile.curr_rating;
+					$scope.displayRating = Math.floor($scope.userProfile.curr_rating);
 			}
 			console.log("rating " + $scope.userProfile.curr_rating);
 		}, function(error) {
@@ -229,17 +245,6 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		$window.location.href = '/signup.html';
 	};
 	
-	$scope.checkGoogle = function(){
-		$scope.errors = [];
-		Listings.profile().then(function(response) {
-			$scope.userProfile = response.data;
-			if($scope.userProfile.username){
-				$window.location.href = '/dashboard';
-			}
-		}, function(error) {
-			$scope.errors.push("There was an error updating your profile.");
-		});
-	};
 		
 	$scope.getSelectedRating = function (newRating, username, matchname) {
 		$scope.rating.rating = newRating;
@@ -363,7 +368,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
   }
 ]);
 
-
+/*-------------------http://embed.plnkr.co/1esaGq/----------*/
 angular.module('listings').directive('starRating', function () {
     return {
         restrict: 'A',
