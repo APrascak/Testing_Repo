@@ -28,7 +28,7 @@ module.exports.init = function() {
 	app.use(bodyParser.json()); //Body parsing middleware
 
 	// required for passport
-	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+	app.use(session({ secret: 'ilovebumblesomuchicantbelivehowmuchido' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 
@@ -63,12 +63,16 @@ module.exports.init = function() {
 	});
 
 	app.get('/create', function(req, res) {
-		res.redirect('/create.html');
+		res.redirect('/dashboard.html');
 	});
 
 	//Profile Check
 	app.get('/dashboard',isLoggedIn, function(req, res) {
 		res.redirect('/dashboard.html');
+    });
+	
+	app.get('/google',isLoggedIn, function(req, res) {
+		res.redirect('/create.html');
     });
 
     app.get('/profile',isLoggedIn, function(req, res) {
