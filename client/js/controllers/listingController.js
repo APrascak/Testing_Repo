@@ -208,6 +208,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
     };
 	
 	$scope.profileLoad = function() {
+		$scope.errors = [];
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			$scope.comm = $scope.userProfile.communication;
@@ -229,6 +230,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	};
 	
 	$scope.checkGoogle = function(){
+		$scope.errors = [];
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			if($scope.userProfile.username){
@@ -252,6 +254,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	};
 	
 	$scope.viewOtherUser = function(username, matchStat){
+		$scope.errors = [];
 		Listings.getProfile(username).then(function(response) {
 			//console.log(response);
 			response.data.status = matchStat;
@@ -259,7 +262,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 				$window.location.href = '/viewprofile';
 			});
 		}, function(error) {
-			$scope.errors.push("There was an error get mentor/mentee.");
+			$scope.errors.push("There was an error getting mentor/mentee.");
 		});
 	}
 	
@@ -267,12 +270,15 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			if(!$scope.userProfile.usertype.mentee){
-				$scope.errors = [];
 				$scope.errors.push("You're not registered as a mentee. Update your profile and try again.");
 			}else{
-				Listings.mentors().then(function(response) {
-					console.log(response);
-					$scope.mentors = response.data;
+				Listings.algorithm().then(function(response) {
+					Listings.mentors().then(function(response) {
+						console.log(response);
+						$scope.mentors = response.data;
+					}, function(error) {
+						$scope.errors.push("There was an error loading your mentors.");
+					});
 				}, function(error) {
 					$scope.errors.push("There was an error loading your mentors.");
 				});
@@ -283,6 +289,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	}
 	
 	$scope.getMentees = function(){
+		$scope.errors = [];
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			if(!$scope.userProfile.usertype.mentor){
@@ -303,6 +310,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	}
 
 	$scope.getMatches = function(){
+		$scope.errors = [];
 		Listings.profile().then(function(response) {
 			$scope.userProfile = response.data;
 			$scope.errors = [];
@@ -323,6 +331,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	}
   
   	$scope.makeRequest = function(id){
+		$scope.errors = [];
 		Listings.makeRequest({'id': id}).then(function(response) {
 			$window.location.href = '/mentors';
 		}, function(error) {
@@ -332,6 +341,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	}
 	
   	$scope.acceptRequest = function(id){
+		$scope.errors = [];
 		Listings.acceptRequest({'id': id}).then(function(response) {
 			$window.location.href = '/mentees';
 		}, function(error) {
@@ -341,6 +351,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$window'
 	}
 	
   	$scope.rejectRequest = function(id){
+		$scope.errors = [];
 		Listings.rejectRequest({'id': id}).then(function(response) {
 			$window.location.href = '/mentees';
 		}, function(error) {

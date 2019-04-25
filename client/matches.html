@@ -62,7 +62,7 @@
                 <th>View Profile</th>
                 <th>Status</th>
               </tr>
-			  <tr ng-if="!matches"><td colspan="3" style="text-align:center">No ongoing matches.</td></tr>
+			  <tr ng-if="!matches || mentors"><td colspan="3" style="text-align:center">No ongoing matches.</td></tr>
               <tr ng-repeat="match in matches | filter: { code: query }">
                 <td>{{match.mentor_name}}</td>
                 <td><a ng-click="viewOtherUser(match.mentor_name,match.status)">View Profile</a></td>

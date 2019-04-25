@@ -60,7 +60,7 @@
                 <th>View Profile</th>
                 <th>Add</th>
               </tr>
-			  <tr ng-if="!mentors"><td colspan="3" style="text-align:center">No new mentor matches.</td></tr>
+			  <tr ng-if="!mentors || mentors.length == 0"><td colspan="3" style="text-align:center">No new mentor matches.</td></tr>
               <tr ng-repeat="mentor in mentors | filter: { code: query }">
                 <td>{{mentor.mentor_name}}</td>
                 <td><a ng-click="viewOtherUser(mentor.mentor_name,mentor.status)">View Profile</a></td>
